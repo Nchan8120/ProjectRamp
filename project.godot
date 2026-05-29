@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="ProjectRamp"
-config/features=PackedStringArray("4.6", "Mobile")
+run/main_scene="uid://dqbkm8rhrn8ql"
+config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [dotnet]

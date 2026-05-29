@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://btuxtagvwmcmj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_25osk"]
+radius = 0.08
+height = 0.16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d60mj"]
+radius = 0.08
+
+[node name="Ball" type="RigidBody3D" unique_id=1001961588]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=276480033]
+mesh = SubResource("SphereMesh_25osk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=517212037]
+shape = SubResource("SphereShape3D_d60mj")

@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dqbkm8rhrn8ql"]
+
+[ext_resource type="Script" uid="uid://cs27sy2sgxey8" path="res://Scenes/ScoringHole.cs" id="1_x87qo"]
+[ext_resource type="PackedScene" uid="uid://btuxtagvwmcmj" path="res://Scenes/ball.tscn" id="2_b6fju"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_oqyrl"]
+size = Vector3(0.6, 0.1, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x87qo"]
+size = Vector3(0.6, 0.1, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b6fju"]
+size = Vector3(0.6, 0.1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6h5vk"]
+size = Vector3(0.6, 0.1, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fiftr"]
+size = Vector3(0.1, 0.2, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ixah"]
+size = Vector3(0.1, 0.2, 2.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6h5vk"]
+size = Vector3(0.6, 0.8, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fiftr"]
+size = Vector3(0.6, 0.4, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rgj8m"]
+size = Vector3(0.6, 0.01, 0.6)
+
+[node name="GameScene" type="Node3D" unique_id=1089038052]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1020950208]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 2.25)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=71810553]
+
+[node name="Lane" type="Node3D" parent="." unique_id=1140650000]
+
+[node name="Approach" type="StaticBody3D" parent="Lane" unique_id=915849082]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Approach" unique_id=256321058]
+mesh = SubResource("BoxMesh_oqyrl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/Approach" unique_id=1942699137]
+shape = SubResource("BoxShape3D_x87qo")
+
+[node name="Ramp" type="StaticBody3D" parent="Lane" unique_id=763151785]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, -0.7071067, 0, 0.7071067, 0.7071067, 0, 0.1, -1.3512603)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Ramp" unique_id=464100266]
+mesh = SubResource("BoxMesh_b6fju")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/Ramp" unique_id=1755526332]
+shape = SubResource("BoxShape3D_6h5vk")
+
+[node name="Walls" type="Node3D" parent="Lane" unique_id=1920736330]
+
+[node name="LeftWall" type="StaticBody3D" parent="Lane/Walls" unique_id=1268634169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Walls/LeftWall" unique_id=614756994]
+mesh = SubResource("BoxMesh_fiftr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/Walls/LeftWall" unique_id=186469360]
+shape = SubResource("BoxShape3D_1ixah")
+
+[node name="RightWall" type="StaticBody3D" parent="Lane/Walls" unique_id=84335228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Walls/RightWall" unique_id=654909977]
+mesh = SubResource("BoxMesh_fiftr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/Walls/RightWall" unique_id=262434571]
+shape = SubResource("BoxShape3D_1ixah")
+
+[node name="ScoringArea" type="Node3D" parent="Lane" unique_id=1935229699]
+
+[node name="BackWall" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=1056373313]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.40477622, -1.6371161)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/BackWall" unique_id=466828757]
+mesh = SubResource("BoxMesh_6h5vk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/BackWall" unique_id=1647689518]
+shape = SubResource("BoxShape3D_fiftr")
+
+[node name="Holes" type="Node3D" parent="Lane/ScoringArea" unique_id=1962242546]
+
+[node name="Hole_1" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1655825725]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.47, -1.65)
+script = ExtResource("1_x87qo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_1" unique_id=1897473453]
+shape = SubResource("BoxShape3D_rgj8m")
+
+[node name="Ball" parent="." unique_id=1001961588 instance=ExtResource("2_b6fju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66352284, -1.6076736)
