@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dqbkm8rhrn8ql"]
 
+[ext_resource type="Script" uid="uid://cj4py512fsrbs" path="res://Scripts/RoundManager.cs" id="1_6h5vk"]
 [ext_resource type="Script" uid="uid://c7sdk04dmqbwf" path="res://Scripts/ScoringHole.cs" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://btuxtagvwmcmj" path="res://Scenes/ball.tscn" id="2_b6fju"]
-[ext_resource type="Script" uid="uid://btfi8sve66co0" path="res://Scripts/BallController.cs" id="3_6h5vk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oqyrl"]
 size = Vector3(0.6, 0.1, 2.5)
@@ -26,12 +26,25 @@ size = Vector3(0.1, 0.2, 2.5)
 size = Vector3(0.6, 0.8, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fiftr"]
-size = Vector3(0.6, 0.4, 0.05)
+size = Vector3(0.6, 0.8, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rgj8m"]
 size = Vector3(0.6, 0.01, 0.6)
 
-[node name="GameScene" type="Node3D" unique_id=1089038052]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fmhe"]
+size = Vector3(0.5, 0.01, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7iton"]
+size = Vector3(0.4, 0.01, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ikfsv"]
+size = Vector3(0.3, 0.01, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5dgvu"]
+size = Vector3(0.1, 0.01, 0.1)
+
+[node name="GameScene" type="Node3D" unique_id=1089038052 groups=["RoundManager"]]
+script = ExtResource("1_6h5vk")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020950208]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 2.25)
@@ -78,6 +91,7 @@ mesh = SubResource("BoxMesh_fiftr")
 shape = SubResource("BoxShape3D_1ixah")
 
 [node name="ScoringArea" type="Node3D" parent="Lane" unique_id=1935229699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1776241)
 
 [node name="BackWall" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=1056373313]
 transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.40477622, -1.6371161)
@@ -97,9 +111,40 @@ script = ExtResource("1_b6fju")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_1" unique_id=1897473453]
 shape = SubResource("BoxShape3D_rgj8m")
 
+[node name="Hole_2" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=268508069]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.47, -1.65)
+script = ExtResource("1_b6fju")
+PointValue = 200
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_2" unique_id=670045832]
+shape = SubResource("BoxShape3D_2fmhe")
+
+[node name="Hole_3" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=53144723]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.47, -1.65)
+script = ExtResource("1_b6fju")
+PointValue = 300
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_3" unique_id=1169622685]
+shape = SubResource("BoxShape3D_7iton")
+
+[node name="Hole_4" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1957101303]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.47, -1.65)
+script = ExtResource("1_b6fju")
+PointValue = 400
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_4" unique_id=1950758460]
+shape = SubResource("BoxShape3D_ikfsv")
+
+[node name="Hole_5" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1890421325]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.47, -1.65)
+script = ExtResource("1_b6fju")
+PointValue = 500
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_5" unique_id=1207187992]
+shape = SubResource("BoxShape3D_5dgvu")
+
 [node name="Ball" parent="." unique_id=1001961588 instance=ExtResource("2_b6fju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2203933, 1.0907834)
-script = ExtResource("3_6h5vk")
 MouseSensitivity = 0.4
-HorizontalInfluence = -1.0
+VerticalInfluence = -0.2
 ForwardInfluence = 1.0

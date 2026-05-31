@@ -10,12 +10,14 @@ public partial class BallController : RigidBody3D
 	[Export] public float VerticalInfluence = -1.0f;    // positive or negative depending on camera
 	[Export] public float ForwardInfluence = -1.0f;     // positive or negative depending on camera
 	[Export] public NodePath MeshPath; // assign in inspector
+	[Export] public float MissTimeout = 3.0f; // seconds before ball is considered a miss
 	
+	private float _airTime = 0f;
+	private bool _hasScored = false;
+	private RoundManager _roundManager;
 	private MeshInstance3D _mesh;
 	private StandardMaterial3D _material;
-
 	private enum BallState { Idle, Gripping, Throwing, Scored }
-
 	private BallState _state = BallState.Idle;
 	private Vector3 _startPosition;
 	private List<Vector2> _mouseBuffer = new List<Vector2>();
@@ -31,8 +33,24 @@ public partial class BallController : RigidBody3D
 		_material = new StandardMaterial3D();
 		_material.AlbedoColor = Colors.White;
 		_mesh.MaterialOverride = _material;
+		 _roundManager = GetTree().GetFirstNodeInGroup("RoundManager") as RoundManager;
 	}
 
+	public override void _Process(double delta)
+	{
+		if (_state == BallState.Throwing)
+		{
+			_airTime += (float)delta;
+
+			// if ball has been in play too long without scoring, call it a miss
+			if (_airTime >= MissTimeout)
+			{
+				_roundManager?.OnBallMissed();
+				ResetBall();
+			}
+		}
+	}
+	
 	public override void _Input(InputEvent @event)
 	{
 		if (@event is InputEventMouseButton mouseButton)
@@ -103,19 +121,22 @@ public partial class BallController : RigidBody3D
 
 	public async void OnScored()
 	{
+		_hasScored = true;
+		_airTime = 0f;
 		_state = BallState.Scored;
-		await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
 		ResetBall();
 	}
 
 	private void ResetBall()
 	{
+		_hasScored = false;
+		_airTime = 0f;
 		Freeze = true;
 		LinearVelocity = Vector3.Zero;
 		AngularVelocity = Vector3.Zero;
 		GlobalPosition = _startPosition;
 		_state = BallState.Idle;
 		_mouseBuffer.Clear();
-		_material.AlbedoColor = Colors.White; // back to white when idle
+		_material.AlbedoColor = Colors.White;
 	}
 }
