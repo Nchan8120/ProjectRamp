@@ -8,12 +8,13 @@ public partial class ScoringHole : Area3D
 	{
 		BodyEntered += OnBodyEntered;
 	}
-
+	
 	private void OnBodyEntered(Node3D body)
 	{
-		if (body.Name == "Ball")
+		if (body is BallController ball)
 		{
 			GD.Print($"Scored {PointValue} points!");
+			ball.OnScored();
 		}
 	}
 }

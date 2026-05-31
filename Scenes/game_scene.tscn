@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dqbkm8rhrn8ql"]
 
-[ext_resource type="Script" uid="uid://cs27sy2sgxey8" path="res://Scenes/ScoringHole.cs" id="1_x87qo"]
+[ext_resource type="Script" uid="uid://c7sdk04dmqbwf" path="res://Scripts/ScoringHole.cs" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://btuxtagvwmcmj" path="res://Scenes/ball.tscn" id="2_b6fju"]
+[ext_resource type="Script" uid="uid://btfi8sve66co0" path="res://Scripts/BallController.cs" id="3_6h5vk"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oqyrl"]
 size = Vector3(0.6, 0.1, 2.5)
@@ -91,10 +92,14 @@ shape = SubResource("BoxShape3D_fiftr")
 
 [node name="Hole_1" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1655825725]
 transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.47, -1.65)
-script = ExtResource("1_x87qo")
+script = ExtResource("1_b6fju")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_1" unique_id=1897473453]
 shape = SubResource("BoxShape3D_rgj8m")
 
 [node name="Ball" parent="." unique_id=1001961588 instance=ExtResource("2_b6fju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66352284, -1.6076736)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2203933, 1.0907834)
+script = ExtResource("3_6h5vk")
+MouseSensitivity = 0.4
+HorizontalInfluence = -1.0
+ForwardInfluence = 1.0

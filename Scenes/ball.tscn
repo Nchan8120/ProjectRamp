@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://btuxtagvwmcmj"]
 
+[ext_resource type="Script" uid="uid://btfi8sve66co0" path="res://Scripts/BallController.cs" id="1_d60mj"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_25osk"]
 radius = 0.08
 height = 0.16
@@ -8,6 +10,8 @@ height = 0.16
 radius = 0.08
 
 [node name="Ball" type="RigidBody3D" unique_id=1001961588]
+script = ExtResource("1_d60mj")
+MeshPath = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=276480033]
 mesh = SubResource("SphereMesh_25osk")
