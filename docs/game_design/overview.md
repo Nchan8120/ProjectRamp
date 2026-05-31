@@ -7,6 +7,7 @@
 - In the shop they can purchase powerups.
 - Then they progress to the next round where the point requirement goes up.
 
+
 # Game Over
 - Beating a certain number of rounds (10?) will count as a victory on that machine&difficulty
 
@@ -48,4 +49,4 @@
 - Hard is score scales faster
 - Expert is minus one ball
 - Master is score scales even faster
-- The Chosen One is reduced shop item slots
+- The Chosen One is -1 shop item slot
