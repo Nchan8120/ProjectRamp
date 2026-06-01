@@ -45,6 +45,9 @@ size = Vector3(0.1, 0.01, 0.1)
 
 [node name="GameScene" type="Node3D" unique_id=1089038052 groups=["RoundManager"]]
 script = ExtResource("1_6h5vk")
+BallPath = NodePath("Ball")
+ScoreLabelPath = NodePath("CanvasLayer/GameHUD/ScoreLabel")
+BallsLabelPath = NodePath("CanvasLayer/GameHUD/BallsLabel")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020950208]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 2.25)
@@ -146,5 +149,29 @@ shape = SubResource("BoxShape3D_5dgvu")
 [node name="Ball" parent="." unique_id=1001961588 instance=ExtResource("2_b6fju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2203933, 1.0907834)
 MouseSensitivity = 0.4
-VerticalInfluence = -0.2
+VerticalInfluence = -0.1
 ForwardInfluence = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=999467137]
+
+[node name="GameHUD" type="Control" parent="CanvasLayer" unique_id=118883241]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BallsLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=1122570294]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 86.0
+offset_bottom = 83.0
+text = "BALLS: 9"
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=1924862001]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 89.0
+offset_bottom = 43.0
+text = "SCORE: 0"
