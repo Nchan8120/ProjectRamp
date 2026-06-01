@@ -107,7 +107,7 @@ public partial class RoundManager : Node3D
 		else
 		{
 			// go to shop
-			GetTree().ChangeSceneToFile("res://scenes/shop_scene.tscn");
+			GetTree().CallDeferred("change_scene_to_file", "res://scenes/shop_scene.tscn");
 		}
 	}
 
@@ -115,7 +115,7 @@ public partial class RoundManager : Node3D
 	{
 		GD.Print($"GAME OVER!");
 		_gameState.ResetRun();
-		GetTree().ChangeSceneToFile("res://scenes/game_scene.tscn");
+		GetTree().CallDeferred("change_scene_to_file", "res://scenes/game_scene.tscn");
 	}
 	
 }
