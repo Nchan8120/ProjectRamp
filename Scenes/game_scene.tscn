@@ -29,7 +29,7 @@ size = Vector3(0.6, 0.8, 0.05)
 size = Vector3(0.6, 0.8, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rgj8m"]
-size = Vector3(0.3, 0.01, 0.1)
+size = Vector3(0.5, 0.01, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fmhe"]
 size = Vector3(0.1, 0.01, 0.1)
@@ -50,6 +50,7 @@ ScoreLabelPath = NodePath("CanvasLayer/GameHUD/ScoreLabel")
 BallsLabelPath = NodePath("CanvasLayer/GameHUD/BallsLabel")
 ThresholdLabelPath = NodePath("CanvasLayer/GameHUD/ThresholdLabel")
 RoundLabelPath = NodePath("CanvasLayer/GameHUD/RoundLabel")
+MoneyLabelPath = NodePath("CanvasLayer/GameHUD/MoneyLabel")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020950208]
 transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 2.25)
@@ -117,7 +118,7 @@ script = ExtResource("1_b6fju")
 shape = SubResource("BoxShape3D_rgj8m")
 
 [node name="Hole_2" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=268508069]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0.225, 0.654, -1.7763488)
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0.2, 0.654, -1.776)
 script = ExtResource("1_b6fju")
 PointValue = 200
 
@@ -141,7 +142,7 @@ PointValue = 400
 shape = SubResource("BoxShape3D_ikfsv")
 
 [node name="Hole_5" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1890421325]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, -0.14950696, 0.648, -1.778431)
+transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, -0.2, 0.648, -1.778)
 script = ExtResource("1_b6fju")
 PointValue = 500
 
@@ -192,3 +193,11 @@ offset_left = 20.0
 offset_top = 140.0
 offset_right = 60.0
 offset_bottom = 163.0
+
+[node name="MoneyLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=1879821129]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 180.0
+offset_right = 60.0
+offset_bottom = 203.0
+text = "$0"

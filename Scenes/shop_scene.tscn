@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://3nu0ub6i6tdf"]
+
+[node name="ShopScene" type="Control" unique_id=1540398089]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="." unique_id=630005014]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyLabel" type="Label" parent="." unique_id=1771342668]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RerollButton" type="Button" parent="." unique_id=259150005]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="RerollCostLabel" type="Label" parent="." unique_id=198238937]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ContinueButton" type="Button" parent="." unique_id=1594621565]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="ItemSlots" type="HBoxContainer" parent="." unique_id=1319033216]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ItemSlot1" type="Panel" parent="ItemSlots" unique_id=438990308]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=550083320]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TypeLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=2094472896]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CostLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=690333560]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BuyButton" type="Button" parent="ItemSlots/ItemSlot1" unique_id=1223575854]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="ItemSlot2" type="Panel" parent="ItemSlots" unique_id=440721014]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=483464538]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TypeLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=533277164]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CostLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=1164490488]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BuyButton" type="Button" parent="ItemSlots/ItemSlot2" unique_id=251556254]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="CapsuleMachines" type="HBoxContainer" parent="." unique_id=1313228380]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CapsuleMachine1" type="Panel" parent="CapsuleMachines" unique_id=69053053]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2132525375]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TypeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=1824566405]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CostLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2138394759]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BuyButton" type="Button" parent="CapsuleMachines/CapsuleMachine1" unique_id=521511991]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="CapsuleMachine2" type="Panel" parent="CapsuleMachines" unique_id=1137165084]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1317138985]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TypeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=463847186]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CostLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1846466843]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BuyButton" type="Button" parent="CapsuleMachines/CapsuleMachine2" unique_id=576706421]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="HouseRuleSlot" type="Panel" parent="." unique_id=1620366176]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NameLabel" type="Label" parent="HouseRuleSlot" unique_id=1708178560]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CostLabel" type="Label" parent="HouseRuleSlot" unique_id=2091517704]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BuyButton" type="Button" parent="HouseRuleSlot" unique_id=1087677733]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="PersistBadge" type="Label" parent="HouseRuleSlot" unique_id=28792128]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

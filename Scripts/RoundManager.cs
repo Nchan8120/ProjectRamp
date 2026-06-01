@@ -11,6 +11,7 @@ public partial class RoundManager : Node3D
 	[Export] public NodePath BallsLabelPath;
 	[Export] public NodePath ThresholdLabelPath;
 	[Export] public NodePath RoundLabelPath;
+	[Export] public NodePath MoneyLabelPath;
 
 	private int _ballsRemaining;
 	private int _currentScore;
@@ -21,14 +22,18 @@ public partial class RoundManager : Node3D
 	private Label _ballsLabel;
 	private Label _thresholdLabel;
 	private Label _roundLabel;
-
+	private GameState _gameState;
+	private Label _moneyLabel;
+	
 	public override void _Ready()
 	{
+		_gameState = GetNode<GameState>("/root/GameState");
 		_ball = GetNode<BallController>(BallPath);
 		_scoreLabel = GetNode<Label>(ScoreLabelPath);
 		_ballsLabel = GetNode<Label>(BallsLabelPath);
 		_thresholdLabel = GetNode<Label>(ThresholdLabelPath);
 		_roundLabel = GetNode<Label>(RoundLabelPath);
+		_moneyLabel = GetNode<Label>(MoneyLabelPath);
 		StartRound();
 	}
 
@@ -72,6 +77,7 @@ public partial class RoundManager : Node3D
 		_ballsLabel.Text = $"BALLS: {_ballsRemaining}";
 		_thresholdLabel.Text = $"NEED: {_currentThreshold}";
 		_roundLabel.Text = $"ROUND: {_currentRound}/{TotalRounds}";
+		_moneyLabel.Text = $"${_gameState.Money}";
 	}
 
 	private void EndRound()
@@ -89,28 +95,28 @@ public partial class RoundManager : Node3D
 	private void WinRound()
 	{
 		int leftoverBalls = _ballsRemaining;
-		GD.Print($"Round cleared with {leftoverBalls} balls remaining!");
-		
-		if (_currentRound >= TotalRounds)
+		GameState gameState = GetNode<GameState>("/root/GameState");
+		_gameState.AwardRoundEndMoney(leftoverBalls);
+		_gameState.TotalScore += _currentScore;
+		_gameState.CurrentRound++;
+
+		if (_gameState.CurrentRound > _gameState.TotalRounds)
 		{
-			GD.Print("YOU WIN! Run complete!");
-			// victory state comes later
+			GD.Print("YOU WIN!");
+			// victory screen later
 		}
 		else
 		{
-			GD.Print($"Round {_currentRound} cleared! Moving to shop...");
-			_currentRound++;
-			// shop comes later, for now just start next round
-			StartRound();
+			// go to shop
+			GetTree().ChangeSceneToFile("res://scenes/shop_scene.tscn");
 		}
 	}
 
 	private void GameOver()
 	{
-		GD.Print($"GAME OVER! Score: {_currentScore} | Needed: {_currentThreshold}");
-		// game over screen comes later
-		// for now reset to round 1
-		_currentRound = 1;
-		StartRound();
+		GD.Print($"GAME OVER!");
+		_gameState.ResetRun();
+		GetTree().ChangeSceneToFile("res://scenes/game_scene.tscn");
 	}
+	
 }

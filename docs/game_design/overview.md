@@ -16,9 +16,10 @@
 - Track furthest round before losing
 
 # Economy
-- Winning a round rewards tickets
-- Leftover balls in a round are converted to tickets
+- Winning a round rewards tickets ($5)
+- Leftover balls in a round are converted to tickets ($2 per ball)
 - Some powerups may give tickets
+
 
 # Powerups
 - One type of Powerup will enhance you balls (extra money,extra score, extra bouncy, etc.). You will get these from ball booster packs.
@@ -28,16 +29,18 @@
 - One type of Powerup will be a powerful and permanent effect that doesn't take up a slot but is very expensive. House Rule sticker
 
 # Shop
-- Shop has 2 item slots (slot has equal chance for each powerup type)
+- Shop has 2 item slots (any item type)
 - Shop has 2 capsule machines.
 - Capsule machines have different sizes and costs
-- Small: pick 1 of 2
-- Medium: pick 1 of 4
-- Large: pick 2 of 6
+- Small: pick 1 of 2 ($5) (50% to appear)
+- Medium: pick 1 of 4 ($8) (30% to appear)
+- Large: pick 2 of 6 ($10) (20% to appear)
 - Capsule machines can be of each type: totem, ball, engineering, stunt
-- Shop has 1 house rule sticker
+- First shop always has a small totem capsule
+- Shop has 1 house rule sticker ($15)
 - House rule stickers return on odd number rounds
 - ex. if you don't by the sticker in shop 1 its still there in shop 2. If you do buy it in shop 1 then shop 2 has no sticker. No matter what, on shop 3 a new random sticker will appear in the shop.
+- Shop can be rerolled ($3) with increasing cost each time (+$1)
 
 # Difficulty 
 - There will be themed machines each with a unique effect (ex. extra ball, extra totem slot, easier/harder scoring holes)
