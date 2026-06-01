@@ -1,159 +1,265 @@
 [gd_scene format=3 uid="uid://3nu0ub6i6tdf"]
 
+[ext_resource type="Script" uid="uid://cru10sfbi5hih" path="res://Scripts/ShopManager.cs" id="1_4li1v"]
+
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4li1v")
+MoneyLabelPath = NodePath("MoneyLabel")
+RerollButtonPath = NodePath("RerollButton")
+RerollCostLabelPath = NodePath("RerollCostLabel")
+ContinueButtonPath = NodePath("ContinueButton")
+ItemSlot1NamePath = NodePath("ItemSlots/ItemSlot1/NameLabel")
+ItemSlot1TypePath = NodePath("ItemSlots/ItemSlot1/TypeLabel")
+ItemSlot1CostPath = NodePath("ItemSlots/ItemSlot1/CostLabel")
+ItemSlot1BuyPath = NodePath("ItemSlots/ItemSlot1/BuyButton")
+ItemSlot2NamePath = NodePath("ItemSlots/ItemSlot2/NameLabel")
+ItemSlot2TypePath = NodePath("ItemSlots/ItemSlot2/TypeLabel")
+ItemSlot2CostPath = NodePath("ItemSlots/ItemSlot2/CostLabel")
+ItemSlot2BuyPath = NodePath("ItemSlots/ItemSlot2/BuyButton")
+Capsule1TypePath = NodePath("CapsuleMachines/CapsuleMachine1/TypeLabel")
+Capsule1SizePath = NodePath("CapsuleMachines/CapsuleMachine1/SizeLabel")
+Capsule1CostPath = NodePath("CapsuleMachines/CapsuleMachine1/CostLabel")
+Capsule1BuyPath = NodePath("CapsuleMachines/CapsuleMachine1/BuyButton")
+Capsule2TypePath = NodePath("CapsuleMachines/CapsuleMachine2/TypeLabel")
+Capsule2SizePath = NodePath("CapsuleMachines/CapsuleMachine2/SizeLabel")
+Capsule2CostPath = NodePath("CapsuleMachines/CapsuleMachine2/CostLabel")
+Capsule2BuyPath = NodePath("CapsuleMachines/CapsuleMachine2/BuyButton")
+HouseRuleNamePath = NodePath("HouseRuleSlot/NameLabel")
+HouseRuleCostPath = NodePath("HouseRuleSlot/CostLabel")
+HouseRuleBuyPath = NodePath("HouseRuleSlot/BuyButton")
+HouseRulePersistPath = NodePath("HouseRuleSlot/PersistBadge")
+HouseRuleSlotPath = NodePath("HouseRuleSlot")
 
 [node name="Background" type="ColorRect" parent="." unique_id=630005014]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.101960786, 0.101960786, 0.18039216, 1)
 
 [node name="MoneyLabel" type="Label" parent="." unique_id=1771342668]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
 
 [node name="RerollButton" type="Button" parent="." unique_id=259150005]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 20.0
+offset_top = 580.0
+offset_right = 170.0
+offset_bottom = 620.0
+text = "REROLL"
 
 [node name="RerollCostLabel" type="Label" parent="." unique_id=198238937]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 180.0
+offset_top = 590.0
+offset_right = 220.0
+offset_bottom = 613.0
 
 [node name="ContinueButton" type="Button" parent="." unique_id=1594621565]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 980.0
+offset_top = 580.0
+offset_right = 1130.0
+offset_bottom = 620.0
+text = "CONTINUE"
 
 [node name="ItemSlots" type="HBoxContainer" parent="." unique_id=1319033216]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 480.0
+offset_bottom = 240.0
+theme_override_constants/separation = 20
 
 [node name="ItemSlot1" type="Panel" parent="ItemSlots" unique_id=438990308]
+custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=550083320]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
 
 [node name="TypeLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=2094472896]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 63.0
 
 [node name="CostLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=690333560]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 50.0
+offset_bottom = 93.0
 
 [node name="BuyButton" type="Button" parent="ItemSlots/ItemSlot1" unique_id=1223575854]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 140.0
+text = "BUY"
 
 [node name="ItemSlot2" type="Panel" parent="ItemSlots" unique_id=440721014]
+custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
 
 [node name="NameLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=483464538]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
 
 [node name="TypeLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=533277164]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 63.0
 
 [node name="CostLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=1164490488]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 50.0
+offset_bottom = 93.0
 
 [node name="BuyButton" type="Button" parent="ItemSlots/ItemSlot2" unique_id=251556254]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 140.0
+text = "BUY"
 
 [node name="CapsuleMachines" type="HBoxContainer" parent="." unique_id=1313228380]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 20.0
+offset_top = 280.0
+offset_right = 480.0
+offset_bottom = 440.0
+theme_override_constants/separation = 20
 
 [node name="CapsuleMachine1" type="Panel" parent="CapsuleMachines" unique_id=69053053]
+custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2132525375]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="TypeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=1824566405]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+
+[node name="SizeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2132525375]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 63.0
 
 [node name="CostLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2138394759]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 50.0
+offset_bottom = 93.0
 
 [node name="BuyButton" type="Button" parent="CapsuleMachines/CapsuleMachine1" unique_id=521511991]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 140.0
+text = "BUY"
 
 [node name="CapsuleMachine2" type="Panel" parent="CapsuleMachines" unique_id=1137165084]
+custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1317138985]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="TypeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=463847186]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
+
+[node name="SizeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1317138985]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 63.0
 
 [node name="CostLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1846466843]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 50.0
+offset_bottom = 93.0
 
 [node name="BuyButton" type="Button" parent="CapsuleMachines/CapsuleMachine2" unique_id=576706421]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 140.0
+text = "BUY"
 
 [node name="HouseRuleSlot" type="Panel" parent="." unique_id=1620366176]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 800.0
+offset_top = 80.0
+offset_right = 1120.0
+offset_bottom = 240.0
 
 [node name="NameLabel" type="Label" parent="HouseRuleSlot" unique_id=1708178560]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 33.0
 
 [node name="CostLabel" type="Label" parent="HouseRuleSlot" unique_id=2091517704]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 50.0
+offset_bottom = 63.0
 
 [node name="BuyButton" type="Button" parent="HouseRuleSlot" unique_id=1087677733]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 10.0
+offset_top = 70.0
+offset_right = 18.0
+offset_bottom = 78.0
+text = "BUY"
 
 [node name="PersistBadge" type="Label" parent="HouseRuleSlot" unique_id=28792128]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 10.0
+offset_top = 100.0
+offset_right = 130.0
+offset_bottom = 140.0
+
+[node name="ShopLabel" type="Label" parent="." unique_id=1175519952]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 20.0
+offset_right = 544.0
+offset_bottom = 43.0
+text = "SHOP"

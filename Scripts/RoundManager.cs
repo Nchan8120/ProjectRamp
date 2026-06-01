@@ -15,7 +15,7 @@ public partial class RoundManager : Node3D
 
 	private int _ballsRemaining;
 	private int _currentScore;
-	private int _currentRound = 1;
+	private int _currentRound;
 	private int _currentThreshold;
 	private BallController _ball;
 	private Label _scoreLabel;
@@ -34,6 +34,7 @@ public partial class RoundManager : Node3D
 		_thresholdLabel = GetNode<Label>(ThresholdLabelPath);
 		_roundLabel = GetNode<Label>(RoundLabelPath);
 		_moneyLabel = GetNode<Label>(MoneyLabelPath);
+		_currentRound = _gameState.CurrentRound;
 		StartRound();
 	}
 
@@ -94,9 +95,7 @@ public partial class RoundManager : Node3D
 
 	private void WinRound()
 	{
-		int leftoverBalls = _ballsRemaining;
-		GameState gameState = GetNode<GameState>("/root/GameState");
-		_gameState.AwardRoundEndMoney(leftoverBalls);
+		_gameState.LeftoverBalls = _ballsRemaining;
 		_gameState.TotalScore += _currentScore;
 		_gameState.CurrentRound++;
 

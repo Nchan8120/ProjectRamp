@@ -7,6 +7,7 @@ public partial class GameState : Node
 	public int Money = 0;
 	public int CurrentRound = 1;
 	public int TotalRounds = 10;
+	public int LeftoverBalls = 0;
 
 	// Owned items
 	public List<string> OwnedTotems = new List<string>();
