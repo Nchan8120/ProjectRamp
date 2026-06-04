@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://ddwclk5n3bj0b"]
+
+[ext_resource type="Script" uid="uid://g5ho0kvkoag0" path="res://Scripts/TotemPanel.cs" id="1_8kb07"]
+
+[node name="TotemPanel" type="Control" unique_id=2029938859]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 952.0
+offset_top = 80.0
+offset_right = 1132.0
+offset_bottom = 620.0
+script = ExtResource("1_8kb07")
+
+[node name="SlotsContainer" type="VBoxContainer" parent="." unique_id=920478795]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 8
+
+[node name="TotemSlot1" type="Panel" parent="SlotsContainer" unique_id=509736888]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 2
+
+[node name="TotemName" type="Label" parent="SlotsContainer/TotemSlot1" unique_id=239525854]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+
+[node name="SellButton" type="Button" parent="SlotsContainer/TotemSlot1" unique_id=1512549648]
+visible = false
+custom_minimum_size = Vector2(8, 50)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 168.0
+offset_bottom = 100.0
+
+[node name="TotemSlot2" type="Panel" parent="SlotsContainer" unique_id=1457927659]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 2
+
+[node name="TotemName" type="Label" parent="SlotsContainer/TotemSlot2" unique_id=710789638]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+
+[node name="SellButton" type="Button" parent="SlotsContainer/TotemSlot2" unique_id=1678121880]
+visible = false
+custom_minimum_size = Vector2(8, 50)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 168.0
+offset_bottom = 100.0
+
+[node name="TotemSlot3" type="Panel" parent="SlotsContainer" unique_id=1762506091]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 2
+
+[node name="TotemName" type="Label" parent="SlotsContainer/TotemSlot3" unique_id=1462042626]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+
+[node name="SellButton" type="Button" parent="SlotsContainer/TotemSlot3" unique_id=51452242]
+visible = false
+custom_minimum_size = Vector2(8, 50)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 168.0
+offset_bottom = 100.0
+
+[node name="TotemSlot4" type="Panel" parent="SlotsContainer" unique_id=71608886]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 2
+
+[node name="TotemName" type="Label" parent="SlotsContainer/TotemSlot4" unique_id=433581106]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+
+[node name="SellButton" type="Button" parent="SlotsContainer/TotemSlot4" unique_id=1934130459]
+visible = false
+custom_minimum_size = Vector2(8, 50)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 168.0
+offset_bottom = 100.0
+
+[node name="TotemSlot5" type="Panel" parent="SlotsContainer" unique_id=894323228]
+custom_minimum_size = Vector2(180, 90)
+layout_mode = 2
+
+[node name="TotemName" type="Label" parent="SlotsContainer/TotemSlot5" unique_id=1546784831]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 31.0
+
+[node name="SellButton" type="Button" parent="SlotsContainer/TotemSlot5" unique_id=188925892]
+visible = false
+custom_minimum_size = Vector2(8, 50)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 168.0
+offset_bottom = 100.0

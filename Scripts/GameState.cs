@@ -10,7 +10,7 @@ public partial class GameState : Node
 	public int LeftoverBalls = 0;
 
 	// Owned items
-	public List<string> OwnedTotems = new List<string>();
+	public List<OwnedTotem> OwnedTotems = new List<OwnedTotem>();
 	public List<string> OwnedBallUpgrades = new List<string>();
 	public List<string> OwnedEngineeringUpgrades = new List<string>();
 	public List<string> OwnedStunts = new List<string>();

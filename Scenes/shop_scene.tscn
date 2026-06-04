@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://3nu0ub6i6tdf"]
 
 [ext_resource type="Script" uid="uid://cru10sfbi5hih" path="res://Scripts/ShopManager.cs" id="1_4li1v"]
+[ext_resource type="PackedScene" uid="uid://ddwclk5n3bj0b" path="res://Scenes/totem_panel.tscn" id="2_35huh"]
 
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
@@ -51,24 +52,24 @@ offset_bottom = 43.0
 
 [node name="RerollButton" type="Button" parent="." unique_id=259150005]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 400.0
 offset_top = 580.0
-offset_right = 170.0
+offset_right = 550.0
 offset_bottom = 620.0
 text = "REROLL"
 
 [node name="RerollCostLabel" type="Label" parent="." unique_id=198238937]
 layout_mode = 0
-offset_left = 180.0
+offset_left = 550.0
 offset_top = 590.0
-offset_right = 220.0
+offset_right = 590.0
 offset_bottom = 613.0
 
 [node name="ContinueButton" type="Button" parent="." unique_id=1594621565]
 layout_mode = 0
-offset_left = 980.0
+offset_left = 700.0
 offset_top = 580.0
-offset_right = 1130.0
+offset_right = 850.0
 offset_bottom = 620.0
 text = "CONTINUE"
 
@@ -222,10 +223,10 @@ text = "BUY"
 
 [node name="HouseRuleSlot" type="Panel" parent="." unique_id=1620366176]
 layout_mode = 0
-offset_left = 800.0
-offset_top = 80.0
-offset_right = 1120.0
-offset_bottom = 240.0
+offset_left = 20.0
+offset_top = 480.0
+offset_right = 340.0
+offset_bottom = 640.0
 
 [node name="NameLabel" type="Label" parent="HouseRuleSlot" unique_id=1708178560]
 layout_mode = 0
@@ -263,3 +264,6 @@ offset_top = 20.0
 offset_right = 544.0
 offset_bottom = 43.0
 text = "SHOP"
+
+[node name="TotemPanel" parent="." unique_id=2029938859 instance=ExtResource("2_35huh")]
+layout_mode = 1
