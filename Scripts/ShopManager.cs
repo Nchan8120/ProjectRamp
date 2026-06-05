@@ -331,26 +331,35 @@ public partial class ShopManager : Control
 				{
 					_gameState.OwnedTotems.Add(new OwnedTotem(item));
 					RefreshTotemPanel();
-					GD.Print($"Totem added: {item.Name}");
 				}
 				else
 				{
 					GD.Print("Totem slots full!");
-					// refund the player
 					_gameState.AddMoney(item.Cost);
 				}
 				break;
 			case ItemType.BallUpgrade:
-				_gameState.OwnedBallUpgrades.Add(item.Name);
-				break;
 			case ItemType.Engineering:
-				_gameState.OwnedEngineeringUpgrades.Add(item.Name);
-				break;
 			case ItemType.Stunt:
-				_gameState.OwnedStunts.Add(item.Name);
+				if (_gameState.OwnedItems.Count < _gameState.MaxItems)
+				{
+					_gameState.OwnedItems.Add(new OwnedItem(item));
+					RefreshItemPanel();
+				}
+				else
+				{
+					GD.Print("Item slots full!");
+					_gameState.AddMoney(item.Cost);
+				}
 				break;
 		}
 		GD.Print($"Bought: {item.Name}");
+	}
+
+	private void RefreshItemPanel()
+	{
+		ItemPanel panel = GetNodeOrNull<ItemPanel>("ItemPanel");
+		panel?.RefreshUI();
 	}
 	
 	private void RefreshTotemPanel()

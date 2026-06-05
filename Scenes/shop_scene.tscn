@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cru10sfbi5hih" path="res://Scripts/ShopManager.cs" id="1_4li1v"]
 [ext_resource type="PackedScene" uid="uid://ddwclk5n3bj0b" path="res://Scenes/totem_panel.tscn" id="2_35huh"]
+[ext_resource type="PackedScene" uid="uid://ck2pckcn7kjxc" path="res://Scenes/item_panel.tscn" id="3_njw01"]
 
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
@@ -74,11 +75,15 @@ offset_bottom = 620.0
 text = "CONTINUE"
 
 [node name="ItemSlots" type="HBoxContainer" parent="." unique_id=1319033216]
-layout_mode = 0
-offset_left = 20.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
 offset_top = 80.0
-offset_right = 480.0
+offset_right = 244.0
 offset_bottom = 240.0
+grow_horizontal = 2
 theme_override_constants/separation = 20
 
 [node name="ItemSlot1" type="Panel" parent="ItemSlots" unique_id=438990308]
@@ -148,11 +153,15 @@ offset_bottom = 140.0
 text = "BUY"
 
 [node name="CapsuleMachines" type="HBoxContainer" parent="." unique_id=1313228380]
-layout_mode = 0
-offset_left = 20.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
 offset_top = 280.0
-offset_right = 480.0
+offset_right = 244.0
 offset_bottom = 440.0
+grow_horizontal = 2
 theme_override_constants/separation = 20
 
 [node name="CapsuleMachine1" type="Panel" parent="CapsuleMachines" unique_id=69053053]
@@ -222,11 +231,11 @@ offset_bottom = 140.0
 text = "BUY"
 
 [node name="HouseRuleSlot" type="Panel" parent="." unique_id=1620366176]
-layout_mode = 0
+layout_mode = 1
 offset_left = 20.0
-offset_top = 480.0
+offset_top = 80.0
 offset_right = 340.0
-offset_bottom = 640.0
+offset_bottom = 240.0
 
 [node name="NameLabel" type="Label" parent="HouseRuleSlot" unique_id=1708178560]
 layout_mode = 0
@@ -266,4 +275,7 @@ offset_bottom = 43.0
 text = "SHOP"
 
 [node name="TotemPanel" parent="." unique_id=2029938859 instance=ExtResource("2_35huh")]
+layout_mode = 1
+
+[node name="ItemPanel" parent="." unique_id=65166487 instance=ExtResource("3_njw01")]
 layout_mode = 1

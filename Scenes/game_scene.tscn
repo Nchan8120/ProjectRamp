@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c7sdk04dmqbwf" path="res://Scripts/ScoringHole.cs" id="1_b6fju"]
 [ext_resource type="PackedScene" uid="uid://btuxtagvwmcmj" path="res://Scenes/ball.tscn" id="2_b6fju"]
 [ext_resource type="PackedScene" uid="uid://ddwclk5n3bj0b" path="res://Scenes/totem_panel.tscn" id="4_fiftr"]
+[ext_resource type="PackedScene" uid="uid://ck2pckcn7kjxc" path="res://Scenes/item_panel.tscn" id="5_1ixah"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oqyrl"]
 size = Vector3(0.6, 0.1, 2.5)
@@ -204,3 +205,5 @@ offset_bottom = 203.0
 text = "$0"
 
 [node name="TotemPanel" parent="CanvasLayer" unique_id=2029938859 instance=ExtResource("4_fiftr")]
+
+[node name="ItemPanel" parent="CanvasLayer" unique_id=65166487 instance=ExtResource("5_1ixah")]

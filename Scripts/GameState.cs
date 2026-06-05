@@ -11,9 +11,8 @@ public partial class GameState : Node
 
 	// Owned items
 	public List<OwnedTotem> OwnedTotems = new List<OwnedTotem>();
-	public List<string> OwnedBallUpgrades = new List<string>();
-	public List<string> OwnedEngineeringUpgrades = new List<string>();
-	public List<string> OwnedStunts = new List<string>();
+	public List<OwnedItem> OwnedItems = new List<OwnedItem>();
+	public int MaxItems = 3;
 	public List<string> OwnedHouseRules = new List<string>();
 
 	// Shop state
@@ -54,10 +53,7 @@ public partial class GameState : Node
 		RerollCost = 3;
 		PersistentHouseRule = null;
 		OwnedTotems.Clear();
-		OwnedBallUpgrades.Clear();
-		OwnedEngineeringUpgrades.Clear();
-		OwnedStunts.Clear();
-		OwnedHouseRules.Clear();
+		OwnedItems.Clear();
 		TotalScore = 0;
 		HighestRoundReached = 1;
 	}
