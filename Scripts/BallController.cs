@@ -59,7 +59,11 @@ public partial class BallController : RigidBody3D
 			{
 				if (mouseButton.Pressed && _state == BallState.Idle)
 				{
-					StartGrip(mouseButton.Position);
+					// only start grip if the click is on the ball
+					if (IsMouseOverBall(mouseButton.Position))
+					{
+						StartGrip(mouseButton.Position);
+					}
 				}
 				else if (!mouseButton.Pressed && _state == BallState.Gripping)
 				{
@@ -74,6 +78,19 @@ public partial class BallController : RigidBody3D
 			if (_mouseBuffer.Count > BufferFrames)
 				_mouseBuffer.RemoveAt(0);
 		}
+	}
+
+	private bool IsMouseOverBall(Vector2 screenPos)
+	{
+		Camera3D camera = GetViewport().GetCamera3D();
+		if (camera == null) return false;
+
+		// project the ball's 3D position to screen space
+		Vector2 ballScreenPos = camera.UnprojectPosition(GlobalPosition);
+
+		// check distance from click to ball's screen position
+		float clickRadius = 40f; // pixels, adjust based on ball size on screen
+		return screenPos.DistanceTo(ballScreenPos) <= clickRadius;
 	}
 
 	private void StartGrip(Vector2 mousePos)

@@ -168,40 +168,40 @@ offset_bottom = 40.0
 [node name="BallsLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=1122570294]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 60.0
+offset_top = 100.0
 offset_right = 86.0
-offset_bottom = 83.0
+offset_bottom = 123.0
 text = "BALLS: 9"
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=1924862001]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 20.0
+offset_top = 60.0
 offset_right = 89.0
-offset_bottom = 43.0
+offset_bottom = 83.0
 text = "SCORE: 0"
 
 [node name="ThresholdLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=582543058]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 100.0
+offset_top = 140.0
 offset_right = 99.0
-offset_bottom = 123.0
+offset_bottom = 163.0
 text = "NEED: 700"
 
 [node name="RoundLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=160430265]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 140.0
+offset_top = 180.0
 offset_right = 60.0
-offset_bottom = 163.0
+offset_bottom = 203.0
 
 [node name="MoneyLabel" type="Label" parent="CanvasLayer/GameHUD" unique_id=1879821129]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 180.0
+offset_top = 20.0
 offset_right = 60.0
-offset_bottom = 203.0
+offset_bottom = 43.0
 text = "$0"
 
 [node name="TotemPanel" parent="CanvasLayer" unique_id=2029938859 instance=ExtResource("4_fiftr")]

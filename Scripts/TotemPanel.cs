@@ -203,8 +203,17 @@ public partial class TotemPanel : Control
 		OwnedTotem totem = _gameState.OwnedTotems[slotIndex];
 		_gameState.AddMoney(totem.SellPrice);
 		_gameState.OwnedTotems.RemoveAt(slotIndex);
+		RefreshMoneyLabel();
 
 		GD.Print($"Sold {totem.Name} for ${totem.SellPrice}");
 		RefreshUI();
+	}
+	
+	private void RefreshMoneyLabel()
+	{
+		// search the whole scene tree for a label named MoneyLabel
+		Label moneyLabel = GetTree().Root.FindChild("MoneyLabel", true, false) as Label;
+		if (moneyLabel != null)
+			moneyLabel.Text = $"${_gameState.Money}";
 	}
 }

@@ -186,8 +186,17 @@ public partial class ItemPanel : Control
 		OwnedItem item = _gameState.OwnedItems[slotIndex];
 		_gameState.AddMoney(item.SellPrice);
 		_gameState.OwnedItems.RemoveAt(slotIndex);
+		RefreshMoneyLabel();
 
 		GD.Print($"Sold {item.Name} for ${item.SellPrice}");
 		RefreshUI();
+	}
+	
+	private void RefreshMoneyLabel()
+	{
+		// search the whole scene tree for a label named MoneyLabel
+		Label moneyLabel = GetTree().Root.FindChild("MoneyLabel", true, false) as Label;
+		if (moneyLabel != null)
+			moneyLabel.Text = $"${_gameState.Money}";
 	}
 }
