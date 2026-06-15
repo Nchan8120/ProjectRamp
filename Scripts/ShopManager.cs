@@ -247,12 +247,35 @@ public partial class ShopManager : Control
 
 		if (_gameState.SpendMoney(capsule.Cost))
 		{
-			// capsule picking UI comes later
-			// for now just give a random item from the capsule type
-			ItemData reward = ItemDatabase.GetRandom(capsule.Type);
-			AddItemToInventory(reward);
-			GD.Print($"Capsule reward: {reward.Name}");
+			UpdateUI();
 
+			// determine choice count and pick count based on size
+			int choiceCount;
+			int pickCount;
+			switch (capsule.Size)
+			{
+				case CapsuleSize.Small:
+					choiceCount = 2;
+					pickCount = 1;
+					break;
+				case CapsuleSize.Medium:
+					choiceCount = 4;
+					pickCount = 1;
+					break;
+				case CapsuleSize.Large:
+					choiceCount = 6;
+					pickCount = 2;
+					break;
+				default:
+					choiceCount = 2;
+					pickCount = 1;
+					break;
+			}
+
+			// generate unique random choices from the capsule's item type
+			List<ItemData> choices = GetUniqueRandomItems(capsule.Type, choiceCount);
+
+			// mark as sold immediately since money is spent
 			if (slot == 1)
 			{
 				_cap1Sold = true;
@@ -266,8 +289,31 @@ public partial class ShopManager : Control
 				_cap2Buy.Disabled = true;
 			}
 
-			UpdateUI();
+			// open the picker
+			CapsulePicker picker = GetNode<CapsulePicker>("CapsulePicker");
+			picker.Open(choices, pickCount, (List<ItemData> picked) =>
+			{
+				foreach (ItemData item in picked)
+					AddItemToInventory(item);
+			});
 		}
+	}
+
+	private List<ItemData> GetUniqueRandomItems(ItemType type, int count)
+	{
+		var sourceList = new List<ItemData>(ItemDatabase.GetListByType(type));
+		var result = new List<ItemData>();
+
+		count = Mathf.Min(count, sourceList.Count); // cant pick more than exist
+
+		for (int i = 0; i < count; i++)
+		{
+			int randomIndex = (int)GD.RandRange(0, sourceList.Count - 1);
+			result.Add(sourceList[randomIndex]);
+			sourceList.RemoveAt(randomIndex);
+		}
+
+		return result;
 	}
 
 	private void OnHouseRuleBuyPressed()

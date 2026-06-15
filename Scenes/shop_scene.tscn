@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cru10sfbi5hih" path="res://Scripts/ShopManager.cs" id="1_4li1v"]
 [ext_resource type="PackedScene" uid="uid://ddwclk5n3bj0b" path="res://Scenes/totem_panel.tscn" id="2_35huh"]
 [ext_resource type="PackedScene" uid="uid://ck2pckcn7kjxc" path="res://Scenes/item_panel.tscn" id="3_njw01"]
+[ext_resource type="PackedScene" uid="uid://de4mv3oxym6wg" path="res://Scenes/capsule_picker.tscn" id="4_6rmb7"]
 
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
@@ -278,4 +279,8 @@ text = "SHOP"
 layout_mode = 1
 
 [node name="ItemPanel" parent="." unique_id=65166487 instance=ExtResource("3_njw01")]
+layout_mode = 1
+
+[node name="CapsulePicker" parent="." unique_id=1024369955 instance=ExtResource("4_6rmb7")]
+visible = false
 layout_mode = 1

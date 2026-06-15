@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://de4mv3oxym6wg"]
+
+[ext_resource type="Script" uid="uid://b4xft6vmsl250" path="res://Scripts/CapsulePicker.cs" id="1_uhehq"]
+
+[node name="CapsulePicker" type="Control" unique_id=1024369955]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uhehq")
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=891259149]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=2069782006]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 60.0
+offset_right = 585.0
+offset_bottom = 83.0
+text = "CHOOSE AN ITEM"
+
+[node name="ChoicesContainer" type="HBoxContainer" parent="." unique_id=183119315]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 150.0
+offset_right = 1096.0
+offset_bottom = 450.0
+theme_override_constants/separation = 16
+
+[node name="ChoiceSlot1" type="Panel" parent="ChoicesContainer" unique_id=682828271]
+custom_minimum_size = Vector2(160, 280)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ChoicesContainer/ChoiceSlot1" unique_id=1833275549]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 31.0
+
+[node name="DescLabel" type="Label" parent="ChoicesContainer/ChoiceSlot1" unique_id=1522556296]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 73.0
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="ChoicesContainer/ChoiceSlot1" unique_id=1172117746]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 148.0
+offset_bottom = 270.0
+
+[node name="ChoiceSlot2" type="Panel" parent="ChoicesContainer" unique_id=822413739]
+custom_minimum_size = Vector2(160, 280)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ChoicesContainer/ChoiceSlot2" unique_id=1691594413]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 31.0
+
+[node name="DescLabel" type="Label" parent="ChoicesContainer/ChoiceSlot2" unique_id=289453581]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 73.0
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="ChoicesContainer/ChoiceSlot2" unique_id=1828519825]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 148.0
+offset_bottom = 270.0
+
+[node name="ChoiceSlot3" type="Panel" parent="ChoicesContainer" unique_id=1534097035]
+custom_minimum_size = Vector2(160, 280)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ChoicesContainer/ChoiceSlot3" unique_id=767853414]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 31.0
+
+[node name="DescLabel" type="Label" parent="ChoicesContainer/ChoiceSlot3" unique_id=1453085949]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 73.0
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="ChoicesContainer/ChoiceSlot3" unique_id=282774684]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 148.0
+offset_bottom = 270.0
+
+[node name="ChoiceSlot4" type="Panel" parent="ChoicesContainer" unique_id=525441202]
+custom_minimum_size = Vector2(160, 280)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ChoicesContainer/ChoiceSlot4" unique_id=1830098312]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 31.0
+
+[node name="DescLabel" type="Label" parent="ChoicesContainer/ChoiceSlot4" unique_id=1860936733]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 73.0
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="ChoicesContainer/ChoiceSlot4" unique_id=1673774774]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 148.0
+offset_bottom = 270.0
+
+[node name="ChoiceSlot5" type="Panel" parent="ChoicesContainer" unique_id=1079842639]
+custom_minimum_size = Vector2(160, 280)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ChoicesContainer/ChoiceSlot5" unique_id=2054676266]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 31.0
+
+[node name="DescLabel" type="Label" parent="ChoicesContainer/ChoiceSlot5" unique_id=268463316]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 73.0
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="ChoicesContainer/ChoiceSlot5" unique_id=1092630100]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 148.0
+offset_bottom = 270.0
+
+[node name="ChoiceSlot6" type="Panel" parent="ChoicesContainer" unique_id=387623946]
+custom_minimum_size = Vector2(160, 280)
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ChoicesContainer/ChoiceSlot6" unique_id=746250366]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 148.0
+offset_bottom = 31.0
+
+[node name="DescLabel" type="Label" parent="ChoicesContainer/ChoiceSlot6" unique_id=101556186]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 50.0
+offset_right = 148.0
+offset_bottom = 73.0
+autowrap_mode = 3
+
+[node name="SelectButton" type="Button" parent="ChoicesContainer/ChoiceSlot6" unique_id=784149917]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 148.0
+offset_bottom = 270.0
+
+[node name="SkipButton" type="Button" parent="." unique_id=1320023056]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 550.0
+offset_right = 676.0
+offset_bottom = 600.0
+text = "SKIP
+"
+
+[node name="ConfirmButton" type="Button" parent="." unique_id=1799804393]
+visible = false
+layout_mode = 0
+offset_left = 476.0
+offset_top = 480.0
+offset_right = 676.0
+offset_bottom = 530.0
+text = "CONFIRM"

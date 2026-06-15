@@ -10,6 +10,7 @@ public static class ItemDatabase
 		new ItemData("Piggy Bank", "Every miss generates $1", ItemType.Totem, 5),
 		new ItemData("Clutch Gene", "Last ball every round is worth double", ItemType.Totem, 6),
 		new ItemData("High Roller", "Interest rate on held money doubled", ItemType.Totem, 8),
+		new ItemData("Underdog", "The further behind threshold you are, the higher your multiplier", ItemType.Totem, 7),
 	};
 
 	public static List<ItemData> BallUpgrades = new List<ItemData>
@@ -19,6 +20,7 @@ public static class ItemDatabase
 		new ItemData("Hollow Core", "Ball gets more air off the ramp", ItemType.BallUpgrade, 5),
 		new ItemData("Coin Filled", "Scoring zero still generates $2", ItemType.BallUpgrade, 6),
 		new ItemData("Veteran", "Gains +10 points every round survived", ItemType.BallUpgrade, 7),
+		new ItemData("Sticky Ball", "Ball sticks to the wall", ItemType.BallUpgrade, 7),
 	};
 
 	public static List<ItemData> Engineering = new List<ItemData>
@@ -28,6 +30,7 @@ public static class ItemDatabase
 		new ItemData("Expanded Bullseye", "Bullseye is 20% larger", ItemType.Engineering, 5),
 		new ItemData("Scoring Walls", "Hitting a wall generates +25 points", ItemType.Engineering, 5),
 		new ItemData("Turbo Pad", "Launch pad gives ball extra lift", ItemType.Engineering, 6),
+		new ItemData("Demolition", "Destroy obstacles in a small area", ItemType.Engineering, 6),
 	};
 
 	public static List<ItemData> Stunts = new List<ItemData>
@@ -37,6 +40,7 @@ public static class ItemDatabase
 		new ItemData("Double Down", "Costs 2 balls, next throw scores double", ItemType.Stunt, 6),
 		new ItemData("Nudge", "Give ball a small directional push mid air", ItemType.Stunt, 4),
 		new ItemData("Clutch", "Only on last ball, triples its score", ItemType.Stunt, 7),
+		new ItemData("Ghost", "Ball passes through one wall before becomeing solid again", ItemType.Stunt, 7),
 	};
 
 	public static List<ItemData> HouseRules = new List<ItemData>
