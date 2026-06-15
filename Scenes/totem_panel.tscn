@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ddwclk5n3bj0b"]
 
-[ext_resource type="Script" uid="uid://g5ho0kvkoag0" path="res://Scripts/TotemPanel.cs" id="1_8kb07"]
+[ext_resource type="Script" uid="uid://g5ho0kvkoag0" path="res://Scripts/UI/TotemPanel.cs" id="1_8kb07"]
 
 [node name="TotemPanel" type="Control" unique_id=2029938859]
 layout_mode = 3

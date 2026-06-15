@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ck2pckcn7kjxc"]
 
-[ext_resource type="Script" uid="uid://dxo143fr8hhg8" path="res://Scripts/ItemPanel.cs" id="1_fnh3e"]
+[ext_resource type="Script" uid="uid://dxo143fr8hhg8" path="res://Scripts/UI/ItemPanel.cs" id="1_fnh3e"]
 
 [node name="ItemPanel" type="Control" unique_id=65166487]
 layout_mode = 3

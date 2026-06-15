@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://de4mv3oxym6wg"]
 
-[ext_resource type="Script" uid="uid://b4xft6vmsl250" path="res://Scripts/CapsulePicker.cs" id="1_uhehq"]
+[ext_resource type="Script" uid="uid://b4xft6vmsl250" path="res://Scripts/UI/CapsulePicker.cs" id="1_uhehq"]
 
 [node name="CapsulePicker" type="Control" unique_id=1024369955]
 layout_mode = 3
