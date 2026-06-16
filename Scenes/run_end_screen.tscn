@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://djiqrdlxfmrom"]
+
+[ext_resource type="Script" uid="uid://ndrq5ngcxqlm" path="res://Scripts/UI/RunEndScreen.cs" id="1_ax42x"]
+
+[node name="RunEndScreen" type="Control" unique_id=2119629883]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ax42x")
+TitleLabelPath = NodePath("TitleLabel")
+DefeatedByLabelPath = NodePath("DefeatedByLabel")
+HighScoreLabelPath = NodePath("StatsContainer/HighScoreLabel")
+RoundLabelPath = NodePath("StatsContainer/RoundLabel")
+BallsThrownLabelPath = NodePath("StatsContainer/BallsThrownLabel")
+ItemsBoughtLabelPath = NodePath("StatsContainer/ItemsBoughtLabel")
+RerollsLabelPath = NodePath("StatsContainer/RerollsLabel")
+MainMenuButtonPath = NodePath("ButtonsContainer/MainMenuButton")
+ActionButtonPath = NodePath("ButtonsContainer/ActionButton")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1519842415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=583746196]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 60.0
+offset_right = 752.0
+offset_bottom = 140.0
+theme_override_font_sizes/font_size = 48
+
+[node name="DefeatedByLabel" type="Label" parent="." unique_id=1127941480]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 150.0
+offset_right = 802.0
+offset_bottom = 190.0
+
+[node name="StatsContainer" type="VBoxContainer" parent="." unique_id=242242651]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 200.0
+offset_right = 776.0
+offset_bottom = 400.0
+
+[node name="HighScoreLabel" type="Label" parent="StatsContainer" unique_id=356060622]
+layout_mode = 2
+
+[node name="RoundLabel" type="Label" parent="StatsContainer" unique_id=1899186957]
+layout_mode = 2
+
+[node name="BallsThrownLabel" type="Label" parent="StatsContainer" unique_id=1037737882]
+layout_mode = 2
+
+[node name="ItemsBoughtLabel" type="Label" parent="StatsContainer" unique_id=936718928]
+layout_mode = 2
+
+[node name="RerollsLabel" type="Label" parent="StatsContainer" unique_id=561242238]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=163820294]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 550.0
+offset_right = 776.0
+offset_bottom = 600.0
+theme_override_constants/separation = 20
+
+[node name="MainMenuButton" type="Button" parent="ButtonsContainer" unique_id=1024959319]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2
+text = "Main Menu
+"
+
+[node name="ActionButton" type="Button" parent="ButtonsContainer" unique_id=1842017069]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 2

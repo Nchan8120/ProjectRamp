@@ -334,7 +334,8 @@ public partial class ShopManager : Control
 	private void OnRerollPressed()
 	{
 		if (!_gameState.SpendMoney(_gameState.RerollCost)) return;
-
+		
+		_gameState.TimesRerolled++;
 		_gameState.RerollCost++;
 		_item1Sold = false;
 		_item2Sold = false;
@@ -370,6 +371,7 @@ public partial class ShopManager : Control
 
 	private void AddItemToInventory(ItemData item)
 	{
+		_gameState.ItemsBought++;
 		switch (item.Type)
 		{
 			case ItemType.Totem:

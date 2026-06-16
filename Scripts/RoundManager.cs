@@ -51,6 +51,7 @@ public partial class RoundManager : Node3D
 	{
 		_currentScore += points;
 		_ballsRemaining--;
+		_gameState.BallsThrown++;
 		UpdateUI();
 		
 		if (_currentScore >= _currentThreshold)
@@ -66,6 +67,7 @@ public partial class RoundManager : Node3D
 	public void OnBallMissed()
 	{
 		_ballsRemaining--;
+		_gameState.BallsThrown++;
 		UpdateUI();
 
 		if (_ballsRemaining <= 0)
@@ -83,6 +85,10 @@ public partial class RoundManager : Node3D
 
 	private void EndRound()
 	{
+		if (_currentScore > _gameState.HighestRoundScore)
+		{
+		_gameState.HighestRoundScore = _currentScore;
+		}
 		if (_currentScore >= _currentThreshold)
 		{
 			WinRound();
@@ -102,7 +108,8 @@ public partial class RoundManager : Node3D
 		if (_gameState.CurrentRound > _gameState.TotalRounds)
 		{
 			GD.Print("YOU WIN!");
-			// victory screen later
+			// victory screen 
+			GetTree().CallDeferred("change_scene_to_file", "res://scenes/run_end_screen.tscn");
 		}
 		else
 		{
@@ -113,9 +120,9 @@ public partial class RoundManager : Node3D
 
 	private void GameOver()
 	{
-		GD.Print($"GAME OVER!");
-		_gameState.ResetRun();
-		GetTree().CallDeferred("change_scene_to_file", "res://scenes/game_scene.tscn");
+		if (_gameState.CurrentRound > _gameState.HighestRoundReached)
+		_gameState.HighestRoundReached = _gameState.CurrentRound;
+		GetTree().CallDeferred("change_scene_to_file", "res://scenes/run_end_screen.tscn");
 	}
 	
 }

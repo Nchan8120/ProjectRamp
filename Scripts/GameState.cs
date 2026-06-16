@@ -24,9 +24,16 @@ public partial class GameState : Node
 	public int MaxTotems = 5;
 	public int MaxStunts = 3;
 
-	// Run stats for scoring
+	// Run stats 
 	public int TotalScore = 0;
 	public int HighestRoundReached = 1;
+	public int BallsThrown = 0;
+	public int ItemsBought = 0;
+	public int TimesRerolled = 0;
+	public int HighestRoundScore = 0;
+	public string DefeatedByBoss = null; // null if not defeated by boss
+	
+	public bool IsEndlessMode = false;
 
 	public void AddMoney(int amount)
 	{
@@ -56,6 +63,13 @@ public partial class GameState : Node
 		OwnedItems.Clear();
 		TotalScore = 0;
 		HighestRoundReached = 1;
+		BallsThrown = 0;
+		ItemsBought = 0;
+		TimesRerolled = 0;
+		HighestRoundScore = 0;
+		DefeatedByBoss = null;
+		LeftoverBalls = 0;
+		IsEndlessMode = false;
 	}
 
 	public void AwardRoundEndMoney(int leftoverBalls)
