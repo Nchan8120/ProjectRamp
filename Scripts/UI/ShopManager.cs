@@ -382,8 +382,7 @@ public partial class ShopManager : Control
 				}
 				else
 				{
-					GD.Print("Totem slots full!");
-					_gameState.AddMoney(item.Cost);
+					GD.Print("Totem slots full! Sell an item first.");
 				}
 				break;
 			case ItemType.BallUpgrade:
@@ -396,8 +395,7 @@ public partial class ShopManager : Control
 				}
 				else
 				{
-					GD.Print("Item slots full!");
-					_gameState.AddMoney(item.Cost);
+					GD.Print("Item slots full! Sell and item first.");
 				}
 				break;
 		}
@@ -406,13 +404,23 @@ public partial class ShopManager : Control
 
 	private void RefreshItemPanel()
 	{
-		ItemPanel panel = GetNodeOrNull<ItemPanel>("ItemPanel");
-		panel?.RefreshUI();
+		// refresh all item panels in the scene
+		var panels = GetTree().GetNodesInGroup("ItemPanel");
+		foreach (Node panel in panels)
+		{
+			if (panel is ItemPanel itemPanel)
+				itemPanel.RefreshUI();
+		}
 	}
 	
 	private void RefreshTotemPanel()
 	{
-		TotemPanel panel = GetNodeOrNull<TotemPanel>("TotemPanel");
-		panel?.RefreshUI();
+		// refresh all totem panels in the scene
+		var panels = GetTree().GetNodesInGroup("TotemPanel");
+		foreach (Node panel in panels)
+		{
+			if (panel is TotemPanel totemPanel)
+				totemPanel.RefreshUI();
+		}
 	}
 }

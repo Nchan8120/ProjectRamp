@@ -99,8 +99,17 @@ public partial class CapsulePicker : Control
 			_slots[index].SelfModulate = new Color(0.6f, 1f, 0.6f, 1f); // greenish highlight
 		}
 
-		// show confirm button if at least 1 item is selected
-		_confirmButton.Visible = _selectedIndices.Count >= 1;
+		// show confirm button 
+		if (_selectedIndices.Count >= 1)
+		{
+			_confirmButton.Visible = true;
+			_confirmButton.Disabled = !CanAddSelectedItems();
+		}
+		else
+		{
+			_confirmButton.Visible = false;
+			_confirmButton.Disabled = false;
+		}
 	}
 
 	private void OnConfirmPressed()
@@ -117,5 +126,30 @@ public partial class CapsulePicker : Control
 	{
 		Visible = false;
 		_onComplete?.Invoke(new List<ItemData>()); // empty list = nothing picked
+	}
+	
+	private bool CanAddSelectedItems()
+	{
+		foreach (int index in _selectedIndices)
+		{
+			ItemData item = _choices[index];
+			if (item.Type == ItemType.Totem)
+			{
+				if (_gameState.OwnedTotems.Count >= _gameState.MaxTotems)
+					return false;
+			}
+			else
+			{
+				if (_gameState.OwnedItems.Count >= _gameState.MaxItems)
+					return false;
+			}
+		}
+		return true;
+	}
+	
+	public void RefreshConfirmButton()
+	{
+		if (_selectedIndices.Count >= 1)
+			_confirmButton.Disabled = !CanAddSelectedItems();
 	}
 }

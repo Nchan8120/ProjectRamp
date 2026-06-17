@@ -37,6 +37,8 @@ public partial class TotemPanel : Control
 			// enable input on each slot for click and drag
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
 		}
+		
+		AddToGroup("TotemPanel");
 
 		RefreshUI();
 	}
@@ -204,9 +206,12 @@ public partial class TotemPanel : Control
 		_gameState.AddMoney(totem.SellPrice);
 		_gameState.OwnedTotems.RemoveAt(slotIndex);
 		RefreshMoneyLabel();
+		
 
 		GD.Print($"Sold {totem.Name} for ${totem.SellPrice}");
 		RefreshUI();
+		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
+		picker?.RefreshConfirmButton();
 	}
 	
 	private void RefreshMoneyLabel()

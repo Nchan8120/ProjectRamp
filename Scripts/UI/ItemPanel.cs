@@ -36,6 +36,8 @@ public partial class ItemPanel : Control
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
 		}
 
+		AddToGroup("ItemPanel");
+		
 		RefreshUI();
 	}
 
@@ -187,9 +189,12 @@ public partial class ItemPanel : Control
 		_gameState.AddMoney(item.SellPrice);
 		_gameState.OwnedItems.RemoveAt(slotIndex);
 		RefreshMoneyLabel();
+		
 
 		GD.Print($"Sold {item.Name} for ${item.SellPrice}");
 		RefreshUI();
+		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
+		picker?.RefreshConfirmButton();
 	}
 	
 	private void RefreshMoneyLabel()
