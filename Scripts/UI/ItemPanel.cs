@@ -9,41 +9,73 @@ public partial class ItemPanel : Control
 	private List<Label> _typeLabels = new List<Label>();
 	private List<Button> _sellButtons = new List<Button>();
 	private int _selectedSlot = -1;
-
 	private bool _isDragging = false;
 	private int _dragSourceSlot = -1;
 	private Control _dragPreview;
+	private VBoxContainer _slotsContainer;
 
 	public override void _Ready()
 	{
 		_gameState = GetNode<GameState>("/root/GameState");
+		AddToGroup("ItemPanel");
+		_slotsContainer = GetNode<VBoxContainer>("SlotsContainer");
+		BuildSlots();
+	}
 
-		var container = GetNode<VBoxContainer>("SlotsContainer");
-		for (int i = 0; i < 3; i++)
+	private void BuildSlots()
+	{
+		// clear existing slots
+		foreach (Node child in _slotsContainer.GetChildren())
+			child.QueueFree();
+
+		_slots.Clear();
+		_nameLabels.Clear();
+		_typeLabels.Clear();
+		_sellButtons.Clear();
+		_selectedSlot = -1;
+
+		// build slots dynamically based on MaxItems
+		for (int i = 0; i < _gameState.MaxItems; i++)
 		{
-			Panel slot = container.GetNode<Panel>($"ItemSlot{i + 1}");
-			Label nameLabel = slot.GetNode<Label>("ItemName");
-			Label typeLabel = slot.GetNode<Label>("ItemType");
-			Button sellButton = slot.GetNode<Button>("SellButton");
+			Panel slot = new Panel();
+			slot.CustomMinimumSize = new Vector2(120, 90);
+
+			Label nameLabel = new Label();
+			nameLabel.Position = new Vector2(8, 8);
+			nameLabel.Size = new Vector2(200, 20);
+
+			Label typeLabel = new Label();
+			typeLabel.Position = new Vector2(8, 30);
+			typeLabel.Size = new Vector2(200, 20);
+
+			Button sellButton = new Button();
+			sellButton.Position = new Vector2(8, 52);
+			sellButton.Size = new Vector2(180, 28);
+			sellButton.Visible = false;
+
+			slot.AddChild(nameLabel);
+			slot.AddChild(typeLabel);
+			slot.AddChild(sellButton);
+			_slotsContainer.AddChild(slot);
 
 			_slots.Add(slot);
 			_nameLabels.Add(nameLabel);
 			_typeLabels.Add(typeLabel);
 			_sellButtons.Add(sellButton);
 
+			// capture index for lambda
 			int index = i;
 			sellButton.Pressed += () => OnSellPressed(index);
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
 		}
 
-		AddToGroup("ItemPanel");
-		
-		RefreshUI();
+		// populate with current data
+		PopulateSlots();
 	}
 
-	public void RefreshUI()
+	private void PopulateSlots()
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < _slots.Count; i++)
 		{
 			bool hasItem = i < _gameState.OwnedItems.Count
 						   && _gameState.OwnedItems[i] != null;
@@ -66,6 +98,15 @@ public partial class ItemPanel : Control
 		}
 
 		_selectedSlot = -1;
+	}
+
+	public void RefreshUI()
+	{
+		// rebuild slots if count changed (e.g. Juggler bought/sold)
+		if (_slots.Count != _gameState.MaxItems)
+			BuildSlots();
+		else
+			PopulateSlots();
 	}
 
 	private void OnSlotInput(InputEvent inputEvent, int slotIndex)
@@ -149,7 +190,7 @@ public partial class ItemPanel : Control
 			SwapSlots(_dragSourceSlot, targetSlot);
 
 		_dragSourceSlot = -1;
-		RefreshUI();
+		PopulateSlots();
 	}
 
 	private int GetSlotUnderMouse()
@@ -188,18 +229,18 @@ public partial class ItemPanel : Control
 		OwnedItem item = _gameState.OwnedItems[slotIndex];
 		_gameState.AddMoney(item.SellPrice);
 		_gameState.OwnedItems.RemoveAt(slotIndex);
+
 		RefreshMoneyLabel();
-		
+
+		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
+		picker?.RefreshConfirmButton();
 
 		GD.Print($"Sold {item.Name} for ${item.SellPrice}");
 		RefreshUI();
-		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
-		picker?.RefreshConfirmButton();
 	}
-	
+
 	private void RefreshMoneyLabel()
 	{
-		// search the whole scene tree for a label named MoneyLabel
 		Label moneyLabel = GetTree().Root.FindChild("MoneyLabel", true, false) as Label;
 		if (moneyLabel != null)
 			moneyLabel.Text = $"${_gameState.Money}";
