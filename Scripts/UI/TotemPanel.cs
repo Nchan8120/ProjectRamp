@@ -56,6 +56,8 @@ public partial class TotemPanel : Control
 				OwnedTotem totem = _gameState.OwnedTotems[i];
 				_nameLabels[i].Text = totem.Name;
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 1f);
+				// rarity border color via self modulate on the panel
+				_slots[i].SelfModulate = GetRarityColor(totem.Rarity);
 			}
 			else
 			{
@@ -67,6 +69,18 @@ public partial class TotemPanel : Control
 		}
 
 		_selectedSlot = -1;
+	}
+	
+	private Color GetRarityColor(TotemRarity rarity)
+	{
+		return rarity switch
+		{
+			TotemRarity.Common => new Color(0.8f, 0.8f, 0.8f), // grey
+			TotemRarity.Rare => new Color(0.4f, 0.6f, 1f),     // blue
+			TotemRarity.Epic => new Color(0.7f, 0.3f, 1f),     // purple
+			TotemRarity.Legendary => new Color(1f, 0.8f, 0.2f), // gold
+			_ => new Color(1f, 1f, 1f)
+		};
 	}
 
 	private void OnSlotInput(InputEvent inputEvent, int slotIndex)
@@ -162,6 +176,8 @@ public partial class TotemPanel : Control
 		if (targetSlot >= 0 && targetSlot != _dragSourceSlot)
 		{
 			SwapSlots(_dragSourceSlot, targetSlot);
+			// notify totems of reorder
+			GetNode<TotemManager>("/root/TotemManager").BroadcastTotemMoved();
 		}
 
 		_dragSourceSlot = -1;

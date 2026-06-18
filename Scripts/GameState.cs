@@ -8,7 +8,7 @@ public partial class GameState : Node
 	public int CurrentRound = 1;
 	public int TotalRounds = 10;
 	public int LeftoverBalls = 0;
-
+	
 	// Owned items
 	public List<OwnedTotem> OwnedTotems = new List<OwnedTotem>();
 	public List<OwnedItem> OwnedItems = new List<OwnedItem>();
@@ -19,6 +19,7 @@ public partial class GameState : Node
 	public int RerollCost = 3;
 	public string PersistentHouseRule = null; // carries over if not bought
 	public bool HouseRuleAvailableThisShop = false;
+	public bool HasFreeReroll = false;
 
 	// Slot limits
 	public int MaxTotems = 5;
@@ -32,6 +33,12 @@ public partial class GameState : Node
 	public int TimesRerolled = 0;
 	public int HighestRoundScore = 0;
 	public string DefeatedByBoss = null; // null if not defeated by boss
+	
+	// Totem flags
+	public bool ClutchGeneActive = false;
+	public int BallsPerRound = 9;
+	public int LeftoverBallValue = 2;
+	public float ScoreMultiplier = 1.0f;
 	
 	public bool IsEndlessMode = false;
 
@@ -70,12 +77,14 @@ public partial class GameState : Node
 		DefeatedByBoss = null;
 		LeftoverBalls = 0;
 		IsEndlessMode = false;
+		LeftoverBallValue = 2;
+		ScoreMultiplier = 1.0f;
 	}
 
 	public void AwardRoundEndMoney(int leftoverBalls)
 	{
 		int winBonus = 5;
-		int ballBonus = leftoverBalls * 2;
+		int ballBonus = leftoverBalls * LeftoverBallValue;
 		AddMoney(winBonus + ballBonus);
 		GD.Print($"Round rewards: ${winBonus} win bonus + ${ballBonus} ball bonus");
 	}

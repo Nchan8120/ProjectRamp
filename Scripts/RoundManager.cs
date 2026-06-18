@@ -2,7 +2,6 @@ using Godot;
 
 public partial class RoundManager : Node3D
 {
-	[Export] public int BallsPerRound = 9;
 	[Export] public int StartingThreshold = 700;
 	[Export] public int ThresholdIncrement = 200;
 	[Export] public int TotalRounds = 10;
@@ -28,6 +27,9 @@ public partial class RoundManager : Node3D
 	public override void _Ready()
 	{
 		_gameState = GetNode<GameState>("/root/GameState");
+		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
+		totemManager.SetRoundManager(this);
+		
 		_ball = GetNode<BallController>(BallPath);
 		_scoreLabel = GetNode<Label>(ScoreLabelPath);
 		_ballsLabel = GetNode<Label>(BallsLabelPath);
@@ -40,18 +42,32 @@ public partial class RoundManager : Node3D
 
 	public void StartRound()
 	{
-		_ballsRemaining = BallsPerRound;
+		_ballsRemaining = _gameState.BallsPerRound; // ← use GameState value
 		_currentScore = 0;
 		_currentThreshold = StartingThreshold + (ThresholdIncrement * (_currentRound - 1));
+
+		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
+		totemManager.BroadcastRoundStart();
+
 		UpdateUI();
 		GD.Print($"Round {_currentRound} | Threshold: {_currentThreshold}");
 	}
 
 	public void OnBallScored(int points)
 	{
+		// apply clutch gene if last ball
+		if (_ballsRemaining == 1 && _gameState.ClutchGeneActive)
+		{
+			points *= 2;
+		}
+		
+		points = Mathf.RoundToInt(points * _gameState.ScoreMultiplier);
 		_currentScore += points;
 		_ballsRemaining--;
 		_gameState.BallsThrown++;
+		
+		GetNode<TotemManager>("/root/TotemManager").BroadcastScore(points);
+		
 		UpdateUI();
 		
 		if (_currentScore >= _currentThreshold)
@@ -68,6 +84,7 @@ public partial class RoundManager : Node3D
 	{
 		_ballsRemaining--;
 		_gameState.BallsThrown++;
+		GetNode<TotemManager>("/root/TotemManager").BroadcastMiss();
 		UpdateUI();
 
 		if (_ballsRemaining <= 0)

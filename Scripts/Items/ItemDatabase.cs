@@ -67,8 +67,14 @@ public static class ItemDatabase
 
 	public static ItemData GetRandom(ItemType type)
 	{
+		if (type == ItemType.Totem)
+		{
+			TotemData totemData = TotemDatabase.GetRandom();
+			return new ItemData(totemData.Name, totemData.Description, ItemType.Totem, totemData.Cost);
+		}
+
 		var list = GetListByType(type);
-		return list[GD.RandRange(0, list.Count - 1)];
+		return list[(int)GD.RandRange(0, list.Count - 1)];
 	}
 
 	public static ItemType GetRandomType()

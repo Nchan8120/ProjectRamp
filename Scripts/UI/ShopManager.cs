@@ -333,10 +333,19 @@ public partial class ShopManager : Control
 
 	private void OnRerollPressed()
 	{
-		if (!_gameState.SpendMoney(_gameState.RerollCost)) return;
-		
-		_gameState.TimesRerolled++;
-		_gameState.RerollCost++;
+		if (_gameState.HasFreeReroll)
+		{
+			_gameState.HasFreeReroll = false;
+			// don't charge, don't increment reroll cost
+		}
+		else
+		{
+			if (!_gameState.SpendMoney(_gameState.RerollCost)) return;
+			{
+				_gameState.TimesRerolled++;
+				_gameState.RerollCost++;
+			}
+		}
 		_item1Sold = false;
 		_item2Sold = false;
 		_cap1Sold = false;
@@ -377,12 +386,19 @@ public partial class ShopManager : Control
 			case ItemType.Totem:
 				if (_gameState.OwnedTotems.Count < _gameState.MaxTotems)
 				{
-					_gameState.OwnedTotems.Add(new OwnedTotem(item));
+					// find matching TotemData from TotemDatabase
+					TotemData totemData = TotemDatabase.AllTotems.Find(t => t.Name == item.Name);
+					if (totemData != null)
+					{
+						OwnedTotem newTotem = new OwnedTotem(totemData);
+						_gameState.OwnedTotems.Add(newTotem);
+						GetNode<TotemManager>("/root/TotemManager").OnTotemAdded(newTotem);
+					}
 					RefreshTotemPanel();
 				}
 				else
 				{
-					GD.Print("Totem slots full! Sell an item first.");
+					GD.Print("Totem slots full! Sell a totem first.");
 				}
 				break;
 			case ItemType.BallUpgrade:
