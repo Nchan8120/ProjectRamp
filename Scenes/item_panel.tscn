@@ -4,14 +4,13 @@
 
 [node name="ItemPanel" type="Control" unique_id=65166487]
 layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -278.0
-offset_right = 60.0
-offset_bottom = -238.0
-grow_vertical = 0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -44.0
+offset_right = 40.0
+offset_bottom = -4.0
+grow_vertical = 2
 script = ExtResource("1_fnh3e")
 
 [node name="SlotsContainer" type="VBoxContainer" parent="." unique_id=2132322546]

@@ -419,6 +419,7 @@ public partial class ShopManager : Control
 						GetNode<TotemManager>("/root/TotemManager").OnTotemAdded(newTotem);
 					}
 					RefreshTotemPanel();
+					RefreshItemPanel();
 				}
 				else
 				{

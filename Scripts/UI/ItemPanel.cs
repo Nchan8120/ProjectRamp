@@ -41,16 +41,17 @@ public partial class ItemPanel : Control
 			slot.CustomMinimumSize = new Vector2(120, 90);
 
 			Label nameLabel = new Label();
-			nameLabel.Position = new Vector2(8, 8);
-			nameLabel.Size = new Vector2(200, 20);
+			nameLabel.Position = new Vector2(6, 4);
+			nameLabel.Size = new Vector2(108, 18);
+			nameLabel.AutowrapMode = TextServer.AutowrapMode.Word;
 
 			Label typeLabel = new Label();
-			typeLabel.Position = new Vector2(8, 30);
-			typeLabel.Size = new Vector2(200, 20);
+			typeLabel.Position = new Vector2(6, 24);
+			typeLabel.Size = new Vector2(108, 16);
 
 			Button sellButton = new Button();
-			sellButton.Position = new Vector2(8, 52);
-			sellButton.Size = new Vector2(180, 28);
+			sellButton.Position = new Vector2(6, 56);
+			sellButton.Size = new Vector2(108, 28);
 			sellButton.Visible = false;
 
 			slot.AddChild(nameLabel);
