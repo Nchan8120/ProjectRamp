@@ -118,19 +118,20 @@ public partial class RoundManager : Node3D
 
 	private void WinRound()
 	{
+		if (_gameState.CurrentRound > _gameState.HighestRoundReached)
+			_gameState.HighestRoundReached = _gameState.CurrentRound;
+
 		_gameState.LeftoverBalls = _ballsRemaining;
 		_gameState.TotalScore += _currentScore;
 		_gameState.CurrentRound++;
 
-		if (_gameState.CurrentRound > _gameState.TotalRounds)
+		if (_gameState.CurrentRound > _gameState.TotalRounds && !_gameState.IsEndlessMode)
 		{
 			GD.Print("YOU WIN!");
-			// victory screen 
 			GetTree().CallDeferred("change_scene_to_file", "res://scenes/run_end_screen.tscn");
 		}
 		else
 		{
-			// go to shop
 			GetTree().CallDeferred("change_scene_to_file", "res://scenes/shop_scene.tscn");
 		}
 	}

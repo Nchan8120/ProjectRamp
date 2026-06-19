@@ -90,7 +90,7 @@ public partial class RunEndScreen : Control
 		{
 			// endless mode - continue run without resetting
 			_gameState.IsEndlessMode = true;
-			GetTree().ChangeSceneToFile("res://scenes/game_scene.tscn");
+			GetTree().ChangeSceneToFile("res://scenes/shop_scene.tscn");
 		}
 		else
 		{
