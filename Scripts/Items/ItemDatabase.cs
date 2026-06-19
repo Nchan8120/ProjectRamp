@@ -3,16 +3,6 @@ using System.Collections.Generic;
 
 public static class ItemDatabase
 {
-	public static List<ItemData> Totems = new List<ItemData>
-	{
-		new ItemData("Lucky Horseshoe", "Every 3rd throw scores at least 100 points", ItemType.Totem, 6),
-		new ItemData("Hot Streak", "Each consecutive scoring throw increases multiplier by 0.1x", ItemType.Totem, 7),
-		new ItemData("Piggy Bank", "Every miss generates $1", ItemType.Totem, 5),
-		new ItemData("Clutch Gene", "Last ball every round is worth double", ItemType.Totem, 6),
-		new ItemData("High Roller", "Interest rate on held money doubled", ItemType.Totem, 8),
-		new ItemData("Underdog", "The further behind threshold you are, the higher your multiplier", ItemType.Totem, 7),
-	};
-
 	public static List<ItemData> BallUpgrades = new List<ItemData>
 	{
 		new ItemData("Gold Plated", "Ball worth +50 points every throw", ItemType.BallUpgrade, 5),
@@ -56,12 +46,11 @@ public static class ItemDatabase
 	{
 		return type switch
 		{
-			ItemType.Totem => Totems,
 			ItemType.BallUpgrade => BallUpgrades,
 			ItemType.Engineering => Engineering,
 			ItemType.Stunt => Stunts,
 			ItemType.HouseRule => HouseRules,
-			_ => Totems
+			_ => BallUpgrades
 		};
 	}
 

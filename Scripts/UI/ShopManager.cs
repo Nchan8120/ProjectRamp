@@ -128,25 +128,29 @@ public partial class ShopManager : Control
 
 	private void GenerateShop()
 	{
-		// first shop always has small totem capsule
-		if (_gameState.CurrentRound == 2) // round incremented before shop
-		{
+		if (_gameState.CurrentRound == 2)
 			_capsule1Data = new CapsuleData(ItemType.Totem, CapsuleSize.Small);
-		}
 		else
-		{
 			_capsule1Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
-		}
+
 		_capsule2Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
 
-		// generate item slots
-		_item1Data = ItemDatabase.GetRandom(ItemDatabase.GetRandomType());
-		_item2Data = ItemDatabase.GetRandom(ItemDatabase.GetRandomType());
+		_item1Data = GetRandomItemData(ItemDatabase.GetRandomType());
+		_item2Data = GetRandomItemData(ItemDatabase.GetRandomType());
 
-		// house rule logic
 		GenerateHouseRule();
-
 		UpdateShopUI();
+	}
+
+	private ItemData GetRandomItemData(ItemType type)
+	{
+		if (type == ItemType.Totem)
+		{
+			TotemData t = TotemDatabase.GetRandom();
+			return new ItemData(t.Name, t.Description, ItemType.Totem, t.Cost);
+		}
+
+		return ItemDatabase.GetRandom(type);
 	}
 
 	private void GenerateHouseRule()
@@ -301,19 +305,39 @@ public partial class ShopManager : Control
 
 	private List<ItemData> GetUniqueRandomItems(ItemType type, int count)
 	{
-		var sourceList = new List<ItemData>(ItemDatabase.GetListByType(type));
-		var result = new List<ItemData>();
+		if (type == ItemType.Totem)
+		{
+			// pull from TotemDatabase instead
+			var sourceTotems = new List<TotemData>(TotemDatabase.AllTotems);
+			var result = new List<ItemData>();
 
-		count = Mathf.Min(count, sourceList.Count); // cant pick more than exist
+			count = Mathf.Min(count, sourceTotems.Count);
+
+			for (int i = 0; i < count; i++)
+			{
+				int randomIndex = (int)GD.RandRange(0, sourceTotems.Count - 1);
+				TotemData t = sourceTotems[randomIndex];
+				result.Add(new ItemData(t.Name, t.Description, ItemType.Totem, t.Cost));
+				sourceTotems.RemoveAt(randomIndex);
+			}
+
+			return result;
+		}
+
+		// existing logic for non totem types
+		var sourceList = new List<ItemData>(ItemDatabase.GetListByType(type));
+		var resultList = new List<ItemData>();
+
+		count = Mathf.Min(count, sourceList.Count);
 
 		for (int i = 0; i < count; i++)
 		{
 			int randomIndex = (int)GD.RandRange(0, sourceList.Count - 1);
-			result.Add(sourceList[randomIndex]);
+			resultList.Add(sourceList[randomIndex]);
 			sourceList.RemoveAt(randomIndex);
 		}
 
-		return result;
+		return resultList;
 	}
 
 	private void OnHouseRuleBuyPressed()
@@ -352,8 +376,8 @@ public partial class ShopManager : Control
 		_cap2Sold = false;
 
 		// regenerate items and capsules but keep house rule
-		_item1Data = ItemDatabase.GetRandom(ItemDatabase.GetRandomType());
-		_item2Data = ItemDatabase.GetRandom(ItemDatabase.GetRandomType());
+		_item1Data = GetRandomItemData(ItemDatabase.GetRandomType());
+		_item2Data = GetRandomItemData(ItemDatabase.GetRandomType());
 		_capsule1Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
 		_capsule2Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
 
