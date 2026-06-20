@@ -6,62 +6,96 @@ public partial class TotemPanel : Control
 	private GameState _gameState;
 	private List<Panel> _slots = new List<Panel>();
 	private List<Label> _nameLabels = new List<Label>();
+	private List<Label> _valueLabels = new List<Label>();
 	private List<Button> _sellButtons = new List<Button>();
 	private int _selectedSlot = -1;
 
-	// drag and drop state
 	private bool _isDragging = false;
 	private int _dragSourceSlot = -1;
 	private Control _dragPreview;
+	private VBoxContainer _slotsContainer;
 
 	public override void _Ready()
 	{
 		_gameState = GetNode<GameState>("/root/GameState");
+		AddToGroup("TotemPanel");
+		_slotsContainer = GetNode<VBoxContainer>("SlotsContainer");
+		BuildSlots();
+	}
 
-		// collect slot references
-		var container = GetNode<VBoxContainer>("SlotsContainer");
-		for (int i = 0; i < 5; i++)
+	private void BuildSlots()
+	{
+		foreach (Node child in _slotsContainer.GetChildren())
+			child.QueueFree();
+
+		_slots.Clear();
+		_nameLabels.Clear();
+		_valueLabels.Clear();
+		_sellButtons.Clear();
+		_selectedSlot = -1;
+
+		for (int i = 0; i < _gameState.MaxTotems; i++)
 		{
-			Panel slot = container.GetNode<Panel>($"TotemSlot{i + 1}");
-			Label nameLabel = slot.GetNode<Label>("TotemName");
-			Button sellButton = slot.GetNode<Button>("SellButton");
+			Panel slot = new Panel();
+			slot.CustomMinimumSize = new Vector2(180, 90);
+
+			Label nameLabel = new Label();
+			nameLabel.Position = new Vector2(8, 8);
+			nameLabel.Size = new Vector2(164, 20);
+			nameLabel.AutowrapMode = TextServer.AutowrapMode.Word;
+
+			Label valueLabel = new Label();
+			valueLabel.Position = new Vector2(8, 30);
+			valueLabel.Size = new Vector2(164, 18);
+			// make the value stand out a bit
+			valueLabel.AddThemeColorOverride("font_color", new Color(1f, 0.9f, 0.4f));
+
+			Button sellButton = new Button();
+			sellButton.Position = new Vector2(8, 56);
+			sellButton.Size = new Vector2(164, 28);
+			sellButton.Visible = false;
+
+			slot.AddChild(nameLabel);
+			slot.AddChild(valueLabel);
+			slot.AddChild(sellButton);
+			_slotsContainer.AddChild(slot);
 
 			_slots.Add(slot);
 			_nameLabels.Add(nameLabel);
+			_valueLabels.Add(valueLabel);
 			_sellButtons.Add(sellButton);
 
-			// capture index for lambda
 			int index = i;
 			sellButton.Pressed += () => OnSellPressed(index);
-
-			// enable input on each slot for click and drag
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
 		}
-		
-		AddToGroup("TotemPanel");
 
-		RefreshUI();
+		PopulateSlots();
 	}
 
-	public void RefreshUI()
+	private void PopulateSlots()
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < _slots.Count; i++)
 		{
-			// check for null explicitly
-			bool hasTotem = i < _gameState.OwnedTotems.Count 
+			bool hasTotem = i < _gameState.OwnedTotems.Count
 							&& _gameState.OwnedTotems[i] != null;
 
 			if (hasTotem)
 			{
 				OwnedTotem totem = _gameState.OwnedTotems[i];
 				_nameLabels[i].Text = totem.Name;
-				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 1f);
-				// rarity border color via self modulate on the panel
 				_slots[i].SelfModulate = GetRarityColor(totem.Rarity);
+
+				// pull live display value from the effect if it has one
+				string displayValue = totem.Effect?.GetDisplayValue();
+				_valueLabels[i].Text = displayValue ?? "";
+				_valueLabels[i].Visible = displayValue != null;
 			}
 			else
 			{
 				_nameLabels[i].Text = "[ empty ]";
+				_valueLabels[i].Text = "";
+				_valueLabels[i].Visible = false;
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 0.4f);
 			}
 
@@ -70,15 +104,23 @@ public partial class TotemPanel : Control
 
 		_selectedSlot = -1;
 	}
-	
+
+	public void RefreshUI()
+	{
+		if (_slots.Count != _gameState.MaxTotems)
+			BuildSlots();
+		else
+			PopulateSlots();
+	}
+
 	private Color GetRarityColor(TotemRarity rarity)
 	{
 		return rarity switch
 		{
-			TotemRarity.Common => new Color(0.8f, 0.8f, 0.8f), // grey
-			TotemRarity.Rare => new Color(0.4f, 0.6f, 1f),     // blue
-			TotemRarity.Epic => new Color(0.7f, 0.3f, 1f),     // purple
-			TotemRarity.Legendary => new Color(1f, 0.8f, 0.2f), // gold
+			TotemRarity.Common => new Color(0.8f, 0.8f, 0.8f),
+			TotemRarity.Rare => new Color(0.4f, 0.6f, 1f),
+			TotemRarity.Epic => new Color(0.7f, 0.3f, 1f),
+			TotemRarity.Legendary => new Color(1f, 0.8f, 0.2f),
 			_ => new Color(1f, 1f, 1f)
 		};
 	}
@@ -89,24 +131,21 @@ public partial class TotemPanel : Control
 		{
 			if (mouseButton.ButtonIndex == MouseButton.Left && mouseButton.Pressed)
 			{
-				bool hasTotem = slotIndex < _gameState.OwnedTotems.Count;
+				bool hasTotem = slotIndex < _gameState.OwnedTotems.Count
+								&& _gameState.OwnedTotems[slotIndex] != null;
 
 				if (hasTotem)
 				{
-					// toggle selection
 					if (_selectedSlot == slotIndex)
 					{
-						// deselect
 						_selectedSlot = -1;
 						_sellButtons[slotIndex].Visible = false;
 					}
 					else
 					{
-						// deselect previous
 						if (_selectedSlot >= 0)
 							_sellButtons[_selectedSlot].Visible = false;
 
-						// select new
 						_selectedSlot = slotIndex;
 						OwnedTotem totem = _gameState.OwnedTotems[slotIndex];
 						_sellButtons[slotIndex].Text = $"Sell ${totem.SellPrice}";
@@ -116,14 +155,12 @@ public partial class TotemPanel : Control
 			}
 		}
 
-		// drag start
 		if (inputEvent is InputEventMouseMotion && Input.IsMouseButtonPressed(MouseButton.Left))
 		{
-			bool hasTotem = slotIndex < _gameState.OwnedTotems.Count;
+			bool hasTotem = slotIndex < _gameState.OwnedTotems.Count
+							&& _gameState.OwnedTotems[slotIndex] != null;
 			if (hasTotem && !_isDragging)
-			{
 				StartDrag(slotIndex);
-			}
 		}
 	}
 
@@ -132,7 +169,6 @@ public partial class TotemPanel : Control
 		_isDragging = true;
 		_dragSourceSlot = sourceSlot;
 
-		// create a visual drag preview label
 		_dragPreview = new Label();
 		((Label)_dragPreview).Text = _gameState.OwnedTotems[sourceSlot].Name;
 		_dragPreview.Size = new Vector2(160, 40);
@@ -141,22 +177,16 @@ public partial class TotemPanel : Control
 
 	public override void _Process(double delta)
 	{
-		// move drag preview with mouse
 		if (_isDragging && _dragPreview != null)
-		{
 			_dragPreview.GlobalPosition = GetGlobalMousePosition() - new Vector2(80, 20);
-		}
 	}
 
 	public override void _Input(InputEvent inputEvent)
 	{
-		// drop on mouse release
 		if (_isDragging && inputEvent is InputEventMouseButton mouseButton)
 		{
 			if (mouseButton.ButtonIndex == MouseButton.Left && !mouseButton.Pressed)
-			{
 				FinishDrag();
-			}
 		}
 	}
 
@@ -170,18 +200,16 @@ public partial class TotemPanel : Control
 			_dragPreview = null;
 		}
 
-		// find which slot the mouse is over
 		int targetSlot = GetSlotUnderMouse();
 
 		if (targetSlot >= 0 && targetSlot != _dragSourceSlot)
 		{
 			SwapSlots(_dragSourceSlot, targetSlot);
-			// notify totems of reorder
 			GetNode<TotemManager>("/root/TotemManager").BroadcastTotemMoved();
 		}
 
 		_dragSourceSlot = -1;
-		RefreshUI();
+		PopulateSlots();
 	}
 
 	private int GetSlotUnderMouse()
@@ -200,7 +228,6 @@ public partial class TotemPanel : Control
 
 	private void SwapSlots(int a, int b)
 	{
-		// pad list to max index needed with empty slots
 		while (_gameState.OwnedTotems.Count <= Mathf.Max(a, b))
 			_gameState.OwnedTotems.Add(null);
 
@@ -208,7 +235,6 @@ public partial class TotemPanel : Control
 		_gameState.OwnedTotems[a] = _gameState.OwnedTotems[b];
 		_gameState.OwnedTotems[b] = temp;
 
-		// clean up trailing nulls after swap
 		while (_gameState.OwnedTotems.Count > 0 &&
 			   _gameState.OwnedTotems[_gameState.OwnedTotems.Count - 1] == null)
 			_gameState.OwnedTotems.RemoveAt(_gameState.OwnedTotems.Count - 1);
@@ -217,22 +243,22 @@ public partial class TotemPanel : Control
 	private void OnSellPressed(int slotIndex)
 	{
 		if (slotIndex >= _gameState.OwnedTotems.Count) return;
+		if (_gameState.OwnedTotems[slotIndex] == null) return;
 
 		OwnedTotem totem = _gameState.OwnedTotems[slotIndex];
 		_gameState.AddMoney(totem.SellPrice);
 		_gameState.OwnedTotems.RemoveAt(slotIndex);
 		RefreshMoneyLabel();
-		
 
 		GD.Print($"Sold {totem.Name} for ${totem.SellPrice}");
 		RefreshUI();
+
 		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
 		picker?.RefreshConfirmButton();
 	}
-	
+
 	private void RefreshMoneyLabel()
 	{
-		// search the whole scene tree for a label named MoneyLabel
 		Label moneyLabel = GetTree().Root.FindChild("MoneyLabel", true, false) as Label;
 		if (moneyLabel != null)
 			moneyLabel.Text = $"${_gameState.Money}";

@@ -4,6 +4,9 @@ public abstract class TotemEffect
 {
 	protected GameState GameState;
 	protected RoundManager RoundManager;
+	
+	// override this to show a live status value on the totem slot, e.g. "1.3x" or "+50"
+	public virtual string GetDisplayValue() => null;
 
 	public virtual void Initialize(GameState gameState, RoundManager roundManager)
 	{

@@ -69,6 +69,8 @@ public partial class RoundManager : Node3D
 		GetNode<TotemManager>("/root/TotemManager").BroadcastScore(points);
 		
 		UpdateUI();
+		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
+		totemPanel?.RefreshUI();
 		
 		if (_currentScore >= _currentThreshold)
 		{
@@ -86,6 +88,9 @@ public partial class RoundManager : Node3D
 		_gameState.BallsThrown++;
 		GetNode<TotemManager>("/root/TotemManager").BroadcastMiss();
 		UpdateUI();
+		
+		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
+		totemPanel?.RefreshUI();
 
 		if (_ballsRemaining <= 0)
 			EndRound();

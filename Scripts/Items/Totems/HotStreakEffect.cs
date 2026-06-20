@@ -16,4 +16,9 @@ public class HotStreakEffect : TotemEffect
 		_multiplier = 1.0f;
 		GameState.ScoreMultiplier = 1.0f;
 	}
+
+	public override string GetDisplayValue()
+	{
+		return $"{_multiplier:0.0}x";
+	}
 }

@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public class CopycatEffect : TotemEffect
 {
 	private TotemEffect _copiedEffect;
@@ -36,9 +33,15 @@ public class CopycatEffect : TotemEffect
 		_copiedEffect?.ApplyPassiveEffects();
 	}
 
+	public override string GetDisplayValue()
+	{
+		// ensure we're looking at the right totem before reading its value
+		UpdateCopiedEffect();
+		return _copiedEffect?.GetDisplayValue();
+	}
+
 	private void UpdateCopiedEffect()
 	{
-		// find copycat's position in totem list
 		int copycatIndex = -1;
 		for (int i = 0; i < GameState.OwnedTotems.Count; i++)
 		{
@@ -49,17 +52,14 @@ public class CopycatEffect : TotemEffect
 			}
 		}
 
-		// get totem below (next index)
 		int belowIndex = copycatIndex + 1;
 		if (belowIndex < GameState.OwnedTotems.Count && GameState.OwnedTotems[belowIndex] != null)
 		{
 			_copiedEffect = GameState.OwnedTotems[belowIndex].Effect;
-			GD.Print($"Copycat copying: {GameState.OwnedTotems[belowIndex].Name}");
 		}
 		else
 		{
 			_copiedEffect = null;
-			GD.Print("Copycat has nothing to copy");
 		}
 	}
 }
