@@ -33,9 +33,12 @@ public partial class ItemPanel : Control
 		_typeLabels.Clear();
 		_sellButtons.Clear();
 		_selectedSlot = -1;
+		
+		 // show at least MaxItems slots, but more if currently overflowing
+		int slotCount = Mathf.Max(_gameState.MaxItems, _gameState.OwnedItems.Count);
 
 		// build slots dynamically based on MaxItems
-		for (int i = 0; i < _gameState.MaxItems; i++)
+		for (int i = 0; i < slotCount; i++)
 		{
 			Panel slot = new Panel();
 			slot.CustomMinimumSize = new Vector2(120, 90);
@@ -103,6 +106,7 @@ public partial class ItemPanel : Control
 
 	public void RefreshUI()
 	{
+		int neededSlots = Mathf.Max(_gameState.MaxItems, _gameState.OwnedItems.Count);
 		// rebuild slots if count changed (e.g. Juggler bought/sold)
 		if (_slots.Count != _gameState.MaxItems)
 			BuildSlots();

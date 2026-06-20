@@ -249,9 +249,15 @@ public partial class TotemPanel : Control
 		_gameState.AddMoney(totem.SellPrice);
 		_gameState.OwnedTotems.RemoveAt(slotIndex);
 		RefreshMoneyLabel();
+		
+		GetNode<TotemManager>("/root/TotemManager").OnTotemRemoved();
 
 		GD.Print($"Sold {totem.Name} for ${totem.SellPrice}");
 		RefreshUI();
+		
+		// also refresh the item panel in case MaxItems changed
+		ItemPanel itemPanel = GetTree().Root.FindChild("ItemPanel", true, false) as ItemPanel;
+		itemPanel?.RefreshUI();
 
 		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
 		picker?.RefreshConfirmButton();
