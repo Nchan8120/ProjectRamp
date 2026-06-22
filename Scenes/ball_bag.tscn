@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bkn6hc0ydqd0p"]
+
+[ext_resource type="Script" uid="uid://bj3u0mqvv2bk2" path="res://Scripts/BallBag.cs" id="1_fjxoe"]
+
+[node name="BallBag" type="Control" unique_id=1506915918]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fjxoe")
+BallListPath = NodePath("ScrollContainer/BallList")
+CloseButtonPath = NodePath("CloseButton")
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=1480962896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.23921569, 0.4392157, 0.34117648, 0.78431374)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1950671416]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 40.0
+offset_right = 627.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 32
+text = "BALL BAG"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=721784794]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 100.0
+offset_right = 826.0
+offset_bottom = 550.0
+
+[node name="BallList" type="VBoxContainer" parent="ScrollContainer" unique_id=993781456]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CloseButton" type="Button" parent="." unique_id=1015090672]
+layout_mode = 0
+offset_left = 476.0
+offset_top = 580.0
+offset_right = 676.0
+offset_bottom = 630.0
+text = "CLOSE"

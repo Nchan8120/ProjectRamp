@@ -40,6 +40,10 @@ public partial class GameState : Node
 	public int LeftoverBallValue = 2;
 	public float ScoreMultiplier = 1.0f;
 	
+	// Ball Bag
+	public List<OwnedBall> OwnedBalls = new List<OwnedBall>();
+	public int StartingBallCount = 9;
+	
 	public bool IsEndlessMode = false;
 
 	public void AddMoney(int amount)
@@ -79,6 +83,7 @@ public partial class GameState : Node
 		IsEndlessMode = false;
 		LeftoverBallValue = 2;
 		ScoreMultiplier = 1.0f;
+		InitializeBalls();
 	}
 
 	public void AwardRoundEndMoney(int leftoverBalls)
@@ -87,5 +92,17 @@ public partial class GameState : Node
 		int ballBonus = leftoverBalls * LeftoverBallValue;
 		AddMoney(winBonus + ballBonus);
 		GD.Print($"Round rewards: ${winBonus} win bonus + ${ballBonus} ball bonus");
+	}
+	
+	public void InitializeBalls()
+	{
+		OwnedBalls.Clear();
+		for (int i = 0; i < StartingBallCount; i++)
+			OwnedBalls.Add(new OwnedBall(i + 1));
+	}
+	
+	public override void _Ready()
+	{
+		InitializeBalls();
 	}
 }

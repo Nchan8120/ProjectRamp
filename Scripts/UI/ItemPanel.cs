@@ -13,6 +13,8 @@ public partial class ItemPanel : Control
 	private int _dragSourceSlot = -1;
 	private Control _dragPreview;
 	private VBoxContainer _slotsContainer;
+	private int _selectedBallIndex = -1;
+	private List<Button> _useButtons = new List<Button>();
 
 	public override void _Ready()
 	{
@@ -32,6 +34,7 @@ public partial class ItemPanel : Control
 		_nameLabels.Clear();
 		_typeLabels.Clear();
 		_sellButtons.Clear();
+		_useButtons.Clear();
 		_selectedSlot = -1;
 		
 		 // show at least MaxItems slots, but more if currently overflowing
@@ -53,23 +56,32 @@ public partial class ItemPanel : Control
 			typeLabel.Size = new Vector2(108, 16);
 
 			Button sellButton = new Button();
-			sellButton.Position = new Vector2(6, 56);
-			sellButton.Size = new Vector2(108, 28);
+			sellButton.Position = new Vector2(62, 56);
+			sellButton.Size = new Vector2(50, 28);
 			sellButton.Visible = false;
+			
+			Button useButton = new Button();
+			useButton.Text = "Use";
+			useButton.Position = new Vector2(6, 56);
+			useButton.Size = new Vector2(50, 28);
+			useButton.Visible = false;
 
 			slot.AddChild(nameLabel);
 			slot.AddChild(typeLabel);
 			slot.AddChild(sellButton);
+			slot.AddChild(useButton);
 			_slotsContainer.AddChild(slot);
 
 			_slots.Add(slot);
 			_nameLabels.Add(nameLabel);
 			_typeLabels.Add(typeLabel);
 			_sellButtons.Add(sellButton);
+			_useButtons.Add(useButton);
 
 			// capture index for lambda
 			int index = i;
 			sellButton.Pressed += () => OnSellPressed(index);
+			useButton.Pressed += () => OnUsePressed(index);
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
 		}
 
@@ -243,11 +255,51 @@ public partial class ItemPanel : Control
 		GD.Print($"Sold {item.Name} for ${item.SellPrice}");
 		RefreshUI();
 	}
+	
+	private void OnUsePressed(int slotIndex)
+	{
+		if (_selectedBallIndex < 0) return;
+		if (slotIndex >= _gameState.OwnedItems.Count) return;
+		if (_gameState.OwnedItems[slotIndex] == null) return;
+
+		OwnedItem upgrade = _gameState.OwnedItems[slotIndex];
+
+		if (upgrade.Type != ItemType.BallUpgrade) return;
+
+		// find ball bag and apply upgrade
+		BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+		ballBag?.ApplyUpgradeToBall(_selectedBallIndex, upgrade);
+
+		// consume the item
+		_gameState.OwnedItems.RemoveAt(slotIndex);
+		_selectedBallIndex = -1;
+
+		GD.Print($"Applied {upgrade.Name} to ball {_selectedBallIndex + 1}");
+		RefreshUI();
+	}
 
 	private void RefreshMoneyLabel()
 	{
 		Label moneyLabel = GetTree().Root.FindChild("MoneyLabel", true, false) as Label;
 		if (moneyLabel != null)
 			moneyLabel.Text = $"${_gameState.Money}";
+	}
+	public void SetSelectedBall(int ballIndex)
+{
+	_selectedBallIndex = ballIndex;
+	UpdateUseButtons();
+}
+
+	private void UpdateUseButtons()
+	{
+		for (int i = 0; i < _slots.Count; i++)
+		{
+			bool hasItem = i < _gameState.OwnedItems.Count && _gameState.OwnedItems[i] != null;
+			bool isBallUpgrade = hasItem && _gameState.OwnedItems[i].Type == ItemType.BallUpgrade;
+			bool ballSelected = _selectedBallIndex >= 0;
+
+			if (_useButtons.Count > i)
+				_useButtons[i].Visible = isBallUpgrade && ballSelected;
+		}
 	}
 }

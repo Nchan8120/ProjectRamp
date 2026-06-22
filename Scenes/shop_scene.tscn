@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ddwclk5n3bj0b" path="res://Scenes/totem_panel.tscn" id="2_35huh"]
 [ext_resource type="PackedScene" uid="uid://ck2pckcn7kjxc" path="res://Scenes/item_panel.tscn" id="3_njw01"]
 [ext_resource type="PackedScene" uid="uid://de4mv3oxym6wg" path="res://Scenes/capsule_picker.tscn" id="4_6rmb7"]
+[ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="5_jwdga"]
+[ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="6_uxpe5"]
 
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
@@ -13,70 +15,66 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4li1v")
-MoneyLabelPath = NodePath("MoneyLabel")
-RerollButtonPath = NodePath("RerollButton")
-RerollCostLabelPath = NodePath("RerollCostLabel")
-ContinueButtonPath = NodePath("ContinueButton")
-ItemSlot1NamePath = NodePath("ItemSlots/ItemSlot1/NameLabel")
-ItemSlot1TypePath = NodePath("ItemSlots/ItemSlot1/TypeLabel")
-ItemSlot1CostPath = NodePath("ItemSlots/ItemSlot1/CostLabel")
-ItemSlot1BuyPath = NodePath("ItemSlots/ItemSlot1/BuyButton")
-ItemSlot2NamePath = NodePath("ItemSlots/ItemSlot2/NameLabel")
-ItemSlot2TypePath = NodePath("ItemSlots/ItemSlot2/TypeLabel")
-ItemSlot2CostPath = NodePath("ItemSlots/ItemSlot2/CostLabel")
-ItemSlot2BuyPath = NodePath("ItemSlots/ItemSlot2/BuyButton")
-Capsule1TypePath = NodePath("CapsuleMachines/CapsuleMachine1/TypeLabel")
-Capsule1SizePath = NodePath("CapsuleMachines/CapsuleMachine1/SizeLabel")
-Capsule1CostPath = NodePath("CapsuleMachines/CapsuleMachine1/CostLabel")
-Capsule1BuyPath = NodePath("CapsuleMachines/CapsuleMachine1/BuyButton")
-Capsule2TypePath = NodePath("CapsuleMachines/CapsuleMachine2/TypeLabel")
-Capsule2SizePath = NodePath("CapsuleMachines/CapsuleMachine2/SizeLabel")
-Capsule2CostPath = NodePath("CapsuleMachines/CapsuleMachine2/CostLabel")
-Capsule2BuyPath = NodePath("CapsuleMachines/CapsuleMachine2/BuyButton")
-HouseRuleNamePath = NodePath("HouseRuleSlot/NameLabel")
-HouseRuleCostPath = NodePath("HouseRuleSlot/CostLabel")
-HouseRuleBuyPath = NodePath("HouseRuleSlot/BuyButton")
-HouseRulePersistPath = NodePath("HouseRuleSlot/PersistBadge")
-HouseRuleSlotPath = NodePath("HouseRuleSlot")
+MoneyLabelPath = NodePath("CanvasLayer/MoneyLabel")
+RerollButtonPath = NodePath("CanvasLayer/RerollButton")
+RerollCostLabelPath = NodePath("CanvasLayer/RerollCostLabel")
+ContinueButtonPath = NodePath("CanvasLayer/ContinueButton")
+ItemSlot1NamePath = NodePath("CanvasLayer/ItemSlots/ItemSlot1/NameLabel")
+ItemSlot1TypePath = NodePath("CanvasLayer/ItemSlots/ItemSlot1/TypeLabel")
+ItemSlot1CostPath = NodePath("CanvasLayer/ItemSlots/ItemSlot1/CostLabel")
+ItemSlot1BuyPath = NodePath("CanvasLayer/ItemSlots/ItemSlot1/BuyButton")
+ItemSlot2NamePath = NodePath("CanvasLayer/ItemSlots/ItemSlot2/NameLabel")
+ItemSlot2TypePath = NodePath("CanvasLayer/ItemSlots/ItemSlot2/TypeLabel")
+ItemSlot2CostPath = NodePath("CanvasLayer/ItemSlots/ItemSlot2/CostLabel")
+ItemSlot2BuyPath = NodePath("CanvasLayer/ItemSlots/ItemSlot2/BuyButton")
+Capsule1TypePath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine1/TypeLabel")
+Capsule1SizePath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine1/SizeLabel")
+Capsule1CostPath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine1/CostLabel")
+Capsule1BuyPath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine1/BuyButton")
+Capsule2TypePath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine2/TypeLabel")
+Capsule2SizePath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine2/SizeLabel")
+Capsule2CostPath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine2/CostLabel")
+Capsule2BuyPath = NodePath("CanvasLayer/CapsuleMachines/CapsuleMachine2/BuyButton")
+HouseRuleNamePath = NodePath("CanvasLayer/HouseRuleSlot/NameLabel")
+HouseRuleCostPath = NodePath("CanvasLayer/HouseRuleSlot/CostLabel")
+HouseRuleBuyPath = NodePath("CanvasLayer/HouseRuleSlot/BuyButton")
+HouseRulePersistPath = NodePath("CanvasLayer/HouseRuleSlot/PersistBadge")
+HouseRuleSlotPath = NodePath("CanvasLayer/HouseRuleSlot")
 
-[node name="Background" type="ColorRect" parent="." unique_id=630005014]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=507634367]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=630005014]
 offset_right = 1152.0
 offset_bottom = 648.0
 color = Color(0.101960786, 0.101960786, 0.18039216, 1)
 
-[node name="MoneyLabel" type="Label" parent="." unique_id=1771342668]
-layout_mode = 0
+[node name="MoneyLabel" type="Label" parent="CanvasLayer" unique_id=1771342668]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 60.0
 offset_bottom = 43.0
 
-[node name="RerollButton" type="Button" parent="." unique_id=259150005]
-layout_mode = 0
+[node name="RerollButton" type="Button" parent="CanvasLayer" unique_id=259150005]
 offset_left = 400.0
 offset_top = 580.0
 offset_right = 550.0
 offset_bottom = 620.0
 text = "REROLL"
 
-[node name="RerollCostLabel" type="Label" parent="." unique_id=198238937]
-layout_mode = 0
+[node name="RerollCostLabel" type="Label" parent="CanvasLayer" unique_id=198238937]
 offset_left = 550.0
 offset_top = 590.0
 offset_right = 590.0
 offset_bottom = 613.0
 
-[node name="ContinueButton" type="Button" parent="." unique_id=1594621565]
-layout_mode = 0
+[node name="ContinueButton" type="Button" parent="CanvasLayer" unique_id=1594621565]
 offset_left = 700.0
 offset_top = 580.0
 offset_right = 850.0
 offset_bottom = 620.0
 text = "CONTINUE"
 
-[node name="ItemSlots" type="HBoxContainer" parent="." unique_id=1319033216]
-layout_mode = 1
+[node name="ItemSlots" type="HBoxContainer" parent="CanvasLayer" unique_id=1319033216]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -87,32 +85,32 @@ offset_bottom = 240.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
 
-[node name="ItemSlot1" type="Panel" parent="ItemSlots" unique_id=438990308]
+[node name="ItemSlot1" type="Panel" parent="CanvasLayer/ItemSlots" unique_id=438990308]
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=550083320]
+[node name="NameLabel" type="Label" parent="CanvasLayer/ItemSlots/ItemSlot1" unique_id=550083320]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
 
-[node name="TypeLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=2094472896]
+[node name="TypeLabel" type="Label" parent="CanvasLayer/ItemSlots/ItemSlot1" unique_id=2094472896]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 50.0
 offset_bottom = 63.0
 
-[node name="CostLabel" type="Label" parent="ItemSlots/ItemSlot1" unique_id=690333560]
+[node name="CostLabel" type="Label" parent="CanvasLayer/ItemSlots/ItemSlot1" unique_id=690333560]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 70.0
 offset_right = 50.0
 offset_bottom = 93.0
 
-[node name="BuyButton" type="Button" parent="ItemSlots/ItemSlot1" unique_id=1223575854]
+[node name="BuyButton" type="Button" parent="CanvasLayer/ItemSlots/ItemSlot1" unique_id=1223575854]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 100.0
@@ -120,32 +118,32 @@ offset_right = 130.0
 offset_bottom = 140.0
 text = "BUY"
 
-[node name="ItemSlot2" type="Panel" parent="ItemSlots" unique_id=440721014]
+[node name="ItemSlot2" type="Panel" parent="CanvasLayer/ItemSlots" unique_id=440721014]
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=483464538]
+[node name="NameLabel" type="Label" parent="CanvasLayer/ItemSlots/ItemSlot2" unique_id=483464538]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
 
-[node name="TypeLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=533277164]
+[node name="TypeLabel" type="Label" parent="CanvasLayer/ItemSlots/ItemSlot2" unique_id=533277164]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 50.0
 offset_bottom = 63.0
 
-[node name="CostLabel" type="Label" parent="ItemSlots/ItemSlot2" unique_id=1164490488]
+[node name="CostLabel" type="Label" parent="CanvasLayer/ItemSlots/ItemSlot2" unique_id=1164490488]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 70.0
 offset_right = 50.0
 offset_bottom = 93.0
 
-[node name="BuyButton" type="Button" parent="ItemSlots/ItemSlot2" unique_id=251556254]
+[node name="BuyButton" type="Button" parent="CanvasLayer/ItemSlots/ItemSlot2" unique_id=251556254]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 100.0
@@ -153,8 +151,7 @@ offset_right = 130.0
 offset_bottom = 140.0
 text = "BUY"
 
-[node name="CapsuleMachines" type="HBoxContainer" parent="." unique_id=1313228380]
-layout_mode = 1
+[node name="CapsuleMachines" type="HBoxContainer" parent="CanvasLayer" unique_id=1313228380]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -165,32 +162,32 @@ offset_bottom = 440.0
 grow_horizontal = 2
 theme_override_constants/separation = 20
 
-[node name="CapsuleMachine1" type="Panel" parent="CapsuleMachines" unique_id=69053053]
+[node name="CapsuleMachine1" type="Panel" parent="CanvasLayer/CapsuleMachines" unique_id=69053053]
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=1824566405]
+[node name="TypeLabel" type="Label" parent="CanvasLayer/CapsuleMachines/CapsuleMachine1" unique_id=1824566405]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
 
-[node name="SizeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2132525375]
+[node name="SizeLabel" type="Label" parent="CanvasLayer/CapsuleMachines/CapsuleMachine1" unique_id=2132525375]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 50.0
 offset_bottom = 63.0
 
-[node name="CostLabel" type="Label" parent="CapsuleMachines/CapsuleMachine1" unique_id=2138394759]
+[node name="CostLabel" type="Label" parent="CanvasLayer/CapsuleMachines/CapsuleMachine1" unique_id=2138394759]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 70.0
 offset_right = 50.0
 offset_bottom = 93.0
 
-[node name="BuyButton" type="Button" parent="CapsuleMachines/CapsuleMachine1" unique_id=521511991]
+[node name="BuyButton" type="Button" parent="CanvasLayer/CapsuleMachines/CapsuleMachine1" unique_id=521511991]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 100.0
@@ -198,32 +195,32 @@ offset_right = 130.0
 offset_bottom = 140.0
 text = "BUY"
 
-[node name="CapsuleMachine2" type="Panel" parent="CapsuleMachines" unique_id=1137165084]
+[node name="CapsuleMachine2" type="Panel" parent="CanvasLayer/CapsuleMachines" unique_id=1137165084]
 custom_minimum_size = Vector2(200, 160)
 layout_mode = 2
 
-[node name="TypeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=463847186]
+[node name="TypeLabel" type="Label" parent="CanvasLayer/CapsuleMachines/CapsuleMachine2" unique_id=463847186]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
 
-[node name="SizeLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1317138985]
+[node name="SizeLabel" type="Label" parent="CanvasLayer/CapsuleMachines/CapsuleMachine2" unique_id=1317138985]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 50.0
 offset_bottom = 63.0
 
-[node name="CostLabel" type="Label" parent="CapsuleMachines/CapsuleMachine2" unique_id=1846466843]
+[node name="CostLabel" type="Label" parent="CanvasLayer/CapsuleMachines/CapsuleMachine2" unique_id=1846466843]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 70.0
 offset_right = 50.0
 offset_bottom = 93.0
 
-[node name="BuyButton" type="Button" parent="CapsuleMachines/CapsuleMachine2" unique_id=576706421]
+[node name="BuyButton" type="Button" parent="CanvasLayer/CapsuleMachines/CapsuleMachine2" unique_id=576706421]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 100.0
@@ -231,28 +228,27 @@ offset_right = 130.0
 offset_bottom = 140.0
 text = "BUY"
 
-[node name="HouseRuleSlot" type="Panel" parent="." unique_id=1620366176]
-layout_mode = 1
+[node name="HouseRuleSlot" type="Panel" parent="CanvasLayer" unique_id=1620366176]
 offset_left = 20.0
 offset_top = 80.0
 offset_right = 340.0
 offset_bottom = 240.0
 
-[node name="NameLabel" type="Label" parent="HouseRuleSlot" unique_id=1708178560]
+[node name="NameLabel" type="Label" parent="CanvasLayer/HouseRuleSlot" unique_id=1708178560]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 33.0
 
-[node name="CostLabel" type="Label" parent="HouseRuleSlot" unique_id=2091517704]
+[node name="CostLabel" type="Label" parent="CanvasLayer/HouseRuleSlot" unique_id=2091517704]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 40.0
 offset_right = 50.0
 offset_bottom = 63.0
 
-[node name="BuyButton" type="Button" parent="HouseRuleSlot" unique_id=1087677733]
+[node name="BuyButton" type="Button" parent="CanvasLayer/HouseRuleSlot" unique_id=1087677733]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 70.0
@@ -260,27 +256,37 @@ offset_right = 18.0
 offset_bottom = 78.0
 text = "BUY"
 
-[node name="PersistBadge" type="Label" parent="HouseRuleSlot" unique_id=28792128]
+[node name="PersistBadge" type="Label" parent="CanvasLayer/HouseRuleSlot" unique_id=28792128]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 100.0
 offset_right = 130.0
 offset_bottom = 140.0
 
-[node name="ShopLabel" type="Label" parent="." unique_id=1175519952]
-layout_mode = 0
+[node name="ShopLabel" type="Label" parent="CanvasLayer" unique_id=1175519952]
 offset_left = 500.0
 offset_top = 20.0
 offset_right = 544.0
 offset_bottom = 43.0
 text = "SHOP"
 
-[node name="TotemPanel" parent="." unique_id=2029938859 instance=ExtResource("2_35huh")]
-layout_mode = 1
-
-[node name="ItemPanel" parent="." unique_id=65166487 instance=ExtResource("3_njw01")]
-layout_mode = 1
-
-[node name="CapsulePicker" parent="." unique_id=1024369955 instance=ExtResource("4_6rmb7")]
+[node name="CapsulePicker" parent="CanvasLayer" unique_id=1024369955 instance=ExtResource("4_6rmb7")]
 visible = false
-layout_mode = 1
+
+[node name="BallBag" parent="CanvasLayer" unique_id=1506915918 instance=ExtResource("5_jwdga")]
+
+[node name="BallButton" type="Button" parent="CanvasLayer" unique_id=1997745646]
+offset_left = 900.0
+offset_top = 600.0
+offset_right = 984.0
+offset_bottom = 631.0
+text = "BALL BAG
+"
+script = ExtResource("6_uxpe5")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=254278477]
+layer = 2
+
+[node name="TotemPanel" parent="CanvasLayer2" unique_id=2029938859 instance=ExtResource("2_35huh")]
+
+[node name="ItemPanel" parent="CanvasLayer2" unique_id=65166487 instance=ExtResource("3_njw01")]

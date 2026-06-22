@@ -11,6 +11,8 @@ public partial class RoundManager : Node3D
 	[Export] public NodePath ThresholdLabelPath;
 	[Export] public NodePath RoundLabelPath;
 	[Export] public NodePath MoneyLabelPath;
+	
+	public int CurrentBallIndex => _currentBallIndex;
 
 	private int _ballsRemaining;
 	private int _currentScore;
@@ -23,6 +25,7 @@ public partial class RoundManager : Node3D
 	private Label _roundLabel;
 	private GameState _gameState;
 	private Label _moneyLabel;
+	private int _currentBallIndex = 0;
 	
 	public override void _Ready()
 	{
@@ -42,7 +45,8 @@ public partial class RoundManager : Node3D
 
 	public void StartRound()
 	{
-		_ballsRemaining = _gameState.BallsPerRound; // ← use GameState value
+		_ballsRemaining = _gameState.OwnedBalls.Count; // use bag count
+		_currentBallIndex = 0;
 		_currentScore = 0;
 		_currentThreshold = StartingThreshold + (ThresholdIncrement * (_currentRound - 1));
 
@@ -64,6 +68,7 @@ public partial class RoundManager : Node3D
 		points = Mathf.RoundToInt(points * _gameState.ScoreMultiplier);
 		_currentScore += points;
 		_ballsRemaining--;
+		_currentBallIndex++;
 		_gameState.BallsThrown++;
 		
 		GetNode<TotemManager>("/root/TotemManager").BroadcastScore(points);
@@ -85,6 +90,7 @@ public partial class RoundManager : Node3D
 	public void OnBallMissed()
 	{
 		_ballsRemaining--;
+		_currentBallIndex++;
 		_gameState.BallsThrown++;
 		GetNode<TotemManager>("/root/TotemManager").BroadcastMiss();
 		UpdateUI();

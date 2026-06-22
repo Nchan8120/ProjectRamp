@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://btuxtagvwmcmj" path="res://Scenes/ball.tscn" id="2_b6fju"]
 [ext_resource type="PackedScene" uid="uid://ddwclk5n3bj0b" path="res://Scenes/totem_panel.tscn" id="4_fiftr"]
 [ext_resource type="PackedScene" uid="uid://ck2pckcn7kjxc" path="res://Scenes/item_panel.tscn" id="5_1ixah"]
+[ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="6_rgj8m"]
+[ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="7_2fmhe"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_oqyrl"]
 size = Vector3(0.6, 0.1, 2.5)
@@ -204,6 +206,20 @@ offset_right = 60.0
 offset_bottom = 43.0
 text = "$0"
 
-[node name="TotemPanel" parent="CanvasLayer" unique_id=2029938859 instance=ExtResource("4_fiftr")]
+[node name="BallBag" parent="CanvasLayer" unique_id=1506915918 instance=ExtResource("6_rgj8m")]
 
-[node name="ItemPanel" parent="CanvasLayer" unique_id=65166487 instance=ExtResource("5_1ixah")]
+[node name="BallButton" type="Button" parent="CanvasLayer" unique_id=954561868]
+offset_left = 900.0
+offset_top = 600.0
+offset_right = 984.0
+offset_bottom = 631.0
+text = "BALL BAG
+"
+script = ExtResource("7_2fmhe")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1455269120]
+layer = 2
+
+[node name="TotemPanel" parent="CanvasLayer2" unique_id=2029938859 instance=ExtResource("4_fiftr")]
+
+[node name="ItemPanel" parent="CanvasLayer2" unique_id=65166487 instance=ExtResource("5_1ixah")]

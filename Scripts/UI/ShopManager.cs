@@ -294,7 +294,7 @@ public partial class ShopManager : Control
 			}
 
 			// open the picker
-			CapsulePicker picker = GetNode<CapsulePicker>("CapsulePicker");
+			CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
 			picker.Open(choices, pickCount, (List<ItemData> picked) =>
 			{
 				foreach (ItemData item in picked)
