@@ -244,8 +244,12 @@ public partial class TotemPanel : Control
 	{
 		if (slotIndex >= _gameState.OwnedTotems.Count) return;
 		if (_gameState.OwnedTotems[slotIndex] == null) return;
+		
+		
 
 		OwnedTotem totem = _gameState.OwnedTotems[slotIndex];
+		totem.Effect?.OnRemoved();
+		
 		_gameState.AddMoney(totem.SellPrice);
 		_gameState.OwnedTotems.RemoveAt(slotIndex);
 		RefreshMoneyLabel();
@@ -255,10 +259,13 @@ public partial class TotemPanel : Control
 		GD.Print($"Sold {totem.Name} for ${totem.SellPrice}");
 		RefreshUI();
 		
-		// also refresh the item panel in case MaxItems changed
+		// refresh panels
 		ItemPanel itemPanel = GetTree().Root.FindChild("ItemPanel", true, false) as ItemPanel;
 		itemPanel?.RefreshUI();
-
+		
+		BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+		ballBag?.BuildBallList();
+	
 		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
 		picker?.RefreshConfirmButton();
 	}

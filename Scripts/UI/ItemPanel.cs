@@ -263,7 +263,16 @@ public partial class ItemPanel : Control
 		if (_gameState.OwnedItems[slotIndex] == null) return;
 
 		OwnedItem upgrade = _gameState.OwnedItems[slotIndex];
+		
+		OwnedBall targetBall = _gameState.OwnedBalls[_selectedBallIndex];
 
+		// block upgrades on locked balls
+		if (targetBall.IsLocked)
+		{
+			GD.Print("This ball cannot be modified!");
+			return;
+		}
+		
 		if (upgrade.Type != ItemType.BallUpgrade) return;
 
 		// find ball bag and apply upgrade

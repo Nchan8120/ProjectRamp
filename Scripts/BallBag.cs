@@ -43,7 +43,7 @@ public partial class BallBag : Control
 		Visible = true;
 	}
 
-	private void BuildBallList()
+	public void BuildBallList()
 	{
 		// clear existing slots
 		foreach (Node child in _ballList.GetChildren())
@@ -73,9 +73,13 @@ public partial class BallBag : Control
 			numberLabel.Size = new Vector2(100, 40);
 
 			Label typeLabel = new Label();
-			typeLabel.Text = ball.UpgradeType;
+			typeLabel.Text = ball.IsLocked 
+				? $"{ball.UpgradeType} 🔒" 
+				: ball.UpgradeType;
 			typeLabel.Position = new Vector2(120, 8);
 			typeLabel.Size = new Vector2(250, 40);
+			
+			
 
 			slot.AddChild(numberLabel);
 			slot.AddChild(typeLabel);
