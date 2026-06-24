@@ -14,4 +14,11 @@ public class UnderPressureEffect : TotemEffect
 		// remove this totem's contribution to multiplier
 		GameState.ScoreMultiplier = 1.0f;
 	}
+	
+	public override string GetDisplayValue()
+	{
+		float multiplier = 1.0f + (_missCount * 0.25f);
+		return $"{multiplier:0.00}x";
+	}
+
 }

@@ -121,8 +121,9 @@ public partial class ShopManager : Control
 
 		// award round end money before generating shop
 		_gameState.AwardRoundEndMoney(_gameState.LeftoverBalls);
-
+		
 		GenerateShop();
+		GetNode<TotemManager>("/root/TotemManager").BroadcastShopEnter();
 		UpdateUI();
 	}
 
@@ -211,7 +212,9 @@ public partial class ShopManager : Control
 	private void UpdateUI()
 	{
 		_moneyLabel.Text = $"${_gameState.Money}";
-		_rerollCostLabel.Text = $"Reroll: ${_gameState.RerollCost}";
+		_rerollCostLabel.Text = _gameState.HasFreeReroll 
+		? "Reroll: FREE" 
+		: $"Reroll: ${_gameState.RerollCost}";
 	}
 
 	private void OnItemBuyPressed(int slot)
@@ -390,7 +393,8 @@ public partial class ShopManager : Control
 		_cap1Buy.Disabled = false;
 		_cap2Buy.Text = "Buy";
 		_cap2Buy.Disabled = false;
-
+	
+		
 		UpdateShopUI();
 		UpdateUI();
 	}
@@ -420,6 +424,7 @@ public partial class ShopManager : Control
 					}
 					RefreshTotemPanel();
 					RefreshItemPanel();
+					UpdateUI();
 				}
 				else
 				{
