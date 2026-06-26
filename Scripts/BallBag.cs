@@ -28,19 +28,19 @@ public partial class BallBag : Control
 
 		_closeButton.Pressed += OnClosePressed;
 
-		// find round manager if in game scene
-		_roundManager = GetTree().Root.FindChild("RoundManager", true, false) as RoundManager;
-
 		Visible = false;
 		BuildBallList();
 	}
 
 	public void Open()
 	{
-		// refresh round manager reference each time opened
-		_roundManager = GetTree().Root.FindChild("RoundManager", true, false) as RoundManager;
 		BuildBallList();
 		Visible = true;
+	}
+	
+	public void SetRoundManager(RoundManager roundManager)
+	{
+		_roundManager = roundManager;
 	}
 
 	public void BuildBallList()
@@ -65,7 +65,7 @@ public partial class BallBag : Control
 			if (isThrown)
 				slot.SelfModulate = new Color(1f, 1f, 1f, 0.3f);
 			else if (isActive)
-				slot.SelfModulate = new Color(0.6f, 1f, 0.6f, 1f); // green for active ball
+				slot.SelfModulate = new Color(1f, 0.85f, 0.3f, 1f); // yellow
 
 			Label numberLabel = new Label();
 			numberLabel.Text = $"Ball {ball.BallNumber}";
@@ -180,9 +180,12 @@ public partial class BallBag : Control
 
 		int targetIndex = GetSlotUnderMouse();
 
-		// prevent swapping with thrown or active balls
+		// prevent swapping with thrown balls
 		int activeIndex = _roundManager?.CurrentBallIndex ?? 0;
-		if (targetIndex >= activeIndex && targetIndex != _dragSourceIndex)
+		bool targetIsThrown = targetIndex < activeIndex;
+		bool sourceIsThrown = _dragSourceIndex < activeIndex;
+
+		if (!targetIsThrown && !sourceIsThrown && targetIndex != _dragSourceIndex)
 			SwapBalls(_dragSourceIndex, targetIndex);
 
 		_dragSourceIndex = -1;

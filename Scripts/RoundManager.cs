@@ -33,6 +33,9 @@ public partial class RoundManager : Node3D
 		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
 		totemManager.SetRoundManager(this);
 		
+		BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+   	 	ballBag?.SetRoundManager(this);
+		
 		_ball = GetNode<BallController>(BallPath);
 		_scoreLabel = GetNode<Label>(ScoreLabelPath);
 		_ballsLabel = GetNode<Label>(BallsLabelPath);
@@ -73,9 +76,14 @@ public partial class RoundManager : Node3D
 		
 		GetNode<TotemManager>("/root/TotemManager").BroadcastScore(points);
 		
-		UpdateUI();
+		
 		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
 		totemPanel?.RefreshUI();
+		
+		BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+		ballBag?.BuildBallList(); 
+		
+		UpdateUI();
 		
 		if (_currentScore >= _currentThreshold)
 		{
@@ -93,11 +101,15 @@ public partial class RoundManager : Node3D
 		_currentBallIndex++;
 		_gameState.BallsThrown++;
 		GetNode<TotemManager>("/root/TotemManager").BroadcastMiss();
-		UpdateUI();
 		
 		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
 		totemPanel?.RefreshUI();
 
+		BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+		ballBag?.BuildBallList();
+	
+		UpdateUI();
+		
 		if (_ballsRemaining <= 0)
 			EndRound();
 	}
