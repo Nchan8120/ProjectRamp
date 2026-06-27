@@ -11,6 +11,7 @@ public static class ItemDatabase
 		new ItemData("Coin Filled", "Scoring zero still generates $2", ItemType.BallUpgrade, 6),
 		new ItemData("Veteran", "Gains +10 points every round survived", ItemType.BallUpgrade, 7),
 		new ItemData("Sticky Ball", "Ball sticks to the wall", ItemType.BallUpgrade, 7),
+		new ItemData("Glass Ball", "Ball  Scores 2x points, then breaks permanently", ItemType.BallUpgrade, 5),
 	};
 
 	public static List<ItemData> Engineering = new List<ItemData>

@@ -26,6 +26,7 @@ public partial class RoundManager : Node3D
 	private GameState _gameState;
 	private Label _moneyLabel;
 	private int _currentBallIndex = 0;
+	private BallUpgradeEffect _currentBallEffect;
 	
 	public override void _Ready()
 	{
@@ -53,6 +54,8 @@ public partial class RoundManager : Node3D
 		_currentScore = 0;
 		_currentThreshold = StartingThreshold + (ThresholdIncrement * (_currentRound - 1));
 
+		UpdateCurrentBallEffect();
+		
 		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
 		totemManager.BroadcastRoundStart();
 
@@ -68,14 +71,26 @@ public partial class RoundManager : Node3D
 			points *= 2;
 		}
 		
+		 // apply ball upgrade effect
+		if (_currentBallEffect != null && _currentBallIndex < _gameState.OwnedBalls.Count)
+		{
+			OwnedBall currentBall = _gameState.OwnedBalls[_currentBallIndex];
+			points = _currentBallEffect.OnScore(points, currentBall);
+		}
+		
 		points = Mathf.RoundToInt(points * _gameState.ScoreMultiplier);
 		_currentScore += points;
 		_ballsRemaining--;
+		
+		if (_currentBallEffect == null || !_currentBallEffect.BallWasRemoved)
 		_currentBallIndex++;
+		
 		_gameState.BallsThrown++;
 		
 		GetNode<TotemManager>("/root/TotemManager").BroadcastScore(points);
 		
+		// update to next ball's effect
+		UpdateCurrentBallEffect();
 		
 		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
 		totemPanel?.RefreshUI();
@@ -97,9 +112,19 @@ public partial class RoundManager : Node3D
 
 	public void OnBallMissed()
 	{
+		// apply ball upgrade miss effect
+		if (_currentBallEffect != null && _currentBallIndex < _gameState.OwnedBalls.Count)
+		{
+			OwnedBall currentBall = _gameState.OwnedBalls[_currentBallIndex];
+			_currentBallEffect.OnMiss(currentBall);
+		}
 		_ballsRemaining--;
 		_currentBallIndex++;
 		_gameState.BallsThrown++;
+		
+		// update to next ball's effect
+		UpdateCurrentBallEffect();
+	
 		GetNode<TotemManager>("/root/TotemManager").BroadcastMiss();
 		
 		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
@@ -112,6 +137,20 @@ public partial class RoundManager : Node3D
 		
 		if (_ballsRemaining <= 0)
 			EndRound();
+	}
+	
+	private void UpdateCurrentBallEffect()
+	{
+		if (_currentBallIndex < _gameState.OwnedBalls.Count)
+		{
+			OwnedBall currentBall = _gameState.OwnedBalls[_currentBallIndex];
+			_currentBallEffect = BallUpgradeDatabase.GetEffect(currentBall.UpgradeType);
+			_currentBallEffect?.Initialize(_gameState, this);
+		}
+		else
+		{
+			_currentBallEffect = null;
+		}
 	}
 
 	private void UpdateUI()
