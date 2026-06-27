@@ -11,6 +11,7 @@ public partial class BallController : RigidBody3D
 	[Export] public float ForwardInfluence = -1.0f;     // positive or negative depending on camera
 	[Export] public NodePath MeshPath; // assign in inspector
 	[Export] public float MissTimeout = 3.0f; // seconds before ball is considered a miss
+	public bool InputBlocked = false;
 	
 	private float _airTime = 0f;
 	private bool _hasScored = false;
@@ -53,6 +54,7 @@ public partial class BallController : RigidBody3D
 	
 	public override void _Input(InputEvent @event)
 	{
+		if (InputBlocked) return;
 		if (@event is InputEventMouseButton mouseButton)
 		{
 			if (mouseButton.ButtonIndex == MouseButton.Left)

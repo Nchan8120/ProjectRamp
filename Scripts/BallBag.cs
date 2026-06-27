@@ -34,6 +34,9 @@ public partial class BallBag : Control
 
 	public void Open()
 	{
+		// block ball input while bag is open
+		BallController ball = GetTree().Root.FindChild("Ball", true, false) as BallController;
+		if (ball != null) ball.InputBlocked = true;
 		BuildBallList();
 		Visible = true;
 	}
@@ -125,8 +128,7 @@ public partial class BallBag : Control
 		// drag to reorder
 		if (inputEvent is InputEventMouseMotion && Input.IsMouseButtonPressed(MouseButton.Left))
 		{
-			bool isActive = _roundManager != null && slotIndex == _roundManager.CurrentBallIndex;
-			if (!_isDragging && !isActive)
+			if (!_isDragging)
 				StartDrag(slotIndex);
 		}
 	}
@@ -226,6 +228,9 @@ public partial class BallBag : Control
 
 	private void OnClosePressed()
 	{
+		// restore ball input on close
+		BallController ball = GetTree().Root.FindChild("Ball", true, false) as BallController;
+		if (ball != null) ball.InputBlocked = false;
 		_selectedBallIndex = -1;
 		NotifyItemPanel();
 		Visible = false;
