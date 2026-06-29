@@ -8,6 +8,7 @@ public static class BallUpgradeDatabase
 		return upgradeType switch
 		{
 			"Glass Ball" => new GlassBallEffect(),
+			"Golden Ball" => new GoldenBallEffect(),
 			_ => null // Standard ball has no effect
 		};
 	}

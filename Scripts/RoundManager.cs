@@ -139,7 +139,7 @@ public partial class RoundManager : Node3D
 			EndRound();
 	}
 	
-	private void UpdateCurrentBallEffect()
+	public void UpdateCurrentBallEffect()
 	{
 		if (_currentBallIndex < _gameState.OwnedBalls.Count)
 		{

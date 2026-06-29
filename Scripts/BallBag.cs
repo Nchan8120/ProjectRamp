@@ -221,7 +221,11 @@ public partial class BallBag : Control
 
 		_gameState.OwnedBalls[ballIndex].UpgradeType = upgrade.Name;
 		_selectedBallIndex = -1;
-
+		// if the upgraded ball is the current active ball, refresh the effect immediately
+		if (_roundManager != null && ballIndex == _roundManager.CurrentBallIndex)
+		{
+			_roundManager.UpdateCurrentBallEffect();
+		}
 		NotifyItemPanel();
 		BuildBallList();
 	}
