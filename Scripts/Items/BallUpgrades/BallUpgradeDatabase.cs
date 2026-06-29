@@ -9,6 +9,7 @@ public static class BallUpgradeDatabase
 		{
 			"Glass Ball" => new GlassBallEffect(),
 			"Golden Ball" => new GoldenBallEffect(),
+			"Rubber Ball" => new RubberBallEffect(),
 			_ => null // Standard ball has no effect
 		};
 	}

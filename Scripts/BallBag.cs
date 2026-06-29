@@ -221,9 +221,12 @@ public partial class BallBag : Control
 
 		_gameState.OwnedBalls[ballIndex].UpgradeType = upgrade.Name;
 		_selectedBallIndex = -1;
+		GD.Print($"ApplyUpgradeToBall - ballIndex: {ballIndex}, CurrentBallIndex: {_roundManager?.CurrentBallIndex}, RoundManager null: {_roundManager == null}");
+
 		// if the upgraded ball is the current active ball, refresh the effect immediately
 		if (_roundManager != null && ballIndex == _roundManager.CurrentBallIndex)
 		{
+			GD.Print("Calling UpdateCurrentBallEffect");
 			_roundManager.UpdateCurrentBallEffect();
 		}
 		NotifyItemPanel();

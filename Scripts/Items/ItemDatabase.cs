@@ -5,12 +5,7 @@ public static class ItemDatabase
 {
 	public static List<ItemData> BallUpgrades = new List<ItemData>
 	{
-		new ItemData("Gold Plated", "Ball worth +50 points every throw", ItemType.BallUpgrade, 5),
-		new ItemData("Rubber Coat", "Ball bounces higher off ramp", ItemType.BallUpgrade, 4),
-		new ItemData("Hollow Core", "Ball gets more air off the ramp", ItemType.BallUpgrade, 5),
-		new ItemData("Coin Filled", "Scoring zero still generates $2", ItemType.BallUpgrade, 6),
-		new ItemData("Veteran", "Gains +10 points every round survived", ItemType.BallUpgrade, 7),
-		new ItemData("Sticky Ball", "Ball sticks to the wall", ItemType.BallUpgrade, 7),
+		new ItemData("Rubber Ball", "Ball bounces more than a standard ball", ItemType.BallUpgrade, 4),
 		new ItemData("Glass Ball", "Ball Scores 2x points, then breaks permanently", ItemType.BallUpgrade, 5),
 		new ItemData("Golden Ball", "Scoring this ball gives $3", ItemType.BallUpgrade, 3),
 	};

@@ -11,7 +11,11 @@ public partial class BallController : RigidBody3D
 	[Export] public float ForwardInfluence = -1.0f;     // positive or negative depending on camera
 	[Export] public NodePath MeshPath; // assign in inspector
 	[Export] public float MissTimeout = 3.0f; // seconds before ball is considered a miss
+	[Export] public PhysicsMaterial StandardPhysicsMaterial;
+	[Export] public PhysicsMaterial RubberPhysicsMaterial;
+	
 	public bool InputBlocked = false;
+	public int BounceBonus = 0; // set by rubber ball effect
 	
 	private float _airTime = 0f;
 	private bool _hasScored = false;
@@ -35,6 +39,8 @@ public partial class BallController : RigidBody3D
 		_material.AlbedoColor = Colors.White;
 		_mesh.MaterialOverride = _material;
 		 _roundManager = GetTree().GetFirstNodeInGroup("RoundManager") as RoundManager;
+		
+		BodyEntered += OnBodyEntered;
 	}
 
 	public override void _Process(double delta)
@@ -157,5 +163,24 @@ public partial class BallController : RigidBody3D
 		_state = BallState.Idle;
 		_mouseBuffer.Clear();
 		_material.AlbedoColor = Colors.White;
+	}
+	
+	public void ApplyPhysicsMaterial(string upgradeType)
+	{
+		PhysicsMaterial material = upgradeType switch
+		{
+			"Rubber Ball" => RubberPhysicsMaterial,
+			_ => StandardPhysicsMaterial
+		};
+
+		PhysicsMaterialOverride = material;
+	}
+	
+	private void OnBodyEntered(Node body)
+	{
+		if (BounceBonus <= 0) return;
+		if (_state != BallState.Throwing) return;
+
+		_roundManager?.AddBounceBonus(BounceBonus);
 	}
 }

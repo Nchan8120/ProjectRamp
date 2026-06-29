@@ -13,6 +13,7 @@ public partial class RoundManager : Node3D
 	[Export] public NodePath MoneyLabelPath;
 	
 	public int CurrentBallIndex => _currentBallIndex;
+	public BallController GetBallController() => _ball;
 
 	private int _ballsRemaining;
 	private int _currentScore;
@@ -92,6 +93,12 @@ public partial class RoundManager : Node3D
 		// update to next ball's effect
 		UpdateCurrentBallEffect();
 		
+		string nextUpgradeType = _currentBallIndex < _gameState.OwnedBalls.Count 
+			? _gameState.OwnedBalls[_currentBallIndex].UpgradeType 
+			: "Standard";
+		_ball.ApplyPhysicsMaterial(nextUpgradeType);
+		_ball.BounceBonus = 0; // reset, RubberBallEffect.Initialize will set it again if needed
+		
 		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
 		totemPanel?.RefreshUI();
 		
@@ -124,6 +131,12 @@ public partial class RoundManager : Node3D
 		
 		// update to next ball's effect
 		UpdateCurrentBallEffect();
+		
+		string nextUpgradeType = _currentBallIndex < _gameState.OwnedBalls.Count 
+			? _gameState.OwnedBalls[_currentBallIndex].UpgradeType 
+			: "Standard";
+		_ball.ApplyPhysicsMaterial(nextUpgradeType);
+		_ball.BounceBonus = 0; // reset, RubberBallEffect.Initialize will set it again if needed
 	
 		GetNode<TotemManager>("/root/TotemManager").BroadcastMiss();
 		
@@ -203,6 +216,14 @@ public partial class RoundManager : Node3D
 		if (_gameState.CurrentRound > _gameState.HighestRoundReached)
 		_gameState.HighestRoundReached = _gameState.CurrentRound;
 		GetTree().CallDeferred("change_scene_to_file", "res://scenes/run_end_screen.tscn");
+	}
+	
+	public void AddBounceBonus(int bonus)
+	{
+		GD.Print($"AddBounceBonus called - bonus: {bonus}, score before: {_currentScore}");
+		_currentScore += bonus;
+		GD.Print($"Bounce bonus! +{bonus} points. Total: {_currentScore}");
+		UpdateUI();
 	}
 	
 }
