@@ -5,7 +5,7 @@ Sticker 1 shows up in shop 1 & 2. Sticker 2 shows up in shop 3 & 4, etc.
 
 - Extra ball: +1 ball
 - Extra ring: +1 scoring area
-- Bigger Holes: All scoring areas increased by 10%
+- Bigger Holes: All scoring areas size increased by 10%
 - Golden Ticket: 25% more ticket rewards (rounded up)
 - Extra Totem: +1 totem slot
 - Extra Stunt: +1 stunt slot

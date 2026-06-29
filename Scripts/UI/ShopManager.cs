@@ -161,14 +161,21 @@ public partial class ShopManager : Control
 		if (_gameState.PersistentHouseRule != null)
 		{
 			// carry over unsold rule
-			_houseRuleData = ItemDatabase.HouseRules.Find(r => r.Name == _gameState.PersistentHouseRule);
+			_houseRuleData = new ItemData(
+				_gameState.PersistentHouseRule,
+				HouseRuleDatabase.GetByName(_gameState.PersistentHouseRule)?.Description ?? "",
+				ItemType.HouseRule,
+				HouseRuleDatabase.GetByName(_gameState.PersistentHouseRule)?.Cost ?? 15
+			);
 			_houseRuleSlot.Visible = true;
 			_houseRulePersist.Text = "RETURNING!";
 		}
 		else if (isOddShop)
 		{
-			// generate new house rule on odd shops
-			_houseRuleData = ItemDatabase.GetRandom(ItemType.HouseRule);
+			// pick random house rule from database
+			var allRules = HouseRuleDatabase.AllHouseRules;
+			HouseRuleData randomRule = allRules[(int)GD.RandRange(0, allRules.Count - 1)];
+			_houseRuleData = new ItemData(randomRule.Name, randomRule.Description, ItemType.HouseRule, randomRule.Cost);
 			_gameState.PersistentHouseRule = _houseRuleData.Name;
 			_houseRuleSlot.Visible = true;
 			_houseRulePersist.Text = "";
@@ -349,11 +356,24 @@ public partial class ShopManager : Control
 
 		if (_gameState.SpendMoney(_houseRuleData.Cost))
 		{
+			// find and apply house rule effect
+			HouseRuleData houseRuleData = HouseRuleDatabase.GetByName(_houseRuleData.Name);
+			if (houseRuleData != null)
+			{
+				HouseRuleEffect effect = houseRuleData.CreateEffect();
+				effect.Initialize(_gameState);
+				effect.OnPurchased();
+			}
+			
 			_gameState.OwnedHouseRules.Add(_houseRuleData.Name);
 			_gameState.PersistentHouseRule = null; // clear persistence on purchase
 			_houseRuleSold = true;
 			_houseRuleBuy.Text = "SOLD";
 			_houseRuleBuy.Disabled = true;
+			
+			// refresh ball bag in case a ball was added
+			BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+			ballBag?.BuildBallList();
 			UpdateUI();
 		}
 	}

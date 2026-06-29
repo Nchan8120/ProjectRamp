@@ -5,7 +5,7 @@ public static class ItemDatabase
 {
 	public static List<ItemData> BallUpgrades = new List<ItemData>
 	{
-		new ItemData("Rubber Ball", "Ball bounces more than a standard ball", ItemType.BallUpgrade, 4),
+		new ItemData("Rubber Ball", "Ball bounces more and scores 25 points per bounce", ItemType.BallUpgrade, 4),
 		new ItemData("Glass Ball", "Ball Scores 2x points, then breaks permanently", ItemType.BallUpgrade, 5),
 		new ItemData("Golden Ball", "Scoring this ball gives $3", ItemType.BallUpgrade, 3),
 	};
@@ -32,7 +32,7 @@ public static class ItemDatabase
 
 	public static List<ItemData> HouseRules = new List<ItemData>
 	{
-		new ItemData("Extra Ball", "Start every round with +1 ball", ItemType.HouseRule, 15),
+		new ItemData("Extra Ball", "Adds 1 Standard Ball to Ball Bag", ItemType.HouseRule, 15),
 		new ItemData("Safety Net", "First game over attempt in run, survive with 1 point instead", ItemType.HouseRule, 15),
 		new ItemData("High Interest Account", "Interest rate permanently doubled", ItemType.HouseRule, 15),
 		new ItemData("Extra Totem Slot", "Can hold +1 totem permanently", ItemType.HouseRule, 15),
