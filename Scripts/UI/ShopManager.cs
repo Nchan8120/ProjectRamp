@@ -374,6 +374,7 @@ public partial class ShopManager : Control
 			// refresh ball bag in case a ball was added
 			BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
 			ballBag?.BuildBallList();
+			RefreshTotemPanel();
 			UpdateUI();
 		}
 	}
