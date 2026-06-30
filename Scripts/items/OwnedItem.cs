@@ -1,10 +1,12 @@
+using Godot;
+using System;
+
 public class OwnedItem
 {
 	public string Name;
 	public string Description;
 	public ItemType Type;
 	public int PurchasePrice;
-	public int SellPrice => PurchasePrice / 2;
 
 	public OwnedItem(ItemData data)
 	{
@@ -12,5 +14,10 @@ public class OwnedItem
 		Description = data.Description;
 		Type = data.Type;
 		PurchasePrice = data.Cost;
+	}
+	
+	public int GetSellPrice(float multiplier)
+	{
+		return Mathf.RoundToInt(PurchasePrice * multiplier);
 	}
 }

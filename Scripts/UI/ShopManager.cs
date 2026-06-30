@@ -371,10 +371,11 @@ public partial class ShopManager : Control
 			_houseRuleBuy.Text = "SOLD";
 			_houseRuleBuy.Disabled = true;
 			
-			// refresh ball bag in case a ball was added
+			// refresh UI
 			BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
 			ballBag?.BuildBallList();
 			RefreshTotemPanel();
+			RefreshItemPanel(); 
 			UpdateUI();
 		}
 	}

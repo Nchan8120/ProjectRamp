@@ -148,7 +148,7 @@ public partial class TotemPanel : Control
 
 						_selectedSlot = slotIndex;
 						OwnedTotem totem = _gameState.OwnedTotems[slotIndex];
-						_sellButtons[slotIndex].Text = $"Sell ${totem.SellPrice}";
+						_sellButtons[slotIndex].Text = $"Sell ${totem.GetSellPrice(_gameState.SellValueMultiplier)}";
 						_sellButtons[slotIndex].Visible = true;
 					}
 				}
@@ -250,13 +250,13 @@ public partial class TotemPanel : Control
 		OwnedTotem totem = _gameState.OwnedTotems[slotIndex];
 		totem.Effect?.OnRemoved();
 		
-		_gameState.AddMoney(totem.SellPrice);
+		_gameState.AddMoney(totem.GetSellPrice(_gameState.SellValueMultiplier));
 		_gameState.OwnedTotems.RemoveAt(slotIndex);
 		RefreshMoneyLabel();
 		
 		GetNode<TotemManager>("/root/TotemManager").OnTotemRemoved();
 
-		GD.Print($"Sold {totem.Name} for ${totem.SellPrice}");
+		GD.Print($"Sold {totem.Name} for ${totem.GetSellPrice(_gameState.SellValueMultiplier)}");
 		RefreshUI();
 		
 		// refresh panels

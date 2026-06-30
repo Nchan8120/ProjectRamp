@@ -149,7 +149,7 @@ public partial class ItemPanel : Control
 
 						_selectedSlot = slotIndex;
 						OwnedItem item = _gameState.OwnedItems[slotIndex];
-						_sellButtons[slotIndex].Text = $"Sell ${item.SellPrice}";
+						_sellButtons[slotIndex].Text = $"Sell ${item.GetSellPrice(_gameState.SellValueMultiplier)}";
 						_sellButtons[slotIndex].Visible = true;
 					}
 				}
@@ -244,7 +244,7 @@ public partial class ItemPanel : Control
 		if (_gameState.OwnedItems[slotIndex] == null) return;
 
 		OwnedItem item = _gameState.OwnedItems[slotIndex];
-		_gameState.AddMoney(item.SellPrice);
+		_gameState.AddMoney(item.GetSellPrice(_gameState.SellValueMultiplier));
 		_gameState.OwnedItems.RemoveAt(slotIndex);
 
 		RefreshMoneyLabel();
@@ -252,7 +252,7 @@ public partial class ItemPanel : Control
 		CapsulePicker picker = GetTree().Root.FindChild("CapsulePicker", true, false) as CapsulePicker;
 		picker?.RefreshConfirmButton();
 
-		GD.Print($"Sold {item.Name} for ${item.SellPrice}");
+		GD.Print($"Sold {item.Name} for ${item.GetSellPrice(_gameState.SellValueMultiplier)}");
 		RefreshUI();
 	}
 	

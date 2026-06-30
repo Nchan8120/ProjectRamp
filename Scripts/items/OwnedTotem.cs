@@ -1,3 +1,6 @@
+using Godot;
+using System;
+
 public enum TotemRarity
 {
 	Common,
@@ -12,7 +15,6 @@ public class OwnedTotem
 	public string Description;
 	public ItemType Type;
 	public int PurchasePrice;
-	public int SellPrice => PurchasePrice / 2;
 	public TotemRarity Rarity;
 	public TotemEffect Effect;
 
@@ -24,5 +26,10 @@ public class OwnedTotem
 		PurchasePrice = data.Cost;
 		Rarity = data.Rarity;
 		Effect = data.CreateEffect();
+	}
+	
+	public int GetSellPrice(float multiplier)
+	{
+		return Mathf.RoundToInt(PurchasePrice * multiplier);
 	}
 }

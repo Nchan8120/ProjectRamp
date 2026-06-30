@@ -20,6 +20,7 @@ public partial class GameState : Node
 	public string PersistentHouseRule = null; // carries over if not bought
 	public bool HouseRuleAvailableThisShop = false;
 	public bool HasFreeReroll = false;
+	public float SellValueMultiplier = 0.5f; // default 50% sell back
 
 	// Slot limits
 	public int MaxTotems = 5;
@@ -83,6 +84,7 @@ public partial class GameState : Node
 		IsEndlessMode = false;
 		LeftoverBallValue = 2;
 		ScoreMultiplier = 1.0f;
+		SellValueMultiplier = 0.5f;
 		InitializeBalls();
 	}
 
