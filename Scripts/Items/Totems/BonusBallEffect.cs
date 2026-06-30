@@ -3,11 +3,18 @@ using Godot;
 public class BonusBallEffect : TotemEffect
 {
 	private OwnedBall _addedBall;
+	private bool _hasAddedBall = false;
+
 
 	public override void Initialize(GameState gameState, RoundManager roundManager)
 	{
 		base.Initialize(gameState, roundManager);
-		AddBonusBall();
+		// only add the ball once, not on every initialize call
+		if (!_hasAddedBall)
+		{
+			AddBonusBall();
+			_hasAddedBall = true;
+		}
 	}
 
 	private void AddBonusBall()

@@ -11,7 +11,7 @@ public static class TotemDatabase
 		new TotemData("Free Reroll", "First reroll each shop is free", 5, TotemRarity.Common, () => new FreeRerollEffect()),
 
 		// Rare
-		new TotemData("Bonus Ball", "Generates 1 additional bonus ball per round", 8, TotemRarity.Rare, () => new BonusBallEffect()),
+		new TotemData("Bonus Ball", "Gives 1 Bonus Ball", 8, TotemRarity.Rare, () => new BonusBallEffect()),
 		new TotemData("Clutch Gene", "Last ball of round is worth 2x", 9, TotemRarity.Rare, () => new ClutchGeneEffect()),
 		new TotemData("Penny Pincher", "Leftover balls worth double money", 8, TotemRarity.Rare, () => new PennyPincherEffect()),
 
