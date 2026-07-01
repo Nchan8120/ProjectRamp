@@ -89,4 +89,14 @@ public partial class TotemManager : Node
 	{
 		ApplyPassiveEffects();
 	}
+	
+	public int ProcessScoreInOrder(int points)
+	{
+		foreach (OwnedTotem totem in _gameState.OwnedTotems)
+		{
+			if (totem?.Effect != null)
+				points = totem.Effect.ProcessScore(points);
+		}
+		return points;
+	}
 }

@@ -17,6 +17,11 @@ public class CopycatEffect : TotemEffect
 	{
 		_copiedEffect?.OnScore(points);
 	}
+	
+	public override int ProcessScore(int points)
+	{
+		return _copiedEffect?.ProcessScore(points) ?? points;
+	}
 
 	public override void OnMiss()
 	{

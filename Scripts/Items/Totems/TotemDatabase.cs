@@ -14,6 +14,7 @@ public static class TotemDatabase
 		new TotemData("Bonus Ball", "Gives 1 Bonus Ball", 8, TotemRarity.Rare, () => new BonusBallEffect()),
 		new TotemData("Clutch Gene", "Last ball of round is worth 2x", 9, TotemRarity.Rare, () => new ClutchGeneEffect()),
 		new TotemData("Penny Pincher", "Leftover balls worth double money", 8, TotemRarity.Rare, () => new PennyPincherEffect()),
+		new TotemData("Lead from Gold", "For each Golden Ball in bag, +50 on each throw", 9, TotemRarity.Rare, () => new LeadFromGoldEffect()),
 
 		// Epic
 		new TotemData("Hot Streak", "Consecutive scores increase multiplier by 0.1x, resets on miss", 14, TotemRarity.Epic, () => new HotStreakEffect()),

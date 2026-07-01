@@ -14,6 +14,7 @@ public partial class RoundManager : Node3D
 	
 	public int CurrentBallIndex => _currentBallIndex;
 	public BallController GetBallController() => _ball;
+	public int BallsRemaining => _ballsRemaining;
 
 	private int _ballsRemaining;
 	private int _currentScore;
@@ -66,12 +67,6 @@ public partial class RoundManager : Node3D
 
 	public void OnBallScored(int points)
 	{
-		// apply clutch gene if last ball
-		if (_ballsRemaining == 1 && _gameState.ClutchGeneActive)
-		{
-			points *= 2;
-		}
-		
 		 // apply ball upgrade effect
 		if (_currentBallEffect != null && _currentBallIndex < _gameState.OwnedBalls.Count)
 		{
@@ -79,7 +74,12 @@ public partial class RoundManager : Node3D
 			points = _currentBallEffect.OnScore(points, currentBall);
 		}
 		
-		points = Mathf.RoundToInt(points * _gameState.ScoreMultiplier);
+		// process totems in order - each totem transforms points sequentially
+		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
+		points = totemManager.ProcessScoreInOrder(points);
+
+		// broadcast for non-score effects (economy, streaks etc)
+		totemManager.BroadcastScore(points);
 		_currentScore += points;
 		_ballsRemaining--;
 		

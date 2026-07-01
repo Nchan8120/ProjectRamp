@@ -23,4 +23,6 @@ public abstract class TotemEffect
 	public virtual void OnTotemMoved() { }
 	public virtual void ApplyPassiveEffects() { }
 	public virtual void OnRemoved() { }
+	// returns modified points after this totem's effect
+	public virtual int ProcessScore(int points) => points;
 }

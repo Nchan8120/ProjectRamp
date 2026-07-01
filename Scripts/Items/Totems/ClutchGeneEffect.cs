@@ -1,14 +1,16 @@
+using System;
+using Godot;
+
 public class ClutchGeneEffect : TotemEffect
 {
-	public override void OnRoundStart()
+	public override int ProcessScore(int points)
 	{
-		// handled in RoundManager when last ball is thrown
-		// set a flag so RoundManager knows to double the score
-		GameState.ClutchGeneActive = true;
-	}
-
-	public override void OnRemoved()
-	{
-		GameState.ClutchGeneActive = false;
+		// only applies on the last ball
+		if (RoundManager != null && RoundManager.BallsRemaining == 1)
+		{
+			GD.Print("Clutch Gene triggered - 2x points!");
+			return points * 2;
+		}
+		return points;
 	}
 }

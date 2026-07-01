@@ -36,10 +36,9 @@ public partial class GameState : Node
 	public string DefeatedByBoss = null; // null if not defeated by boss
 	
 	// Totem flags
-	public bool ClutchGeneActive = false;
 	public int BallsPerRound = 9;
 	public int LeftoverBallValue = 2;
-	public float ScoreMultiplier = 1.0f;
+
 	
 	// Ball Bag
 	public List<OwnedBall> OwnedBalls = new List<OwnedBall>();
@@ -83,7 +82,6 @@ public partial class GameState : Node
 		LeftoverBalls = 0;
 		IsEndlessMode = false;
 		LeftoverBallValue = 2;
-		ScoreMultiplier = 1.0f;
 		SellValueMultiplier = 0.5f;
 		InitializeBalls();
 	}
