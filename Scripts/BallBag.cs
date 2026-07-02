@@ -218,7 +218,6 @@ public partial class BallBag : Control
 	public void ApplyUpgradeToBall(int ballIndex, OwnedItem upgrade)
 	{
 		if (ballIndex < 0 || ballIndex >= _gameState.OwnedBalls.Count) return;
-
 		_gameState.OwnedBalls[ballIndex].UpgradeType = upgrade.Name;
 		_selectedBallIndex = -1;
 		GD.Print($"ApplyUpgradeToBall - ballIndex: {ballIndex}, CurrentBallIndex: {_roundManager?.CurrentBallIndex}, RoundManager null: {_roundManager == null}");
@@ -228,6 +227,14 @@ public partial class BallBag : Control
 		{
 			GD.Print("Calling UpdateCurrentBallEffect");
 			_roundManager.UpdateCurrentBallEffect();
+		}
+		
+		// refresh totem panel in case any totem display values depend on ball types
+		var panels = GetTree().GetNodesInGroup("TotemPanel");
+		foreach (Node node in panels)
+		{
+			if (node is TotemPanel totemPanel)
+				totemPanel.RefreshUI();
 		}
 		NotifyItemPanel();
 		BuildBallList();
