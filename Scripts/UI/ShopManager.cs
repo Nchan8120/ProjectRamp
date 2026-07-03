@@ -156,11 +156,21 @@ public partial class ShopManager : Control
 
 	private void GenerateHouseRule()
 	{
-		bool isOddShop = (_gameState.CurrentRound % 2 == 0); // round incremented so round 2 = shop 1
+		bool isOddShop = (_gameState.CurrentRound % 2 == 0); // round 2,4,6 = shop 1,3,5
 
-		if (_gameState.PersistentHouseRule != null)
+		if (isOddShop)
 		{
-			// carry over unsold rule
+			// odd shops always generate a new sticker regardless of persistence
+			var allRules = HouseRuleDatabase.AllHouseRules;
+			HouseRuleData randomRule = allRules[(int)GD.RandRange(0, allRules.Count - 1)];
+			_houseRuleData = new ItemData(randomRule.Name, randomRule.Description, ItemType.HouseRule, randomRule.Cost);
+			_gameState.PersistentHouseRule = _houseRuleData.Name;
+			_houseRuleSlot.Visible = true;
+			_houseRulePersist.Text = "";
+		}
+		else if (_gameState.PersistentHouseRule != null)
+		{
+			// even shops show returning sticker only if it wasn't bought last shop
 			_houseRuleData = new ItemData(
 				_gameState.PersistentHouseRule,
 				HouseRuleDatabase.GetByName(_gameState.PersistentHouseRule)?.Description ?? "",
@@ -170,19 +180,9 @@ public partial class ShopManager : Control
 			_houseRuleSlot.Visible = true;
 			_houseRulePersist.Text = "RETURNING!";
 		}
-		else if (isOddShop)
-		{
-			// pick random house rule from database
-			var allRules = HouseRuleDatabase.AllHouseRules;
-			HouseRuleData randomRule = allRules[(int)GD.RandRange(0, allRules.Count - 1)];
-			_houseRuleData = new ItemData(randomRule.Name, randomRule.Description, ItemType.HouseRule, randomRule.Cost);
-			_gameState.PersistentHouseRule = _houseRuleData.Name;
-			_houseRuleSlot.Visible = true;
-			_houseRulePersist.Text = "";
-		}
 		else
 		{
-			// no house rule this shop
+			// even shop, sticker was bought last shop
 			_houseRuleSlot.Visible = false;
 			_houseRuleData = null;
 		}
