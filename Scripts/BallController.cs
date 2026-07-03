@@ -27,6 +27,7 @@ public partial class BallController : RigidBody3D
 	private Vector3 _startPosition;
 	private List<Vector2> _mouseBuffer = new List<Vector2>();
 	private Vector2 _lastMousePos;
+	private GameState _gameState;
 
 	public override void _Ready()
 	{
@@ -38,7 +39,8 @@ public partial class BallController : RigidBody3D
 		_material = new StandardMaterial3D();
 		_material.AlbedoColor = Colors.White;
 		_mesh.MaterialOverride = _material;
-		 _roundManager = GetTree().GetFirstNodeInGroup("RoundManager") as RoundManager;
+		_roundManager = GetTree().GetFirstNodeInGroup("RoundManager") as RoundManager;
+		_gameState = GetNode<GameState>("/root/GameState");
 		
 		BodyEntered += OnBodyEntered;
 	}
@@ -118,6 +120,17 @@ public partial class BallController : RigidBody3D
 			_state = BallState.Idle;
 			return;
 		}
+		
+		// set bounce bonus based on current ball upgrade
+		if (_gameState != null && _roundManager != null)
+		{
+			int currentIndex = _roundManager.CurrentBallIndex;
+			if (currentIndex < _gameState.OwnedBalls.Count)
+			{
+				string upgradeType = _gameState.OwnedBalls[currentIndex].UpgradeType;
+				BounceBonus = upgradeType == "Rubber Ball" ? 25 : 0;
+			}
+		}
 
 		// average the buffered mouse movement
 		Vector2 avgMovement = Vector2.Zero;
@@ -180,7 +193,7 @@ public partial class BallController : RigidBody3D
 	{
 		if (BounceBonus <= 0) return;
 		if (_state != BallState.Throwing) return;
-
+		GD.Print("BounceBonus: {BounceBonus}");
 		_roundManager?.AddBounceBonus(BounceBonus);
 	}
 }
