@@ -99,4 +99,10 @@ public partial class TotemManager : Node
 		}
 		return points;
 	}
+	
+	public void BroadcastReroll()
+	{
+		foreach (OwnedTotem totem in _gameState.OwnedTotems)
+			totem?.Effect?.OnReroll();
+	}
 }

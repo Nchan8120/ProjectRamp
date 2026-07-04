@@ -9,6 +9,7 @@ public static class TotemDatabase
 		new TotemData("Juggler", "+1 item slot", 5, TotemRarity.Common, () => new JugglerEffect()),
 		new TotemData("Bailout", "Missing gives $1", 4, TotemRarity.Common, () => new BailoutEffect()),
 		new TotemData("Free Reroll", "First reroll each shop is free", 5, TotemRarity.Common, () => new FreeRerollEffect()),
+		new TotemData("Gambler", "Each shop reroll permanently adds +25 points per throw", 8, TotemRarity.Rare, () => new GamblerEffect()),
 
 		// Rare
 		new TotemData("Bonus Ball", "Gives 1 Bonus Ball", 8, TotemRarity.Rare, () => new BonusBallEffect()),

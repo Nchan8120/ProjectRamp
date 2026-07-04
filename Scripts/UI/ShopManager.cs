@@ -395,6 +395,10 @@ public partial class ShopManager : Control
 				_gameState.RerollCost++;
 			}
 		}
+		
+		GetNode<TotemManager>("/root/TotemManager").BroadcastReroll();
+		RefreshTotemPanel();
+		
 		_item1Sold = false;
 		_item2Sold = false;
 		_cap1Sold = false;
