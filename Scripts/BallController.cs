@@ -128,7 +128,7 @@ public partial class BallController : RigidBody3D
 			if (currentIndex < _gameState.OwnedBalls.Count)
 			{
 				string upgradeType = _gameState.OwnedBalls[currentIndex].UpgradeType;
-				BounceBonus = upgradeType == "Rubber Ball" ? 25 : 0;
+				BounceBonus = upgradeType == "Rubber Ball" ? RubberBallEffect.BounceBonusValue : 0;
 			}
 		}
 

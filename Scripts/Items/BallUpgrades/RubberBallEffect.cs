@@ -3,6 +3,8 @@ using System;
 
 public class RubberBallEffect : BallUpgradeEffect
 {
+	public const int BounceBonusValue = 25;
+	
 	public override void Initialize(GameState gameState, RoundManager roundManager)
 	{
 		base.Initialize(gameState, roundManager);
@@ -16,7 +18,7 @@ public class RubberBallEffect : BallUpgradeEffect
 		if (ball != null)
 		{
 			ball.ApplyPhysicsMaterial("Rubber Ball");
-			ball.BounceBonus = 25;
+			ball.BounceBonus = BounceBonusValue;
 			GD.Print($"BounceBonus after set: {ball.BounceBonus}");
 		}
 		GD.Print("Rubber Ball physics applied");
