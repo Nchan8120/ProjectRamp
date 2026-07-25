@@ -70,13 +70,13 @@ size = Vector3(0.05, 0.01, 0.05)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dgvu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_2fmhe"]
-size = Vector3(0.01, 0.07, 0.4)
+size = Vector3(0.005, 0.07, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uscyt"]
-size = Vector3(0.01, 0.07, 0.4)
+size = Vector3(0.01, 0.07, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4xiap"]
-size = Vector3(0.01, 0.07, 0.4)
+size = Vector3(0.01, 0.07, 0.5)
 
 [node name="GameScene" type="Node3D" unique_id=1089038052 groups=["RoundManager"]]
 script = ExtResource("1_6h5vk")
@@ -171,7 +171,7 @@ mesh = SubResource("CylinderMesh_2fmhe")
 surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 
 [node name="Hole_3" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=53144723]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.35189632, -1.509683)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.36559302, -1.4920753)
 script = ExtResource("1_b6fju")
 PointValue = 300
 
@@ -221,7 +221,7 @@ sides = 16
 [node name="InnerRing1" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring1" unique_id=293872669]
 transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
 operation = 2
-radius = 0.29
+radius = 0.295
 height = 0.25
 sides = 16
 
@@ -244,7 +244,7 @@ sides = 16
 [node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring2" unique_id=1247819195]
 transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
 operation = 2
-radius = 0.18
+radius = 0.185
 height = 0.25
 sides = 16
 
@@ -262,7 +262,7 @@ sides = 16
 [node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring3" unique_id=1087693401]
 transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
 operation = 2
-radius = 0.06
+radius = 0.065
 height = 0.25
 sides = 16
 
@@ -280,7 +280,7 @@ sides = 16
 [node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring4" unique_id=1514234053]
 transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
 operation = 2
-radius = 0.06
+radius = 0.065
 height = 0.25
 sides = 16
 
@@ -298,12 +298,12 @@ sides = 16
 [node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring5" unique_id=1061206188]
 transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
 operation = 2
-radius = 0.06
+radius = 0.065
 height = 0.25
 sides = 16
 
 [node name="LeftRingExtend" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=284020714]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, -0.29, 0.5, -1.605)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, -0.3, 0.58, -1.65)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/LeftRingExtend" unique_id=417819876]
 mesh = SubResource("BoxMesh_2fmhe")
@@ -312,7 +312,7 @@ mesh = SubResource("BoxMesh_2fmhe")
 shape = SubResource("BoxShape3D_uscyt")
 
 [node name="RightRingExtend" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=485209750]
-transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0.29, 0.5, -1.605)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0.3, 0.58, -1.65)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/RightRingExtend" unique_id=1149065939]
 mesh = SubResource("BoxMesh_2fmhe")
@@ -323,6 +323,7 @@ shape = SubResource("BoxShape3D_4xiap")
 [node name="Ball" parent="." unique_id=1001961588 instance=ExtResource("2_b6fju")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.6)
 MaxThrowSpeed = 10.0
+HorizontalInfluence = 0.5
 VerticalInfluence = 0.0
 ForwardInfluence = 1.0
 
