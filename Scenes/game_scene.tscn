@@ -8,44 +8,75 @@
 [ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="6_rgj8m"]
 [ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="7_2fmhe"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fmhe"]
+albedo_color = Color(0.99607843, 0.25882354, 0.2, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_oqyrl"]
-size = Vector3(0.6, 0.1, 2.5)
+material = SubResource("StandardMaterial3D_2fmhe")
+size = Vector3(0.6, 0.1, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x87qo"]
-size = Vector3(0.6, 0.1, 2.5)
+size = Vector3(0.6, 0.1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7iton"]
+albedo_color = Color(0.99607843, 0.25882354, 0.2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b6fju"]
+material = SubResource("StandardMaterial3D_7iton")
 size = Vector3(0.6, 0.1, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6h5vk"]
 size = Vector3(0.6, 0.1, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fiftr"]
-size = Vector3(0.1, 0.2, 2.5)
+size = Vector3(0.1, 0.2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ixah"]
-size = Vector3(0.1, 0.2, 2.5)
+size = Vector3(0.1, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ikfsv"]
+albedo_color = Color(0.99607843, 0.25882354, 0.2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6h5vk"]
-size = Vector3(0.6, 0.8, 0.05)
+material = SubResource("StandardMaterial3D_ikfsv")
+size = Vector3(0.6, 1, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fiftr"]
 size = Vector3(0.6, 0.8, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rgj8m"]
-size = Vector3(0.5, 0.01, 0.1)
+size = Vector3(0.07, 0.01, 0.07)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2fmhe"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uscyt"]
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2fmhe"]
-size = Vector3(0.1, 0.01, 0.1)
+size = Vector3(0.07, 0.01, 0.07)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7iton"]
-size = Vector3(0.1, 0.01, 0.1)
+size = Vector3(0.05, 0.01, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ikfsv"]
-size = Vector3(0.1, 0.01, 0.1)
+size = Vector3(0.05, 0.01, 0.05)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5dgvu"]
-size = Vector3(0.1, 0.01, 0.1)
+size = Vector3(0.05, 0.01, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dgvu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2fmhe"]
+size = Vector3(0.01, 0.07, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uscyt"]
+size = Vector3(0.01, 0.07, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4xiap"]
+size = Vector3(0.01, 0.07, 0.4)
 
 [node name="GameScene" type="Node3D" unique_id=1089038052 groups=["RoundManager"]]
 script = ExtResource("1_6h5vk")
@@ -57,13 +88,14 @@ RoundLabelPath = NodePath("CanvasLayer/GameHUD/RoundLabel")
 MoneyLabelPath = NodePath("CanvasLayer/GameHUD/MoneyLabel")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1020950208]
-transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 1, 2.25)
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, 0, 1, 1.6128845)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=71810553]
 
 [node name="Lane" type="Node3D" parent="." unique_id=1140650000]
 
 [node name="Approach" type="StaticBody3D" parent="Lane" unique_id=915849082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Approach" unique_id=256321058]
 mesh = SubResource("BoxMesh_oqyrl")
@@ -72,9 +104,10 @@ mesh = SubResource("BoxMesh_oqyrl")
 shape = SubResource("BoxShape3D_x87qo")
 
 [node name="Ramp" type="StaticBody3D" parent="Lane" unique_id=763151785]
-transform = Transform3D(1, 0, 0, 0, 0.7071067, -0.7071067, 0, 0.7071067, 0.7071067, 0, 0.1, -1.3512603)
+transform = Transform3D(1, 0, 0, 0, 0.7660443, -0.6427875, 0, 0.6427875, 0.7660443, 0, 0.1, -1.3124608)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Ramp" unique_id=464100266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.021513164, 0.021513164)
 mesh = SubResource("BoxMesh_b6fju")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/Ramp" unique_id=1755526332]
@@ -83,7 +116,7 @@ shape = SubResource("BoxShape3D_6h5vk")
 [node name="Walls" type="Node3D" parent="Lane" unique_id=1920736330]
 
 [node name="LeftWall" type="StaticBody3D" parent="Lane/Walls" unique_id=1268634169]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.1, -0.25)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Walls/LeftWall" unique_id=614756994]
 mesh = SubResource("BoxMesh_fiftr")
@@ -92,7 +125,7 @@ mesh = SubResource("BoxMesh_fiftr")
 shape = SubResource("BoxShape3D_1ixah")
 
 [node name="RightWall" type="StaticBody3D" parent="Lane/Walls" unique_id=84335228]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.1, -0.25)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/Walls/RightWall" unique_id=654909977]
 mesh = SubResource("BoxMesh_fiftr")
@@ -101,10 +134,10 @@ mesh = SubResource("BoxMesh_fiftr")
 shape = SubResource("BoxShape3D_1ixah")
 
 [node name="ScoringArea" type="Node3D" parent="Lane" unique_id=1935229699]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1776241)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.061047412, -0.14390095)
 
 [node name="BackWall" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=1056373313]
-transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 0.40477622, -1.6371161)
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0.40477622, -1.6371161)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/BackWall" unique_id=466828757]
 mesh = SubResource("BoxMesh_6h5vk")
@@ -115,48 +148,182 @@ shape = SubResource("BoxShape3D_fiftr")
 [node name="Holes" type="Node3D" parent="Lane/ScoringArea" unique_id=1962242546]
 
 [node name="Hole_1" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1655825725]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0, 0.17259413, -1.4347932)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.15835151, -1.3999504)
 script = ExtResource("1_b6fju")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_1" unique_id=1897473453]
 shape = SubResource("BoxShape3D_rgj8m")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/Holes/Hole_1" unique_id=1411965815]
+mesh = SubResource("CylinderMesh_2fmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
+
 [node name="Hole_2" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=268508069]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0.2, 0.654, -1.776)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.24631548, -1.4524893)
 script = ExtResource("1_b6fju")
 PointValue = 200
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_2" unique_id=670045832]
 shape = SubResource("BoxShape3D_2fmhe")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/Holes/Hole_2" unique_id=765646568]
+mesh = SubResource("CylinderMesh_2fmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
+
 [node name="Hole_3" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=53144723]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, -0.20784104, 0.47, -1.65)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.35189632, -1.509683)
 script = ExtResource("1_b6fju")
 PointValue = 300
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_3" unique_id=1169622685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07367015, -0.015839338)
 shape = SubResource("BoxShape3D_7iton")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/Holes/Hole_3" unique_id=1288318725]
+mesh = SubResource("CylinderMesh_2fmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
+
 [node name="Hole_4" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1957101303]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, 0.2, 0.47, -1.65)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, -0.12537456, 0.6358062, -1.7231332)
 script = ExtResource("1_b6fju")
 PointValue = 400
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_4" unique_id=1950758460]
 shape = SubResource("BoxShape3D_ikfsv")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/Holes/Hole_4" unique_id=1696922827]
+mesh = SubResource("CylinderMesh_2fmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
+
 [node name="Hole_5" type="Area3D" parent="Lane/ScoringArea/Holes" unique_id=1890421325]
-transform = Transform3D(1, 0, 0, 0, 0.57357645, -0.81915206, 0, 0.81915206, 0.57357645, -0.2, 0.648, -1.778)
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0.125, 0.636, -1.723)
 script = ExtResource("1_b6fju")
 PointValue = 500
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_5" unique_id=1207187992]
 shape = SubResource("BoxShape3D_5dgvu")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/Holes/Hole_5" unique_id=1699555855]
+mesh = SubResource("CylinderMesh_2fmhe")
+surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
+
+[node name="Ring1" type="CSGCombiner3D" parent="Lane/ScoringArea" unique_id=1023331582]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.86602557, 0, 0.86602557, 0.5, 0, 0.36388665, -1.5231905)
+material_override = SubResource("StandardMaterial3D_5dgvu")
+use_collision = true
+
+[node name="OuterRing1" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring1" unique_id=441812801]
+transform = Transform3D(1, 0, 4.4703484e-08, 2.9802322e-08, 0.99999994, -8.940697e-08, 4.4703484e-08, 0, 0.99999976, 0, 0, 0)
+radius = 0.3
+height = 0.07
+sides = 16
+
+[node name="InnerRing1" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring1" unique_id=293872669]
+transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
+operation = 2
+radius = 0.29
+height = 0.25
+sides = 16
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lane/ScoringArea/Ring1" unique_id=2092417458]
+transform = Transform3D(1, 0, 0, 0, 1, -2.9802322e-08, 0, 2.9802322e-08, 1, 0, 0.046754837, -0.15226352)
+operation = 2
+size = Vector3(0.6, 0.2, 0.3)
+
+[node name="Ring2" type="CSGCombiner3D" parent="Lane/ScoringArea" unique_id=1581435047]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.5, -0.86602545, 0, 0.86602557, 0.49999997, 0, 0.37467557, -1.5)
+material_override = SubResource("StandardMaterial3D_5dgvu")
+use_collision = true
+
+[node name="OuterRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring2" unique_id=1972856222]
+transform = Transform3D(1, 0, 4.4703484e-08, 2.9802322e-08, 0.99999994, -8.940697e-08, 4.4703484e-08, 0, 0.99999976, 0, 0, 0)
+radius = 0.19
+height = 0.07
+sides = 16
+
+[node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring2" unique_id=1247819195]
+transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
+operation = 2
+radius = 0.18
+height = 0.25
+sides = 16
+
+[node name="Ring3" type="CSGCombiner3D" parent="Lane/ScoringArea" unique_id=719948257]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.5, -0.86602545, 0, 0.86602557, 0.49999997, 0, 0.364642, -1.5)
+material_override = SubResource("StandardMaterial3D_5dgvu")
+use_collision = true
+
+[node name="OuterRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring3" unique_id=1823473926]
+transform = Transform3D(1, 0, 4.4703484e-08, 2.9802322e-08, 0.99999994, -8.940697e-08, 4.4703484e-08, 0, 0.99999976, 0, 0, 0)
+radius = 0.07
+height = 0.07
+sides = 16
+
+[node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring3" unique_id=1087693401]
+transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
+operation = 2
+radius = 0.06
+height = 0.25
+sides = 16
+
+[node name="Ring4" type="CSGCombiner3D" parent="Lane/ScoringArea" unique_id=1810938118]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.5, -0.86602545, 0, 0.86602557, 0.49999997, -0.125, 0.647, -1.7141305)
+material_override = SubResource("StandardMaterial3D_5dgvu")
+use_collision = true
+
+[node name="OuterRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring4" unique_id=2067533532]
+transform = Transform3D(1, 0, 4.4703484e-08, 2.9802322e-08, 0.99999994, -8.940697e-08, 4.4703484e-08, 0, 0.99999976, 0, 0, 0)
+radius = 0.07
+height = 0.07
+sides = 16
+
+[node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring4" unique_id=1514234053]
+transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
+operation = 2
+radius = 0.06
+height = 0.25
+sides = 16
+
+[node name="Ring5" type="CSGCombiner3D" parent="Lane/ScoringArea" unique_id=2061181167]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.5, -0.86602545, 0, 0.86602557, 0.49999997, 0.125, 0.647, -1.714)
+material_override = SubResource("StandardMaterial3D_5dgvu")
+use_collision = true
+
+[node name="OuterRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring5" unique_id=1105872567]
+transform = Transform3D(1, 0, 4.4703484e-08, 2.9802322e-08, 0.99999994, -8.940697e-08, 4.4703484e-08, 0, 0.99999976, 0, 0, 0)
+radius = 0.07
+height = 0.07
+sides = 16
+
+[node name="InnerRing2" type="CSGCylinder3D" parent="Lane/ScoringArea/Ring5" unique_id=1061206188]
+transform = Transform3D(0.99999994, 2.9802322e-08, 1.3411045e-07, 8.940697e-08, 1.0000002, -1.4901161e-07, 2.9802322e-08, 5.9604645e-08, 0.99999964, 0, 0, 0)
+operation = 2
+radius = 0.06
+height = 0.25
+sides = 16
+
+[node name="LeftRingExtend" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=284020714]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, -0.29, 0.5, -1.605)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/LeftRingExtend" unique_id=417819876]
+mesh = SubResource("BoxMesh_2fmhe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/LeftRingExtend" unique_id=831208226]
+shape = SubResource("BoxShape3D_uscyt")
+
+[node name="RightRingExtend" type="StaticBody3D" parent="Lane/ScoringArea" unique_id=485209750]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0.29, 0.5, -1.605)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Lane/ScoringArea/RightRingExtend" unique_id=1149065939]
+mesh = SubResource("BoxMesh_2fmhe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/RightRingExtend" unique_id=539452706]
+shape = SubResource("BoxShape3D_4xiap")
+
 [node name="Ball" parent="." unique_id=1001961588 instance=ExtResource("2_b6fju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2203933, 1.0907834)
-MouseSensitivity = 0.4
-VerticalInfluence = -0.1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0.6)
+MaxThrowSpeed = 10.0
+VerticalInfluence = 0.0
 ForwardInfluence = 1.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=999467137]
