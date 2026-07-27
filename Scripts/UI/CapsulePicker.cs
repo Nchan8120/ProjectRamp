@@ -49,6 +49,22 @@ public partial class CapsulePicker : Control
 	// call this to open the picker with a set of choices
 	public void Open(List<ItemData> choices, int pickCount, System.Action<List<ItemData>> onComplete)
 	{
+		 // hide all totem and item panels except our own
+		var totemPanels = GetTree().GetNodesInGroup("TotemPanel");
+		foreach (Node node in totemPanels)
+		{
+			if (node != GetNode<TotemPanel>("TotemPanel"))
+				((Control)node).Visible = false;
+		}
+
+		var itemPanels = GetTree().GetNodesInGroup("ItemPanel");
+		foreach (Node node in itemPanels)
+		{
+			if (node != GetNode<ItemPanel>("ItemPanel"))
+				((Control)node).Visible = false;
+		}
+
+			
 		_choices = choices;
 		_pickCount = pickCount;
 		_selectedIndices.Clear();
@@ -118,13 +134,13 @@ public partial class CapsulePicker : Control
 		foreach (int index in _selectedIndices)
 			picked.Add(_choices[index]);
 
-		Visible = false;
+		ClosePicker();
 		_onComplete?.Invoke(picked);
 	}
 
 	private void OnSkipPressed()
 	{
-		Visible = false;
+		ClosePicker();
 		_onComplete?.Invoke(new List<ItemData>()); // empty list = nothing picked
 	}
 	
@@ -151,5 +167,18 @@ public partial class CapsulePicker : Control
 	{
 		if (_selectedIndices.Count >= 1)
 			_confirmButton.Disabled = !CanAddSelectedItems();
+	}
+	
+	private void ClosePicker()
+	{
+		// restore all panels
+		var totemPanels = GetTree().GetNodesInGroup("TotemPanel");
+		foreach (Node node in totemPanels)
+			((Control)node).Visible = true;
+
+		var itemPanels = GetTree().GetNodesInGroup("ItemPanel");
+		foreach (Node node in itemPanels)
+			((Control)node).Visible = true;
+		Visible = false;
 	}
 }

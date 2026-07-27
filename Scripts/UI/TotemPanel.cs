@@ -26,7 +26,7 @@ public partial class TotemPanel : Control
 	private void BuildSlots()
 	{
 		foreach (Node child in _slotsContainer.GetChildren())
-			child.QueueFree();
+			child.Free();
 
 		_slots.Clear();
 		_nameLabels.Clear();
@@ -79,7 +79,6 @@ public partial class TotemPanel : Control
 		{
 			bool hasTotem = i < _gameState.OwnedTotems.Count
 							&& _gameState.OwnedTotems[i] != null;
-
 			if (hasTotem)
 			{
 				OwnedTotem totem = _gameState.OwnedTotems[i];
@@ -235,9 +234,8 @@ public partial class TotemPanel : Control
 		_gameState.OwnedTotems[a] = _gameState.OwnedTotems[b];
 		_gameState.OwnedTotems[b] = temp;
 
-		while (_gameState.OwnedTotems.Count > 0 &&
-			   _gameState.OwnedTotems[_gameState.OwnedTotems.Count - 1] == null)
-			_gameState.OwnedTotems.RemoveAt(_gameState.OwnedTotems.Count - 1);
+		// remove ALL nulls 
+		_gameState.OwnedTotems.RemoveAll(t => t == null);
 	}
 
 	private void OnSellPressed(int slotIndex)
@@ -255,10 +253,11 @@ public partial class TotemPanel : Control
 		RefreshMoneyLabel();
 		
 		GetNode<TotemManager>("/root/TotemManager").OnTotemRemoved();
+		
+		CallDeferred(nameof(BuildSlots));
 
 		GD.Print($"Sold {totem.Name} for ${totem.GetSellPrice(_gameState.SellValueMultiplier)}");
-		RefreshUI();
-		
+
 		// refresh panels
 		ItemPanel itemPanel = GetTree().Root.FindChild("ItemPanel", true, false) as ItemPanel;
 		itemPanel?.RefreshUI();
