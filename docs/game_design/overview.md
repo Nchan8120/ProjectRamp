@@ -46,7 +46,7 @@
 - There will be themed machines each with a unique effect (ex. extra ball, extra totem slot, easier/harder scoring holes)
 - Each machine will have individual difficulty settings
 - Player must beat easy to unlock medium, then beat medium to unlock hard, etc.
-- Difficult names: easy/medium/hard/expert/master/the chosen one
+- Difficulty names: easy/medium/hard/expert/master/the chosen one
 - Each difficulty has the same effect on different machines.
 - Medium is round completion bonus money reduced
 - Hard is score scales faster

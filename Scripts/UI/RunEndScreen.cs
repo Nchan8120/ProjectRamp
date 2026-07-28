@@ -79,9 +79,7 @@ public partial class RunEndScreen : Control
 	private void OnMainMenuPressed()
 	{
 		_gameState.ResetRun();
-		// main menu scene comes later
-		// for now go back to game scene
-		GetTree().ChangeSceneToFile("res://scenes/game_scene.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/main_menu.tscn");
 	}
 
 	private void OnActionPressed()

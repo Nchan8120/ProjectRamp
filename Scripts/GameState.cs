@@ -38,11 +38,21 @@ public partial class GameState : Node
 	// Totem flags
 	public int BallsPerRound = 9;
 	public int LeftoverBallValue = 2;
-
 	
 	// Ball Bag
 	public List<OwnedBall> OwnedBalls = new List<OwnedBall>();
 	public int StartingBallCount = 9;
+	
+	// Machines/Difficulty
+	public string CurrentMachine = "The Original";
+	public Difficulty CurrentDifficulty = Difficulty.Easy;
+	// difficulty modifiers - read by game systems
+	public int WinBonus => CurrentDifficulty >= Difficulty.Medium ? 2 : 5;
+	public float ThresholdMultiplier => CurrentDifficulty >= Difficulty.Master ? 1.8f : 
+										CurrentDifficulty >= Difficulty.Hard ? 1.3f : 0f;
+	public bool UsesFlatThresholdScaling => CurrentDifficulty < Difficulty.Hard;
+	public int StartingBallPenalty => CurrentDifficulty >= Difficulty.Expert ? 1 : 0;
+	public int BaseItemSlots => CurrentDifficulty >= Difficulty.TheChosenOne ? 2 : 3;
 	
 	public bool IsEndlessMode = false;
 
@@ -83,12 +93,15 @@ public partial class GameState : Node
 		IsEndlessMode = false;
 		LeftoverBallValue = 2;
 		SellValueMultiplier = 0.5f;
+		CurrentMachine = "The Original";
+		CurrentDifficulty = Difficulty.Easy;
+		MaxItems = BaseItemSlots;
 		InitializeBalls();
 	}
 
 	public void AwardRoundEndMoney(int leftoverBalls)
 	{
-		int winBonus = 5;
+		int winBonus = WinBonus; // ← uses difficulty modifier
 		int ballBonus = leftoverBalls * LeftoverBallValue;
 		AddMoney(winBonus + ballBonus);
 		GD.Print($"Round rewards: ${winBonus} win bonus + ${ballBonus} ball bonus");
@@ -97,7 +110,8 @@ public partial class GameState : Node
 	public void InitializeBalls()
 	{
 		OwnedBalls.Clear();
-		for (int i = 0; i < StartingBallCount; i++)
+		int count = StartingBallCount - StartingBallPenalty;
+		for (int i = 0; i < count; i++)
 			OwnedBalls.Add(new OwnedBall(i + 1));
 	}
 	

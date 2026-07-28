@@ -54,7 +54,19 @@ public partial class RoundManager : Node3D
 		_ballsRemaining = _gameState.OwnedBalls.Count; // use bag count
 		_currentBallIndex = 0;
 		_currentScore = 0;
-		_currentThreshold = StartingThreshold + (ThresholdIncrement * (_currentRound - 1));
+		 // calculate threshold based on difficulty
+		if (_currentRound == 1)
+		{
+			_currentThreshold = StartingThreshold;
+		}
+		else if (_gameState.UsesFlatThresholdScaling)
+		{
+			_currentThreshold = StartingThreshold + (ThresholdIncrement * (_currentRound - 1));
+		}
+		else
+		{
+			_currentThreshold = Mathf.RoundToInt(_currentThreshold * _gameState.ThresholdMultiplier);
+		}
 
 		UpdateCurrentBallEffect();
 		
@@ -203,6 +215,11 @@ public partial class RoundManager : Node3D
 		if (_gameState.CurrentRound > _gameState.TotalRounds && !_gameState.IsEndlessMode)
 		{
 			GD.Print("YOU WIN!");
+			// unlock next difficulty on victory
+			SaveManager saveManager = GetNode<SaveManager>("/root/SaveManager");
+			int currentDiffIndex = (int)_gameState.CurrentDifficulty;
+			int nextDiffIndex = Mathf.Min(currentDiffIndex + 1, DifficultyDatabase.AllDifficulties.Count - 1);
+			saveManager.SetHighestDifficultyUnlocked(_gameState.CurrentMachine, nextDiffIndex);
 			GetTree().CallDeferred("change_scene_to_file", "res://scenes/run_end_screen.tscn");
 		}
 		else

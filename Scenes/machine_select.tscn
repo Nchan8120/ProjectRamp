@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://dalk3rx0vnwbc"]
+
+[ext_resource type="Script" uid="uid://0n0rfsdg7sfh" path="res://Scripts/UI/MachineSelect.cs" id="1_rehk2"]
+
+[node name="MachineSelect" type="Control" unique_id=1364592460]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rehk2")
+ArrowLeftPath = NodePath("ArrowLeft")
+ArrowRightPath = NodePath("ArrowRight")
+MachineNamePath = NodePath("MachinePanel/Name")
+MachineDescriptionPath = NodePath("MachinePanel/Description")
+LockLabelPath = NodePath("MachinePanel/LockLabel")
+SelectButtonPath = NodePath("MachinePanel/SelectButton")
+DotsContainerPath = NodePath("MachineDotsContainer")
+BackButtonPath = NodePath("BackButton")
+DifficultyNamePath = NodePath("DifficultyPanel/Name")
+DifficultyDescriptionPath = NodePath("DifficultyPanel/Description")
+DifficultyArrowLeftPath = NodePath("ArrowLeft2")
+DifficultyArrowRightPath = NodePath("ArrowRight2")
+DifficultyLockLabelPath = NodePath("DifficultyPanel/LockLabel")
+DifficultyDotsContainerPath = NodePath("DifficultyDotsContainer2")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1564562610]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1905028508]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 60.0
+offset_right = 776.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 36
+text = "SELECT MACHINE"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="." unique_id=1019350745]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 580.0
+offset_right = 170.0
+offset_bottom = 620.0
+text = "Back"
+
+[node name="ArrowLeft" type="Button" parent="." unique_id=560012022]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 280.0
+offset_right = 160.0
+offset_bottom = 340.0
+theme_override_font_sizes/font_size = 32
+text = "<"
+
+[node name="ArrowRight" type="Button" parent="." unique_id=419057440]
+layout_mode = 0
+offset_left = 992.0
+offset_top = 280.0
+offset_right = 1052.0
+offset_bottom = 340.0
+theme_override_font_sizes/font_size = 32
+text = ">"
+
+[node name="MachinePanel" type="Panel" parent="." unique_id=173903672]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 150.0
+offset_right = 926.0
+offset_bottom = 500.0
+
+[node name="Name" type="Label" parent="MachinePanel" unique_id=1023130315]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 680.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="MachinePanel" unique_id=1615689401]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 680.0
+offset_bottom = 200.0
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LockLabel" type="Label" parent="MachinePanel" unique_id=1752520855]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 280.0
+offset_right = 680.0
+offset_bottom = 320.0
+theme_override_colors/font_color = Color(0.54640853, 7.3399394e-07, 3.85046e-07, 1)
+horizontal_alignment = 1
+
+[node name="SelectButton" type="Button" parent="MachinePanel" unique_id=682781956]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 290.0
+offset_right = 450.0
+offset_bottom = 340.0
+text = "PLAY"
+
+[node name="MachineDotsContainer" type="HBoxContainer" parent="." unique_id=1337303376]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -128.0
+offset_right = 20.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="DifficultyPanel" type="Panel" parent="." unique_id=1802761386]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 280.0
+offset_right = 826.0
+offset_bottom = 410.0
+
+[node name="Name" type="Label" parent="DifficultyPanel" unique_id=1279965085]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 480.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="DifficultyPanel" unique_id=576058047]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 480.0
+offset_bottom = 110.0
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LockLabel" type="Label" parent="DifficultyPanel" unique_id=110995307]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 90.0
+offset_right = 480.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0.54509807, 0, 0, 1)
+horizontal_alignment = 1
+
+[node name="ArrowLeft2" type="Button" parent="." unique_id=1432571846]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 320.0
+offset_right = 280.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 18
+text = "<"
+
+[node name="ArrowRight2" type="Button" parent="." unique_id=838436216]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 320.0
+offset_right = 912.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 18
+text = ">"
+
+[node name="DifficultyDotsContainer2" type="HBoxContainer" parent="." unique_id=1449634991]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -88.0
+offset_right = 20.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 8

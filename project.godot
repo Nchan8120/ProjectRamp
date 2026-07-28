@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ProjectRamp"
-run/main_scene="uid://dqbkm8rhrn8ql"
+run/main_scene="uid://cw3xtb4flg00i"
 config/features=PackedStringArray("4.6", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameState="*uid://b6k66w34uqe8l"
 TotemManager="*uid://davpt731nk7u5"
+SaveManager="*uid://bybbovmufhce5"
 
 [dotnet]
 
