@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cw3xtb4flg00i"]
 
 [ext_resource type="Script" uid="uid://bl8a77mok5cbt" path="res://Scripts/UI/MainMenu.cs" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://c2xlnnnsnapt1" path="res://Scenes/profile_select.tscn" id="2_48xlc"]
 
 [node name="MainMenu" type="Control" unique_id=1557059883]
 layout_mode = 3
@@ -11,6 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_28flt")
 PlayButtonPath = NodePath("ButtonContainer/PlayButton")
+ProfileButtonPath = NodePath("ButtonContainer/ProfileButton")
 SettingsButtonPath = NodePath("ButtonContainer/SettingsButton")
 QuitButtonPath = NodePath("ButtonContainer/QuitButton")
 
@@ -56,6 +58,12 @@ custom_minimum_size = Vector2(300, 55)
 layout_mode = 2
 text = "Play"
 
+[node name="ProfileButton" type="Button" parent="ButtonContainer" unique_id=911709988]
+custom_minimum_size = Vector2(300, 55)
+layout_mode = 2
+text = "Profiles
+"
+
 [node name="SettingsButton" type="Button" parent="ButtonContainer" unique_id=1362103917]
 custom_minimum_size = Vector2(300, 55)
 layout_mode = 2
@@ -78,3 +86,7 @@ offset_right = 148.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 12
 text = "Pre-Alpha Devleopment"
+
+[node name="ProfileSelect" parent="." unique_id=530475510 instance=ExtResource("2_48xlc")]
+visible = false
+layout_mode = 1

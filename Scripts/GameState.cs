@@ -96,6 +96,7 @@ public partial class GameState : Node
 		CurrentMachine = "The Original";
 		CurrentDifficulty = Difficulty.Easy;
 		MaxItems = BaseItemSlots;
+		HasFreeReroll = false;
 		InitializeBalls();
 	}
 

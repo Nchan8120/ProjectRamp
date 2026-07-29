@@ -292,6 +292,7 @@ public partial class MachineSelect : Control
 		_gameState.ResetRun();
 		_gameState.CurrentMachine = machineName;
 		_gameState.CurrentDifficulty = (Difficulty)_currentDifficultyIndex;
+		_saveManager.IncrementRunsPlayed();
 		GetTree().ChangeSceneToFile("res://scenes/game_scene.tscn");
 	}
 
