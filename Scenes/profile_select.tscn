@@ -68,10 +68,9 @@ offset_bottom = 640.0
 text = "Close"
 
 [node name="ConfirmUnlockButton" type="Button" parent="." unique_id=969498199]
-visible = false
 layout_mode = 0
 offset_left = 476.0
-offset_top = 500.0
+offset_top = 550.0
 offset_right = 676.0
-offset_bottom = 540.0
+offset_bottom = 590.0
 text = "Confirm? "

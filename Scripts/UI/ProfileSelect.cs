@@ -21,7 +21,6 @@ public partial class ProfileSelect : Control
 
 	public override void _Ready()
 	{
-		GD.Print("ProfileSelect _Ready starting");
 		_saveManager = GetNode<SaveManager>("/root/SaveManager");
 
 		_closeButton = GetNode<Button>(CloseButtonPath);
