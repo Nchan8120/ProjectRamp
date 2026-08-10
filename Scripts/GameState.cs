@@ -46,6 +46,7 @@ public partial class GameState : Node
 	// Machines/Difficulty
 	public string CurrentMachine = "The Original";
 	public Difficulty CurrentDifficulty = Difficulty.Easy;
+	public int CurrentThreshold = 0;
 	// difficulty modifiers - read by game systems
 	public int WinBonus => CurrentDifficulty >= Difficulty.Medium ? 2 : 5;
 	public float ThresholdMultiplier => CurrentDifficulty >= Difficulty.Master ? 1.8f : 
@@ -97,6 +98,7 @@ public partial class GameState : Node
 		CurrentDifficulty = Difficulty.Easy;
 		MaxItems = BaseItemSlots;
 		HasFreeReroll = false;
+		CurrentThreshold = 0;
 		InitializeBalls();
 	}
 

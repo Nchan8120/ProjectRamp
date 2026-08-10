@@ -65,9 +65,11 @@ public partial class RoundManager : Node3D
 		}
 		else
 		{
-			_currentThreshold = Mathf.RoundToInt(_currentThreshold * _gameState.ThresholdMultiplier);
+			// use GameState stored threshold for multiplicative scaling
+			_currentThreshold = Mathf.RoundToInt(_gameState.CurrentThreshold * _gameState.ThresholdMultiplier);
 		}
-
+		// save current threshold to GameState for next round
+		_gameState.CurrentThreshold = _currentThreshold;
 		UpdateCurrentBallEffect();
 		
 		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
