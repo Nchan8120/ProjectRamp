@@ -74,15 +74,15 @@ public partial class BallBag : Control
 			numberLabel.Text = $"Ball {ball.BallNumber}";
 			numberLabel.Position = new Vector2(8, 8);
 			numberLabel.Size = new Vector2(100, 40);
-
+			
 			Label typeLabel = new Label();
-			typeLabel.Text = ball.IsLocked 
-				? $"{ball.UpgradeType} 🔒" 
-				: ball.UpgradeType;
+			typeLabel.Text = ball.IsLocked
+				? $"{ball.UpgradeType} [locked]"
+				: ball.BonusPoints > 0
+					? $"{ball.UpgradeType} (+{ball.BonusPoints}pts)"
+					: ball.UpgradeType;
 			typeLabel.Position = new Vector2(120, 8);
 			typeLabel.Size = new Vector2(250, 40);
-			
-			
 
 			slot.AddChild(numberLabel);
 			slot.AddChild(typeLabel);

@@ -214,6 +214,7 @@ public partial class RoundManager : Node3D
 		_gameState.TotalScore += _currentScore;
 		_gameState.CurrentRound++;
 
+		IncrementVeteranBalls();
 		if (_gameState.CurrentRound > _gameState.TotalRounds && !_gameState.IsEndlessMode)
 		{
 			GD.Print("YOU WIN!");
@@ -232,6 +233,7 @@ public partial class RoundManager : Node3D
 
 	private void GameOver()
 	{
+		IncrementVeteranBalls();
 		if (_gameState.CurrentRound > _gameState.HighestRoundReached)
 		_gameState.HighestRoundReached = _gameState.CurrentRound;
 		GetTree().CallDeferred("change_scene_to_file", "res://scenes/run_end_screen.tscn");
@@ -243,6 +245,18 @@ public partial class RoundManager : Node3D
 		_currentScore += bonus;
 		GD.Print($"Bounce bonus! +{bonus} points. Total: {_currentScore}");
 		UpdateUI();
+	}
+	
+	private void IncrementVeteranBalls()
+	{
+		foreach (OwnedBall ball in _gameState.OwnedBalls)
+		{
+			if (ball.UpgradeType == "Veteran Ball")
+			{
+				ball.BonusPoints += 50;
+				GD.Print($"Veteran Ball {ball.BallNumber} now has +{ball.BonusPoints} bonus points");
+			}
+		}
 	}
 	
 }
