@@ -105,4 +105,10 @@ public partial class TotemManager : Node
 		foreach (OwnedTotem totem in _gameState.OwnedTotems)
 			totem?.Effect?.OnReroll();
 	}
+	
+	public void BroadcastCapsuleSkipped()
+	{
+		foreach (OwnedTotem totem in _gameState.OwnedTotems)
+			totem?.Effect?.OnCapsuleSkipped();
+	}
 }

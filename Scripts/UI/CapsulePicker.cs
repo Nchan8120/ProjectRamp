@@ -140,6 +140,14 @@ public partial class CapsulePicker : Control
 
 	private void OnSkipPressed()
 	{
+		GetNode<TotemManager>("/root/TotemManager").BroadcastCapsuleSkipped();
+		// refresh totem panel to show updated display value
+		var panels = GetTree().GetNodesInGroup("TotemPanel");
+		foreach (Node node in panels)
+		{
+			if (node is TotemPanel totemPanel)
+				totemPanel.RefreshUI();
+		}
 		ClosePicker();
 		_onComplete?.Invoke(new List<ItemData>()); // empty list = nothing picked
 	}

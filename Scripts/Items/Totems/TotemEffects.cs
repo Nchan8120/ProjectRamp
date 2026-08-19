@@ -26,4 +26,5 @@ public abstract class TotemEffect
 	// returns modified points after this totem's effect
 	public virtual int ProcessScore(int points) => points;
 	public virtual void OnReroll() { }
+	public virtual void OnCapsuleSkipped() { }
 }
