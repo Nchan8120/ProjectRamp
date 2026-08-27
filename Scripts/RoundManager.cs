@@ -88,6 +88,20 @@ public partial class RoundManager : Node3D
 			points = _currentBallEffect.OnScore(points, currentBall);
 		}
 		
+		// alchemist's touch conversion after scoring
+		if (_currentBallIndex < _gameState.OwnedBalls.Count)
+		{
+			OwnedBall currentBall = _gameState.OwnedBalls[_currentBallIndex];
+			foreach (OwnedTotem totem in _gameState.OwnedTotems)
+			{
+				if (totem?.Effect is AlchemistsTouchEffect alchemist)
+				{
+					alchemist.TryConvertBall(currentBall);
+					break;
+				}
+			}
+		}
+		
 		// process totems in order - each totem transforms points sequentially
 		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");
 		points = totemManager.ProcessScoreInOrder(points);
@@ -101,8 +115,6 @@ public partial class RoundManager : Node3D
 		_currentBallIndex++;
 		
 		_gameState.BallsThrown++;
-		
-		GetNode<TotemManager>("/root/TotemManager").BroadcastScore(points);
 		
 		// update to next ball's effect
 		UpdateCurrentBallEffect();
