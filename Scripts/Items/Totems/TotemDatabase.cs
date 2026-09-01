@@ -17,6 +17,7 @@ public static class TotemDatabase
 		new TotemData("Penny Pincher", "Leftover balls worth double money", 8, TotemRarity.Rare, () => new PennyPincherEffect()),
 		new TotemData("Lead from Gold", "For each Golden Ball in bag, +50 on each throw", 9, TotemRarity.Rare, () => new LeadFromGoldEffect()),
 		new TotemData("Gambler", "Each shop reroll permanently adds +25 points per throw", 8, TotemRarity.Rare, () => new GamblerEffect()),
+		new TotemData("Snowball", "Scoring gives +30 points for each ball already thrown this round", 9, TotemRarity.Rare, () => new SnowballEffect()),
 
 		// Epic
 		new TotemData("Hot Streak", "Consecutive scores increase multiplier by 0.1x, resets on miss", 14, TotemRarity.Epic, () => new HotStreakEffect()),
