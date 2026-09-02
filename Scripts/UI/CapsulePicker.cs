@@ -63,6 +63,10 @@ public partial class CapsulePicker : Control
 			if (node != GetNode<ItemPanel>("ItemPanel"))
 				((Control)node).Visible = false;
 		}
+		
+		// refresh our own panels with latest GameState data
+		GetNodeOrNull<TotemPanel>("TotemPanel")?.RefreshUI();
+		GetNodeOrNull<ItemPanel>("ItemPanel")?.RefreshUI();
 
 			
 		_choices = choices;

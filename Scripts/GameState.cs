@@ -77,7 +77,7 @@ public partial class GameState : Node
 
 	public void ResetRun()
 	{
-		Money = 0;
+		Money = 100;
 		CurrentRound = 1;
 		RerollCost = 3;
 		PersistentHouseRule = null;
