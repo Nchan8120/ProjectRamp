@@ -11,6 +11,17 @@ public class GlassBallEffect : BallUpgradeEffect
 		// remove ball from bag permanently
 		GameState.OwnedBalls.Remove(ball);
 		BallWasRemoved = true;
+		
+		// notify Broken Window totem if active
+		foreach (OwnedTotem totem in GameState.OwnedTotems)
+		{
+			if (totem?.Effect is BrokenWindowEffect brokenWindow)
+			{
+				brokenWindow.OnGlassBallBroken();
+				break;
+			}
+		}
+	
 		GD.Print($"Glass Ball shattered! Scored {modifiedPoints} points.");
 
 		return modifiedPoints;
