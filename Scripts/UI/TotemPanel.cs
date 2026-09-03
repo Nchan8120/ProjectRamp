@@ -84,6 +84,7 @@ public partial class TotemPanel : Control
 				OwnedTotem totem = _gameState.OwnedTotems[i];
 				_nameLabels[i].Text = totem.Name;
 				_slots[i].SelfModulate = GetRarityColor(totem.Rarity);
+				_slots[i].TooltipText = totem.Description;
 
 				// pull live display value from the effect if it has one
 				string displayValue = totem.Effect?.GetDisplayValue();
@@ -93,6 +94,7 @@ public partial class TotemPanel : Control
 			else
 			{
 				_nameLabels[i].Text = "[ empty ]";
+				_slots[i].TooltipText = "";
 				_valueLabels[i].Text = "";
 				_valueLabels[i].Visible = false;
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 0.4f);

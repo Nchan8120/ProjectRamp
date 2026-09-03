@@ -102,11 +102,13 @@ public partial class ItemPanel : Control
 				_nameLabels[i].Text = item.Name;
 				_typeLabels[i].Text = item.Type.ToString();
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 1f);
+				_slots[i].TooltipText = item.Description;
 			}
 			else
 			{
 				_nameLabels[i].Text = "[ empty ]";
 				_typeLabels[i].Text = "";
+				_slots[i].TooltipText = "";
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 0.4f);
 			}
 
