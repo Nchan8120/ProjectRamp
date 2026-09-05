@@ -60,6 +60,13 @@ public partial class ShopManager : Control
 	private Label _houseRuleName, _houseRuleCost, _houseRulePersist;
 	private Button _houseRuleBuy;
 	private Control _houseRuleSlot;
+	
+	// panel for tooltip
+	private Panel _item1Panel;
+	private Panel _item2Panel;
+	private Panel _cap1Panel;
+	private Panel _cap2Panel;
+	private Panel _houseRulePanel;
 
 	// shop state
 	private GameState _gameState;
@@ -109,6 +116,13 @@ public partial class ShopManager : Control
 		_houseRuleBuy = GetNode<Button>(HouseRuleBuyPath);
 		_houseRulePersist = GetNode<Label>(HouseRulePersistPath);
 		_houseRuleSlot = GetNode<Control>(HouseRuleSlotPath);
+		
+		_item1Panel = GetNode<Panel>("CanvasLayer/ItemSlots/ItemSlot1");
+		_item2Panel = GetNode<Panel>("CanvasLayer/ItemSlots/ItemSlot2");
+		_cap1Panel = GetNode<Panel>("CanvasLayer/CapsuleMachines/CapsuleMachine1");
+		_cap2Panel = GetNode<Panel>("CanvasLayer/CapsuleMachines/CapsuleMachine2");
+		_houseRulePanel = GetNode<Panel>("CanvasLayer/HouseRuleSlot");
+		
 
 		// connect buttons
 		_rerollButton.Pressed += OnRerollPressed;
@@ -194,25 +208,30 @@ public partial class ShopManager : Control
 		_item1Name.Text = _item1Data.Name;
 		_item1Type.Text = _item1Data.Type.ToString();
 		_item1Cost.Text = $"${_item1Data.Cost}";
-
+		_item1Panel.TooltipText = _item1Data.Description;
+		
 		_item2Name.Text = _item2Data.Name;
 		_item2Type.Text = _item2Data.Type.ToString();
 		_item2Cost.Text = $"${_item2Data.Cost}";
+		_item2Panel.TooltipText = _item2Data.Description;
 
 		// capsules
 		_cap1Type.Text = _capsule1Data.Type.ToString();
 		_cap1Size.Text = _capsule1Data.Size.ToString();
 		_cap1Cost.Text = $"${_capsule1Data.Cost}";
-
+		_cap1Panel.TooltipText = $"{_capsule1Data.Size} {_capsule1Data.Type} Capsule";
+		
 		_cap2Type.Text = _capsule2Data.Type.ToString();
 		_cap2Size.Text = _capsule2Data.Size.ToString();
 		_cap2Cost.Text = $"${_capsule2Data.Cost}";
+		_cap2Panel.TooltipText = $"{_capsule2Data.Size} {_capsule2Data.Type} Capsule";
 
 		// house rule
 		if (_houseRuleData != null)
 		{
 			_houseRuleName.Text = _houseRuleData.Name;
 			_houseRuleCost.Text = $"${_houseRuleData.Cost}";
+			_houseRulePanel.TooltipText = _houseRuleData.Description;
 		}
 	}
 

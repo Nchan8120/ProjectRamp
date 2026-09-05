@@ -231,7 +231,7 @@ text = "BUY"
 [node name="HouseRuleSlot" type="Panel" parent="CanvasLayer" unique_id=1620366176]
 offset_left = 20.0
 offset_top = 80.0
-offset_right = 340.0
+offset_right = 270.0
 offset_bottom = 240.0
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/HouseRuleSlot" unique_id=1708178560]
