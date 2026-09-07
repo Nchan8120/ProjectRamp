@@ -15,11 +15,13 @@ public partial class ItemPanel : Control
 	private VBoxContainer _slotsContainer;
 	private int _selectedBallIndex = -1;
 	private List<Button> _useButtons = new List<Button>();
+	private ItemTooltip _tooltip;
 
 	public override void _Ready()
 	{
 		_gameState = GetNode<GameState>("/root/GameState");
 		AddToGroup("ItemPanel");
+		_tooltip = GetTree().Root.FindChild("ItemTooltip", true, false) as ItemTooltip;
 		_slotsContainer = GetNode<VBoxContainer>("SlotsContainer");
 		BuildSlots();
 	}
@@ -83,6 +85,8 @@ public partial class ItemPanel : Control
 			sellButton.Pressed += () => OnSellPressed(index);
 			useButton.Pressed += () => OnUsePressed(index);
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
+			slot.MouseEntered += () => OnSlotMouseEntered(index);
+			slot.MouseExited += () => _tooltip?.Hide();
 		}
 
 		// populate with current data
@@ -102,13 +106,11 @@ public partial class ItemPanel : Control
 				_nameLabels[i].Text = item.Name;
 				_typeLabels[i].Text = item.Type.ToString();
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 1f);
-				_slots[i].TooltipText = item.Description;
 			}
 			else
 			{
 				_nameLabels[i].Text = "[ empty ]";
 				_typeLabels[i].Text = "";
-				_slots[i].TooltipText = "";
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 0.4f);
 			}
 
@@ -312,5 +314,13 @@ public partial class ItemPanel : Control
 			if (_useButtons.Count > i)
 				_useButtons[i].Visible = isBallUpgrade && ballSelected;
 		}
+	}
+	
+	private void OnSlotMouseEntered(int slotIndex)
+	{
+		bool hasItem = slotIndex < _gameState.OwnedItems.Count
+					   && _gameState.OwnedItems[slotIndex] != null;
+		if (hasItem)
+			_tooltip?.ShowItem(_gameState.OwnedItems[slotIndex], _slots[slotIndex]);
 	}
 }

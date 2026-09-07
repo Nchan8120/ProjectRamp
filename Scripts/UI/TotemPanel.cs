@@ -14,11 +14,15 @@ public partial class TotemPanel : Control
 	private int _dragSourceSlot = -1;
 	private Control _dragPreview;
 	private VBoxContainer _slotsContainer;
+	private ItemTooltip _tooltip;
 
 	public override void _Ready()
 	{
 		_gameState = GetNode<GameState>("/root/GameState");
 		AddToGroup("TotemPanel");
+		var tooltips = GetTree().GetNodesInGroup("ItemTooltip");
+		AddToGroup("ItemPanel");
+		_tooltip = GetTree().Root.FindChild("ItemTooltip", true, false) as ItemTooltip;
 		_slotsContainer = GetNode<VBoxContainer>("SlotsContainer");
 		BuildSlots();
 	}
@@ -68,7 +72,11 @@ public partial class TotemPanel : Control
 			int index = i;
 			sellButton.Pressed += () => OnSellPressed(index);
 			slot.GuiInput += (inputEvent) => OnSlotInput(inputEvent, index);
+			slot.MouseEntered += () => OnSlotMouseEntered(index);
+			slot.MouseExited += () => _tooltip?.Hide();
 		}
+		
+
 
 		PopulateSlots();
 	}
@@ -84,7 +92,6 @@ public partial class TotemPanel : Control
 				OwnedTotem totem = _gameState.OwnedTotems[i];
 				_nameLabels[i].Text = totem.Name;
 				_slots[i].SelfModulate = GetRarityColor(totem.Rarity);
-				_slots[i].TooltipText = totem.Description;
 
 				// pull live display value from the effect if it has one
 				string displayValue = totem.Effect?.GetDisplayValue();
@@ -94,7 +101,6 @@ public partial class TotemPanel : Control
 			else
 			{
 				_nameLabels[i].Text = "[ empty ]";
-				_slots[i].TooltipText = "";
 				_valueLabels[i].Text = "";
 				_valueLabels[i].Visible = false;
 				_slots[i].SelfModulate = new Color(1f, 1f, 1f, 0.4f);
@@ -276,5 +282,13 @@ public partial class TotemPanel : Control
 		Label moneyLabel = GetTree().Root.FindChild("MoneyLabel", true, false) as Label;
 		if (moneyLabel != null)
 			moneyLabel.Text = $"${_gameState.Money}";
+	}
+	
+	private void OnSlotMouseEntered(int slotIndex)
+	{
+		bool hasTotem = slotIndex < _gameState.OwnedTotems.Count
+						&& _gameState.OwnedTotems[slotIndex] != null;
+		if (hasTotem)
+			_tooltip?.ShowTotem(_gameState.OwnedTotems[slotIndex], _slots[slotIndex]);
 	}
 }

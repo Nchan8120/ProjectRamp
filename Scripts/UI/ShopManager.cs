@@ -67,6 +67,7 @@ public partial class ShopManager : Control
 	private Panel _cap1Panel;
 	private Panel _cap2Panel;
 	private Panel _houseRulePanel;
+	private ItemTooltip _tooltip;
 
 	// shop state
 	private GameState _gameState;
@@ -123,6 +124,17 @@ public partial class ShopManager : Control
 		_cap2Panel = GetNode<Panel>("CanvasLayer/CapsuleMachines/CapsuleMachine2");
 		_houseRulePanel = GetNode<Panel>("CanvasLayer/HouseRuleSlot");
 		
+		_tooltip = GetTree().Root.FindChild("ItemTooltip", true, false) as ItemTooltip;
+		_item1Panel.MouseEntered += () => _tooltip?.ShowItemData(_item1Data, _item1Panel);
+		_item1Panel.MouseExited += () => _tooltip?.Hide();
+		_item2Panel.MouseEntered += () => _tooltip?.ShowItemData(_item2Data, _item2Panel);
+		_item2Panel.MouseExited += () => _tooltip?.Hide();
+		_cap1Panel.MouseEntered += () => _tooltip?.ShowCapsule(_capsule1Data, _cap1Panel);
+		_cap1Panel.MouseExited += () => _tooltip?.Hide();
+		_cap2Panel.MouseEntered += () => _tooltip?.ShowCapsule(_capsule2Data, _cap2Panel);
+		_cap2Panel.MouseExited += () => _tooltip?.Hide();
+		_houseRuleSlot.MouseEntered += () => { if (_houseRuleData != null) _tooltip?.ShowItemData(_houseRuleData, (Control)_houseRuleSlot); };
+		_houseRuleSlot.MouseExited += () => _tooltip?.Hide();
 
 		// connect buttons
 		_rerollButton.Pressed += OnRerollPressed;
@@ -208,30 +220,25 @@ public partial class ShopManager : Control
 		_item1Name.Text = _item1Data.Name;
 		_item1Type.Text = _item1Data.Type.ToString();
 		_item1Cost.Text = $"${_item1Data.Cost}";
-		_item1Panel.TooltipText = _item1Data.Description;
 		
 		_item2Name.Text = _item2Data.Name;
 		_item2Type.Text = _item2Data.Type.ToString();
 		_item2Cost.Text = $"${_item2Data.Cost}";
-		_item2Panel.TooltipText = _item2Data.Description;
 
 		// capsules
 		_cap1Type.Text = _capsule1Data.Type.ToString();
 		_cap1Size.Text = _capsule1Data.Size.ToString();
 		_cap1Cost.Text = $"${_capsule1Data.Cost}";
-		_cap1Panel.TooltipText = $"{_capsule1Data.Size} {_capsule1Data.Type} Capsule";
 		
 		_cap2Type.Text = _capsule2Data.Type.ToString();
 		_cap2Size.Text = _capsule2Data.Size.ToString();
 		_cap2Cost.Text = $"${_capsule2Data.Cost}";
-		_cap2Panel.TooltipText = $"{_capsule2Data.Size} {_capsule2Data.Type} Capsule";
 
 		// house rule
 		if (_houseRuleData != null)
 		{
 			_houseRuleName.Text = _houseRuleData.Name;
 			_houseRuleCost.Text = $"${_houseRuleData.Cost}";
-			_houseRulePanel.TooltipText = _houseRuleData.Description;
 		}
 	}
 

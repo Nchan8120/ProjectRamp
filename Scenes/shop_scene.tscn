@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://de4mv3oxym6wg" path="res://Scenes/capsule_picker.tscn" id="4_6rmb7"]
 [ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="5_jwdga"]
 [ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="6_uxpe5"]
+[ext_resource type="PackedScene" uid="uid://blxtuikaixwxb" path="res://Scenes/item_tooltip.tscn" id="7_5ycja"]
+[ext_resource type="Script" uid="uid://bcca8s8tx6ce0" path="res://Scripts/UI/ItemTooltip.cs" id="8_nkmxo"]
 
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
@@ -231,7 +233,7 @@ text = "BUY"
 [node name="HouseRuleSlot" type="Panel" parent="CanvasLayer" unique_id=1620366176]
 offset_left = 20.0
 offset_top = 80.0
-offset_right = 270.0
+offset_right = 220.0
 offset_bottom = 240.0
 
 [node name="NameLabel" type="Label" parent="CanvasLayer/HouseRuleSlot" unique_id=1708178560]
@@ -290,3 +292,6 @@ layer = 2
 [node name="TotemPanel" parent="CanvasLayer2" unique_id=2029938859 instance=ExtResource("2_35huh")]
 
 [node name="ItemPanel" parent="CanvasLayer2" unique_id=65166487 instance=ExtResource("3_njw01")]
+
+[node name="ItemTooltip" parent="CanvasLayer2" unique_id=1513988872 instance=ExtResource("7_5ycja")]
+script = ExtResource("8_nkmxo")
