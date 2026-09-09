@@ -25,10 +25,6 @@ SaveManager="*uid://bybbovmufhce5"
 
 project/assembly_name="ProjectRamp"
 
-[gui]
-
-theme/custom="uid://b5dlo7ui347l7"
-
 [physics]
 
 common/physics_ticks_per_second=144

@@ -1,65 +1,87 @@
 using Godot;
 using System;
 
-public partial class ItemTooltip : Panel
+public partial class ItemTooltip : PanelContainer
 {
+	private const float TooltipWidth = 200f;
+	private const float ScreenPadding = 8f;
+	private const float AnchorGap = 8f;
+
 	private Label _nameLabel;
 	private Label _descriptionLabel;
 	private Label _rarityLabel;
+
 	private StyleBoxFlat _styleBox;
 
 	public override void _Ready()
 	{
 		AddToGroup("ItemTooltip");
-		
-		// build style
-		_styleBox = new StyleBoxFlat();
-		_styleBox.BgColor = new Color(0.1f, 0.1f, 0.2f, 0.95f);
-		_styleBox.BorderWidthTop = 2;
-		_styleBox.BorderWidthBottom = 2;
-		_styleBox.BorderWidthLeft = 2;
-		_styleBox.BorderWidthRight = 2;
-		_styleBox.CornerRadiusTopLeft = 4;
-		_styleBox.CornerRadiusTopRight = 4;
-		_styleBox.CornerRadiusBottomLeft = 4;
-		_styleBox.CornerRadiusBottomRight = 4;
-		_styleBox.ContentMarginLeft = 8;
-		_styleBox.ContentMarginRight = 8;
-		_styleBox.ContentMarginTop = 8;
-		_styleBox.ContentMarginBottom = 8;
+
+		// Panel Style
+		_styleBox = new StyleBoxFlat
+		{
+			BgColor = Colors.White,
+			BorderColor = Colors.Gray,
+
+			BorderWidthLeft = 2,
+			BorderWidthRight = 2,
+			BorderWidthTop = 2,
+			BorderWidthBottom = 2,
+
+			CornerRadiusTopLeft = 8,
+			CornerRadiusTopRight = 8,
+			CornerRadiusBottomLeft = 8,
+			CornerRadiusBottomRight = 8
+		};
+
 		AddThemeStyleboxOverride("panel", _styleBox);
 
-		// build layout in code
-		MarginContainer margin = new MarginContainer();
-		margin.AddThemeConstantOverride("margin_left", 8);
-		margin.AddThemeConstantOverride("margin_right", 8);
-		margin.AddThemeConstantOverride("margin_top", 8);
-		margin.AddThemeConstantOverride("margin_bottom", 8);
-		AddChild(margin);
 
+		MarginContainer margin = new MarginContainer();
+		margin.AddThemeConstantOverride("margin_left", 12);
+		margin.AddThemeConstantOverride("margin_right", 12);
+		margin.AddThemeConstantOverride("margin_top", 10);
+		margin.AddThemeConstantOverride("margin_bottom", 10);
+		AddChild(margin);
+		
 		VBoxContainer vbox = new VBoxContainer();
-		vbox.AddThemeConstantOverride("separation", 6);
+		vbox.AddThemeConstantOverride("separation", 5);
+		// This controls the WIDTH of the tooltip.
+		// Height remains dynamic.
+		vbox.CustomMinimumSize = new Vector2(
+			TooltipWidth - 24,
+			0
+		);
 		margin.AddChild(vbox);
 
 		_nameLabel = new Label();
-		_nameLabel.AutowrapMode = TextServer.AutowrapMode.Word;
-		_nameLabel.CustomMinimumSize = new Vector2(150, 0);
+		_nameLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+		_nameLabel.HorizontalAlignment = HorizontalAlignment.Left;
 		_nameLabel.AddThemeFontSizeOverride("font_size", 16);
+		_nameLabel.AddThemeColorOverride(
+			"font_color",
+			new Color(0.1f, 0.1f, 0.1f)
+		);
 		vbox.AddChild(_nameLabel);
 
 		_descriptionLabel = new Label();
-		_descriptionLabel.AutowrapMode = TextServer.AutowrapMode.Word;
-		_descriptionLabel.CustomMinimumSize = new Vector2(150, 0);
+		_descriptionLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+		_descriptionLabel.HorizontalAlignment = HorizontalAlignment.Left;
+		_descriptionLabel.VerticalAlignment = VerticalAlignment.Top;
 		_descriptionLabel.AddThemeFontSizeOverride("font_size", 13);
+		_descriptionLabel.AddThemeColorOverride(
+			"font_color",
+			new Color(0.2f, 0.2f, 0.2f)
+		);
 		vbox.AddChild(_descriptionLabel);
 
 		_rarityLabel = new Label();
-		_rarityLabel.AutowrapMode = TextServer.AutowrapMode.Word;
-		_rarityLabel.CustomMinimumSize = new Vector2(150, 0);
+		_rarityLabel.AutowrapMode = TextServer.AutowrapMode.WordSmart;
+		_rarityLabel.HorizontalAlignment = HorizontalAlignment.Left;
 		_rarityLabel.AddThemeFontSizeOverride("font_size", 12);
 		vbox.AddChild(_rarityLabel);
 
-		Visible = false;
+		Hide();
 	}
 
 	public void ShowTotem(OwnedTotem totem, Control anchor)
@@ -67,11 +89,17 @@ public partial class ItemTooltip : Panel
 		_nameLabel.Text = totem.Name;
 		_descriptionLabel.Text = totem.Description;
 		_rarityLabel.Text = totem.Rarity.ToString();
-		_rarityLabel.AddThemeColorOverride("font_color", GetRarityColor(totem.Rarity));
-		_styleBox.BorderColor = GetRarityColor(totem.Rarity);
 
-		Show();
-		PositionTooltip(anchor);
+		Color rarityColor = GetRarityColor(totem.Rarity);
+
+		_rarityLabel.AddThemeColorOverride(
+			"font_color",
+			rarityColor
+		);
+
+		_styleBox.BorderColor = rarityColor;
+
+		ShowTooltip(anchor);
 	}
 
 	public void ShowItem(OwnedItem item, Control anchor)
@@ -79,14 +107,21 @@ public partial class ItemTooltip : Panel
 		_nameLabel.Text = item.Name;
 		_descriptionLabel.Text = item.Description;
 		_rarityLabel.Text = item.Type.ToString();
-		_rarityLabel.AddThemeColorOverride("font_color", new Color(1f, 1f, 1f));
-		_styleBox.BorderColor = new Color(1f, 1f, 1f, 0.5f);
 
-		Show();
-		PositionTooltip(anchor);
+		_rarityLabel.AddThemeColorOverride(
+			"font_color",
+			new Color(0.3f, 0.3f, 0.3f)
+		);
+
+		_styleBox.BorderColor = new Color(0.7f, 0.7f, 0.7f);
+
+		ShowTooltip(anchor);
 	}
-
-	public void ShowItemData(ItemData item, Control anchor, TotemRarity? rarity = null)
+	
+	public void ShowItemData(
+		ItemData item,
+		Control anchor,
+		TotemRarity? rarity = null)
 	{
 		_nameLabel.Text = item.Name;
 		_descriptionLabel.Text = item.Description;
@@ -94,56 +129,147 @@ public partial class ItemTooltip : Panel
 		if (rarity.HasValue)
 		{
 			_rarityLabel.Text = rarity.Value.ToString();
-			_rarityLabel.AddThemeColorOverride("font_color", GetRarityColor(rarity.Value));
-			_styleBox.BorderColor = GetRarityColor(rarity.Value);
+
+			Color rarityColor = GetRarityColor(rarity.Value);
+
+			_rarityLabel.AddThemeColorOverride(
+				"font_color",
+				rarityColor
+			);
+
+			_styleBox.BorderColor = rarityColor;
 		}
 		else
 		{
 			_rarityLabel.Text = item.Type.ToString();
-			_rarityLabel.AddThemeColorOverride("font_color", new Color(1f, 1f, 1f));
-			_styleBox.BorderColor = new Color(1f, 1f, 1f, 0.5f);
+
+			_rarityLabel.AddThemeColorOverride(
+				"font_color",
+				new Color(0.3f, 0.3f, 0.3f)
+			);
+
+			_styleBox.BorderColor = new Color(0.7f, 0.7f, 0.7f);
 		}
 
+		ShowTooltip(anchor);
+	}
+
+	public void ShowCapsule(CapsuleData capsule, Control anchor)
+	{
+		_nameLabel.Text = $"{capsule.Size} {capsule.Type} Capsule";
+
+		_descriptionLabel.Text = capsule.Size switch
+		{
+			CapsuleSize.Small => "Pick 1 of 2 items",
+			CapsuleSize.Medium => "Pick 1 of 4 items",
+			CapsuleSize.Large => "Pick up to 2 of 6 items",
+			_ => ""
+		};
+
+		_rarityLabel.Text = "";
+
+		_styleBox.BorderColor = new Color(0.7f, 0.7f, 0.7f);
+
+		ShowTooltip(anchor);
+	}
+
+	private void ShowTooltip(Control anchor)
+	{
 		Show();
-		PositionTooltip(anchor);
+
+		// PanelContainer automatically calculates its size from
+		// its children. Defer positioning until that calculation
+		// has happened.
+		CallDeferred(
+			MethodName.PositionTooltip,
+			anchor
+		);
 	}
 
 	private void PositionTooltip(Control anchor)
 	{
-		// force layout update so size is correct
-		ResetSize();
+		if (!IsInstanceValid(anchor))
+			return;
+
+		Vector2 screenSize = GetViewportRect().Size;
 
 		Vector2 anchorPos = anchor.GlobalPosition;
 		Vector2 anchorSize = anchor.Size;
+
 		Vector2 tooltipSize = Size;
-		Vector2 screenSize = GetViewportRect().Size;
 
-		 float quarter = screenSize.X / 4f;
-		float anchorMidX = anchorPos.X + anchorSize.X / 2f;
+		float anchorCenterX =
+			anchorPos.X + anchorSize.X / 2f;
 
-		float x, y;
+		float quarter = screenSize.X / 4f;
 
-		 if (anchorMidX < quarter)
-			// zone 1 - far left, show right
-			x = anchorPos.X + anchorSize.X + 8;
-		else if (anchorMidX < quarter * 2)
-			// zone 2 - middle left, show left
-			x = anchorPos.X - tooltipSize.X - 150;
-		else if (anchorMidX < quarter * 3)
-			// zone 3 - middle right, show right
-			x = anchorPos.X + anchorSize.X + 8;
+		float x;
+
+		// ZONE 1 — FAR LEFT
+		// Tooltip goes RIGHT
+		if (anchorCenterX < quarter)
+		{
+			x = anchorPos.X + anchorSize.X + AnchorGap;
+		}
+
+
+		// ZONE 2 — MIDDLE LEFT
+		// Tooltip goes LEFT
+		else if (anchorCenterX < quarter * 2f)
+		{
+			x = anchorPos.X - tooltipSize.X - AnchorGap;
+		}
+
+		// ZONE 3 — MIDDLE RIGHT
+		// Tooltip goes RIGHT
+		else if (anchorCenterX < quarter * 3f)
+		{
+			x = anchorPos.X + anchorSize.X + AnchorGap;
+		}
+
+		// ZONE 4 — FAR RIGHT
+		// Tooltip goes LEFT
 		else
-			// zone 4 - far right, show left
-			x = anchorPos.X - tooltipSize.X - 150;
+		{
+			x = anchorPos.X - tooltipSize.X - AnchorGap;
+		}
 
-		// vertical - align with top of anchor, shift up if it goes off bottom
-		y = anchorPos.Y;
-		if (y + tooltipSize.Y > screenSize.Y)
-			y = screenSize.Y - tooltipSize.Y - 8;
+		// VERTICAL POSITION
+		float y = anchorPos.Y;
 
-		// clamp to screen bounds
-		x = Mathf.Clamp(x, 8, screenSize.X - tooltipSize.X - 8);
-		y = Mathf.Clamp(y, 8, screenSize.Y - tooltipSize.Y - 8);
+		// If tooltip extends below screen,
+		// move it upward.
+		if (y + tooltipSize.Y >
+			screenSize.Y - ScreenPadding)
+		{
+			y = screenSize.Y -
+				tooltipSize.Y -
+				ScreenPadding;
+		}
+
+		// If tooltip extends above screen,
+		// move it down.
+		if (y < ScreenPadding)
+		{
+			y = ScreenPadding;
+		}
+
+		// SCREEN CLAMP
+		x = Mathf.Clamp(
+			x,
+			ScreenPadding,
+			screenSize.X -
+			tooltipSize.X -
+			ScreenPadding
+		);
+
+		y = Mathf.Clamp(
+			y,
+			ScreenPadding,
+			screenSize.Y -
+			tooltipSize.Y -
+			ScreenPadding
+		);
 
 		GlobalPosition = new Vector2(x, y);
 	}
@@ -152,28 +278,20 @@ public partial class ItemTooltip : Panel
 	{
 		return rarity switch
 		{
-			TotemRarity.Common => new Color(0.8f, 0.8f, 0.8f),
-			TotemRarity.Rare => new Color(0.4f, 0.6f, 1f),
-			TotemRarity.Epic => new Color(0.7f, 0.3f, 1f),
-			TotemRarity.Legendary => new Color(1f, 0.8f, 0.2f),
-			_ => new Color(1f, 1f, 1f)
-		};
-	}
-	
-	public void ShowCapsule(CapsuleData capsule, Control anchor)
-	{
-		_nameLabel.Text = $"{capsule.Size} {capsule.Type} Capsule";
-		_descriptionLabel.Text = capsule.Size switch
-		{
-			CapsuleSize.Small => "Pick 1 of 2 items",
-			CapsuleSize.Medium => "Pick 1 of 4 items",
-			CapsuleSize.Large => "Pick up to 2 of 6 items",
-			_ => ""
-		};
-		_rarityLabel.Text = "";
-		_styleBox.BorderColor = new Color(1f, 1f, 1f, 0.5f);
+			TotemRarity.Common =>
+				new Color(0.65f, 0.65f, 0.65f),
 
-		Show();
-		PositionTooltip(anchor);
+			TotemRarity.Rare =>
+				new Color(0.4f, 0.6f, 1f),
+
+			TotemRarity.Epic =>
+				new Color(0.7f, 0.3f, 1f),
+
+			TotemRarity.Legendary =>
+				new Color(1f, 0.75f, 0.15f),
+
+			_ =>
+				Colors.Gray
+		};
 	}
 }

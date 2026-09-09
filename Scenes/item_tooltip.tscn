@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://blxtuikaixwxb"]
 
-[node name="ItemTooltip" type="Panel" unique_id=1513988872]
+[ext_resource type="Script" uid="uid://bcca8s8tx6ce0" path="res://Scripts/UI/ItemTooltip.cs" id="1_0qrug"]
+
+[node name="ItemTooltip" type="PanelContainer" unique_id=541363824]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_0qrug")

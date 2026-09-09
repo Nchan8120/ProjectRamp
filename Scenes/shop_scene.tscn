@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="5_jwdga"]
 [ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="6_uxpe5"]
 [ext_resource type="PackedScene" uid="uid://blxtuikaixwxb" path="res://Scenes/item_tooltip.tscn" id="7_5ycja"]
-[ext_resource type="Script" uid="uid://bcca8s8tx6ce0" path="res://Scripts/UI/ItemTooltip.cs" id="8_nkmxo"]
 
 [node name="ShopScene" type="Control" unique_id=1540398089]
 layout_mode = 3
@@ -294,4 +293,3 @@ layer = 2
 [node name="ItemPanel" parent="CanvasLayer2" unique_id=65166487 instance=ExtResource("3_njw01")]
 
 [node name="ItemTooltip" parent="CanvasLayer2" unique_id=1513988872 instance=ExtResource("7_5ycja")]
-script = ExtResource("8_nkmxo")
