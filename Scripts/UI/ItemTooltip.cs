@@ -12,11 +12,11 @@ public partial class ItemTooltip : PanelContainer
 	private Label _rarityLabel;
 
 	private StyleBoxFlat _styleBox;
-
+	
 	public override void _Ready()
 	{
 		AddToGroup("ItemTooltip");
-
+	
 		// Panel Style
 		_styleBox = new StyleBoxFlat
 		{
@@ -80,6 +80,7 @@ public partial class ItemTooltip : PanelContainer
 		_rarityLabel.HorizontalAlignment = HorizontalAlignment.Left;
 		_rarityLabel.AddThemeFontSizeOverride("font_size", 12);
 		vbox.AddChild(_rarityLabel);
+		
 
 		Hide();
 	}
@@ -173,17 +174,22 @@ public partial class ItemTooltip : PanelContainer
 		ShowTooltip(anchor);
 	}
 
-	private void ShowTooltip(Control anchor)
+	private async void ShowTooltip(Control anchor)
 	{
+		GlobalPosition = new Vector2(-10000, -10000);
 		Show();
+		
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-		// PanelContainer automatically calculates its size from
-		// its children. Defer positioning until that calculation
-		// has happened.
-		CallDeferred(
-			MethodName.PositionTooltip,
-			anchor
-		);
+		// snap size back to minimum size, ignoring parent stretch
+		Size = GetMinimumSize();
+		
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+
+		GD.Print($"Size after reset: {Size}");
+
+		PositionTooltip(anchor);
 	}
 
 	private void PositionTooltip(Control anchor)
@@ -197,7 +203,9 @@ public partial class ItemTooltip : PanelContainer
 		Vector2 anchorSize = anchor.Size;
 
 		Vector2 tooltipSize = Size;
-
+		// bail out if size hasn't been calculated yet
+		if (tooltipSize.X <= 0 || tooltipSize.Y <= 0) return;
+		
 		float anchorCenterX =
 			anchorPos.X + anchorSize.X / 2f;
 
@@ -255,20 +263,26 @@ public partial class ItemTooltip : PanelContainer
 		}
 
 		// SCREEN CLAMP
+		float maxX = Mathf.Max(
+			ScreenPadding,
+			screenSize.X - tooltipSize.X - ScreenPadding
+		);
+
+		float maxY = Mathf.Max(
+			ScreenPadding,
+			screenSize.Y - tooltipSize.Y - ScreenPadding
+		);
+
 		x = Mathf.Clamp(
 			x,
 			ScreenPadding,
-			screenSize.X -
-			tooltipSize.X -
-			ScreenPadding
+			maxX
 		);
 
 		y = Mathf.Clamp(
 			y,
 			ScreenPadding,
-			screenSize.Y -
-			tooltipSize.Y -
-			ScreenPadding
+			maxY
 		);
 
 		GlobalPosition = new Vector2(x, y);
