@@ -3,6 +3,7 @@ using Godot;
 public partial class ScoringHole : Area3D
 {
 	[Export] public int PointValue = 100;
+	[Export] public int HoleIndex = 0;
 	private RoundManager _roundManager;
 
 	public override void _Ready()
@@ -17,7 +18,7 @@ public partial class ScoringHole : Area3D
 		{
 			GD.Print($"Scored {PointValue} points!");
 			ball.OnScored();
-			_roundManager?.OnBallScored(PointValue);
+			_roundManager?.OnBallScored(PointValue, HoleIndex);
 		}
 	}
 }

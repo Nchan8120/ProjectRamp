@@ -187,8 +187,6 @@ public partial class ItemTooltip : PanelContainer
 		
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-		GD.Print($"Size after reset: {Size}");
-
 		PositionTooltip(anchor);
 	}
 

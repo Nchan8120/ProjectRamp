@@ -111,4 +111,10 @@ public partial class TotemManager : Node
 		foreach (OwnedTotem totem in _gameState.OwnedTotems)
 			totem?.Effect?.OnCapsuleSkipped();
 	}
+	
+	public void BroadcastHoleScored(int holeIndex)
+	{
+		foreach (OwnedTotem totem in _gameState.OwnedTotems)
+			totem?.Effect?.OnHoleScored(holeIndex);
+	}
 }

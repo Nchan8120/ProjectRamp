@@ -79,7 +79,7 @@ public partial class RoundManager : Node3D
 		GD.Print($"Round {_currentRound} | Threshold: {_currentThreshold}");
 	}
 
-	public void OnBallScored(int points)
+	public void OnBallScored(int points, int holeIndex)
 	{
 		 // apply ball upgrade effect
 		if (_currentBallEffect != null && _currentBallIndex < _gameState.OwnedBalls.Count)
@@ -101,6 +101,9 @@ public partial class RoundManager : Node3D
 				}
 			}
 		}
+		
+		// notify deja vu of which hole was scored before processing
+		GetNode<TotemManager>("/root/TotemManager").BroadcastHoleScored(holeIndex);
 		
 		// process totems in order - each totem transforms points sequentially
 		TotemManager totemManager = GetNode<TotemManager>("/root/TotemManager");

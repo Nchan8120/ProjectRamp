@@ -27,4 +27,5 @@ public abstract class TotemEffect
 	public virtual int ProcessScore(int points) => points;
 	public virtual void OnReroll() { }
 	public virtual void OnCapsuleSkipped() { }
+	public virtual void OnHoleScored(int holeIndex) { }
 }

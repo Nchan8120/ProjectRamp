@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="6_rgj8m"]
 [ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="7_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://blxtuikaixwxb" path="res://Scenes/item_tooltip.tscn" id="8_7iton"]
-[ext_resource type="Script" uid="uid://bcca8s8tx6ce0" path="res://Scripts/UI/ItemTooltip.cs" id="9_ikfsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fmhe"]
 albedo_color = Color(0.99607843, 0.25882354, 0.2, 1)
@@ -150,6 +149,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.28364444, -1.5013695)
 script = ExtResource("1_b6fju")
 PointValue = 200
+HoleIndex = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_2" unique_id=670045832]
 shape = SubResource("BoxShape3D_2fmhe")
@@ -162,6 +162,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.43151376, -1.5328277)
 script = ExtResource("1_b6fju")
 PointValue = 300
+HoleIndex = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_3" unique_id=1169622685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07367015, -0.015839338)
@@ -175,6 +176,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.54806274, -1.6175252)
 script = ExtResource("1_b6fju")
 PointValue = 400
+HoleIndex = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_4" unique_id=1950758460]
 shape = SubResource("BoxShape3D_ikfsv")
@@ -187,6 +189,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.6846908, -1.7345846)
 script = ExtResource("1_b6fju")
 PointValue = 500
+HoleIndex = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_5" unique_id=1207187992]
 shape = SubResource("BoxShape3D_5dgvu")
@@ -199,6 +202,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0.21, 0.76, -1.7953333)
 script = ExtResource("1_b6fju")
 PointValue = 1000
+HoleIndex = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_6" unique_id=1797269486]
 shape = SubResource("BoxShape3D_5dgvu")
@@ -211,6 +215,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, -0.21, 0.77, -1.795)
 script = ExtResource("1_b6fju")
 PointValue = 1000
+HoleIndex = 6
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_7" unique_id=1271927851]
 shape = SubResource("BoxShape3D_5dgvu")
@@ -472,4 +477,3 @@ layer = 2
 [node name="ItemPanel" parent="CanvasLayer2" unique_id=65166487 instance=ExtResource("5_1ixah")]
 
 [node name="ItemTooltip" parent="CanvasLayer2" unique_id=1513988872 instance=ExtResource("8_7iton")]
-script = ExtResource("9_ikfsv")
