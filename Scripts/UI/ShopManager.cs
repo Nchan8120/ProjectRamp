@@ -151,6 +151,8 @@ public partial class ShopManager : Control
 		GenerateShop();
 		GetNode<TotemManager>("/root/TotemManager").BroadcastShopEnter();
 		UpdateUI();
+		// refresh totem panel so display values reflect round reset state
+		RefreshTotemPanel();
 	}
 
 	private void GenerateShop()

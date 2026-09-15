@@ -5,7 +5,7 @@ public class AlchemistsTouchEffect : TotemEffect
 {
 	private bool _hasTriggeredThisRound = false;
 
-	public override void OnRoundStart()
+	public override void OnShopEnter()
 	{
 		_hasTriggeredThisRound = false;
 	}

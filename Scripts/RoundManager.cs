@@ -206,6 +206,7 @@ public partial class RoundManager : Node3D
 
 	private void EndRound()
 	{
+		
 		if (_currentScore > _gameState.HighestRoundScore)
 		{
 		_gameState.HighestRoundScore = _currentScore;
@@ -222,6 +223,7 @@ public partial class RoundManager : Node3D
 
 	private void WinRound()
 	{
+		_currentBallIndex = 0;
 		if (_gameState.CurrentRound > _gameState.HighestRoundReached)
 			_gameState.HighestRoundReached = _gameState.CurrentRound;
 

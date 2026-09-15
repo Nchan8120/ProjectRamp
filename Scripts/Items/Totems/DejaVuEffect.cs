@@ -7,7 +7,7 @@ public class DejaVuEffect : TotemEffect
 	private HashSet<int> _scoredHoles = new HashSet<int>();
 	private bool _triggeredThisThrow = false;
 
-	public override void OnRoundStart()
+	public override void OnShopEnter()
 	{
 		_scoredHoles.Clear();
 		_triggeredThisThrow = false;

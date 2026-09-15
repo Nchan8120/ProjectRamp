@@ -16,7 +16,7 @@ public class UnderPressureEffect : TotemEffect
 		_missCount++;
 	}
 
-	public override void OnRoundStart()
+	public override void OnShopEnter()
 	{
 		_missCount = 0;
 	}
