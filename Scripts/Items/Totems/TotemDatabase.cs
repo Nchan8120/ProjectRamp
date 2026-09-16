@@ -26,6 +26,7 @@ public static class TotemDatabase
 		new TotemData("Copycat", "Copies the effect of the totem below it", 15, TotemRarity.Epic, () => new CopycatEffect()),
 		new TotemData("Alchemist's Touch", "The first non-locked scoring ball each round is converted to a Golden Ball", 13, TotemRarity.Epic, () => new AlchemistsTouchEffect()),
 		new TotemData("Broken Window", "Each broken glass ball increases multiplier by 0.5x ", 13, TotemRarity.Epic, () => new BrokenWindowEffect()),
+		new TotemData("Cannibal", "Gains 0.1x multiplier per upgraded ball scored, removes ball upgrade", 13, TotemRarity.Epic, () => new CannibalEffect()),
 	};
 
 	public static List<TotemData> GetByRarity(TotemRarity rarity)

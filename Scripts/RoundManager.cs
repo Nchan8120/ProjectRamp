@@ -102,6 +102,20 @@ public partial class RoundManager : Node3D
 			}
 		}
 		
+		// cannibal totem - consume ball upgrade after scoring
+		if (_currentBallIndex < _gameState.OwnedBalls.Count)
+		{
+			OwnedBall currentBall = _gameState.OwnedBalls[_currentBallIndex];
+			foreach (OwnedTotem totem in _gameState.OwnedTotems)
+			{
+				if (totem?.Effect is CannibalEffect cannibal)
+				{
+					cannibal.TryConsumeBall(currentBall);
+					break;
+				}
+			}
+		}
+		
 		// notify deja vu of which hole was scored before processing
 		GetNode<TotemManager>("/root/TotemManager").BroadcastHoleScored(holeIndex);
 		
