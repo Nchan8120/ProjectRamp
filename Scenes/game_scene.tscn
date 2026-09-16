@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bkn6hc0ydqd0p" path="res://Scenes/ball_bag.tscn" id="6_rgj8m"]
 [ext_resource type="Script" uid="uid://ctuuxgtv437d5" path="res://Scripts/BallBagButton.cs" id="7_2fmhe"]
 [ext_resource type="PackedScene" uid="uid://blxtuikaixwxb" path="res://Scenes/item_tooltip.tscn" id="8_7iton"]
+[ext_resource type="PackedScene" uid="uid://bce66ovgy3hq4" path="res://Scenes/dev_console.tscn" id="9_ikfsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fmhe"]
 albedo_color = Color(0.99607843, 0.25882354, 0.2, 1)
@@ -477,3 +478,5 @@ layer = 2
 [node name="ItemPanel" parent="CanvasLayer2" unique_id=65166487 instance=ExtResource("5_1ixah")]
 
 [node name="ItemTooltip" parent="CanvasLayer2" unique_id=1513988872 instance=ExtResource("8_7iton")]
+
+[node name="DevConsole" parent="CanvasLayer2" unique_id=1962568591 instance=ExtResource("9_ikfsv")]

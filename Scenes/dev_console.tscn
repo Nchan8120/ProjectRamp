@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bce66ovgy3hq4"]
+
+[ext_resource type="Script" uid="uid://coultmicc8tdd" path="res://Scripts/DevConsole.cs" id="1_4kj63"]
+
+[node name="DevConsole" type="Control" unique_id=1962568591]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4kj63")
