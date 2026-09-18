@@ -10,6 +10,7 @@ public static class TotemDatabase
 		new TotemData("Bailout", "Missing gives $1", 4, TotemRarity.Common, () => new BailoutEffect()),
 		new TotemData("Free Reroll", "First reroll each shop is free", 5, TotemRarity.Common, () => new FreeRerollEffect()),
 		new TotemData("Abstainer", "Each skipped capsule permanently adds +30 points per throw", 6, TotemRarity.Common, () => new AbstainerEffect()),
+		new TotemData("Jackpot", "Randomly selects a scoring hole. Any ball scored in that hole gives $4. Hole changes every throw", 8, TotemRarity.Common, () => new JackpotEffect()),
 
 		// Rare
 		new TotemData("Bonus Ball", "Gives 1 Bonus Ball", 6, TotemRarity.Rare, () => new BonusBallEffect()),
