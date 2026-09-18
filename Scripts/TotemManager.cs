@@ -34,6 +34,7 @@ public partial class TotemManager : Node
 		// reset to defaults first
 		_gameState.MaxItems = 3;
 		_gameState.BallsPerRound = 9;
+		_gameState.BallUpgradesFree = false;
 
 		foreach (OwnedTotem totem in _gameState.OwnedTotems)
 		{

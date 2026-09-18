@@ -19,6 +19,7 @@ public static class TotemDatabase
 		new TotemData("Gambler", "Each shop reroll permanently adds +25 points per throw", 8, TotemRarity.Rare, () => new GamblerEffect()),
 		new TotemData("Snowball", "Scoring gives +30 points for each ball already thrown this round", 9, TotemRarity.Rare, () => new SnowballEffect()),
 		new TotemData("Deja Vu", "2x multiplier if a ball has already scored in this hole this round", 9, TotemRarity.Rare, () => new DejaVuEffect()),
+		new TotemData("Tinkerer", "All ball upgrades and ball upgrade capsules are free", 10, TotemRarity.Rare, () => new TinkererEffect()),
 
 		// Epic
 		new TotemData("Hot Streak", "Consecutive scores increase multiplier by 0.1x, resets on miss", 14, TotemRarity.Epic, () => new HotStreakEffect()),

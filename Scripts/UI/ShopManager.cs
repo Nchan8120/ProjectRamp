@@ -181,6 +181,22 @@ public partial class ShopManager : Control
 
 		return ItemDatabase.GetRandom(type);
 	}
+	
+	private int GetItemCost(ItemData item)
+	{
+		if (item.Type == ItemType.BallUpgrade && _gameState.BallUpgradesFree)
+			return 0;
+
+		return item.Cost;
+	}
+	
+	private int GetCapsuleCost(CapsuleData capsule)
+	{
+		if (capsule.Type == ItemType.BallUpgrade && _gameState.BallUpgradesFree)
+			return 0;
+
+		return capsule.Cost;
+	}
 
 	private void GenerateHouseRule()
 	{
@@ -221,20 +237,20 @@ public partial class ShopManager : Control
 		// item slots
 		_item1Name.Text = _item1Data.Name;
 		_item1Type.Text = _item1Data.Type.ToString();
-		_item1Cost.Text = $"${_item1Data.Cost}";
+		_item1Cost.Text = $"${GetItemCost(_item1Data)}";
 		
 		_item2Name.Text = _item2Data.Name;
 		_item2Type.Text = _item2Data.Type.ToString();
-		_item2Cost.Text = $"${_item2Data.Cost}";
+		_item2Cost.Text = $"${GetItemCost(_item2Data)}";
 
 		// capsules
 		_cap1Type.Text = _capsule1Data.Type.ToString();
 		_cap1Size.Text = _capsule1Data.Size.ToString();
-		_cap1Cost.Text = $"${_capsule1Data.Cost}";
+		_cap1Cost.Text = $"${GetCapsuleCost(_capsule1Data)}";
 		
 		_cap2Type.Text = _capsule2Data.Type.ToString();
 		_cap2Size.Text = _capsule2Data.Size.ToString();
-		_cap2Cost.Text = $"${_capsule2Data.Cost}";
+		_cap2Cost.Text = $"${GetCapsuleCost(_capsule2Data)}";
 
 		// house rule
 		if (_houseRuleData != null)
@@ -259,7 +275,7 @@ public partial class ShopManager : Control
 
 		if (sold || item == null) return;
 
-		if (_gameState.SpendMoney(item.Cost))
+		if (_gameState.SpendMoney(GetItemCost(item)))
 		{
 			AddItemToInventory(item);
 
@@ -287,7 +303,7 @@ public partial class ShopManager : Control
 
 		if (sold || capsule == null) return;
 
-		if (_gameState.SpendMoney(capsule.Cost))
+		if (_gameState.SpendMoney(GetCapsuleCost(capsule)))
 		{
 			UpdateUI();
 

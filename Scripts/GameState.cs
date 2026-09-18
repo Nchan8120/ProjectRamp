@@ -36,8 +36,9 @@ public partial class GameState : Node
 	public string DefeatedByBoss = null; // null if not defeated by boss
 	
 	// Totem flags
-	public int BallsPerRound = 9;
-	public int LeftoverBallValue = 2;
+	public int BallsPerRound = 9; // bonus ball
+	public int LeftoverBallValue = 2; // penny pincher 
+	public bool BallUpgradesFree = false; // tinkerer
 	
 	// Ball Bag
 	public List<OwnedBall> OwnedBalls = new List<OwnedBall>();
@@ -47,6 +48,7 @@ public partial class GameState : Node
 	public string CurrentMachine = "The Original";
 	public Difficulty CurrentDifficulty = Difficulty.Easy;
 	public int CurrentThreshold = 0;
+	
 	// difficulty modifiers - read by game systems
 	public int WinBonus => CurrentDifficulty >= Difficulty.Medium ? 2 : 5;
 	public float ThresholdMultiplier => CurrentDifficulty >= Difficulty.Master ? 1.8f : 
@@ -99,6 +101,7 @@ public partial class GameState : Node
 		MaxItems = BaseItemSlots;
 		HasFreeReroll = false;
 		CurrentThreshold = 0;
+		BallUpgradesFree = false;
 		InitializeBalls();
 	}
 
