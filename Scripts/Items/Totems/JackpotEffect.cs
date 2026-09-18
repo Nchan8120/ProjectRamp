@@ -3,8 +3,8 @@ using Godot;
 public class JackpotEffect : TotemEffect
 {
 	private int _targetHole = -1;
-
 	private const int JackpotReward = 4;
+	private ScoringHole _selectedHole;
 
 	public override void Initialize(GameState gameState, RoundManager roundManager)
 	{
@@ -14,8 +14,14 @@ public class JackpotEffect : TotemEffect
 
 	private void SelectRandomHole()
 	{
-		_targetHole = (int)GD.RandRange(0, 6);
-		GD.Print($"Jackpot target hole: {_targetHole}");
+		_selectedHole?.SetHighlighted(false); // clear old highlight
+
+		var holes = RoundManager.GetScoringHoles();
+		if (holes.Count > 0)
+		{
+			_selectedHole = holes[(int)GD.RandRange(0, holes.Count - 1)];
+			_selectedHole.SetHighlighted(true);
+		}
 	}
 
 	public override void OnMiss()

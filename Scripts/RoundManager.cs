@@ -1,4 +1,5 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class RoundManager : Node3D
 {
@@ -288,6 +289,17 @@ public partial class RoundManager : Node3D
 				GD.Print($"Veteran Ball {ball.BallNumber} now has +{ball.BonusPoints} bonus points");
 			}
 		}
+	}
+	
+	public List<ScoringHole> GetScoringHoles()
+	{
+		List<ScoringHole> holes = new List<ScoringHole>();
+		foreach (Node node in GetTree().GetNodesInGroup("ScoringHole"))
+		{
+			if (node is ScoringHole hole)
+				holes.Add(hole);
+		}
+		return holes;
 	}
 	
 }

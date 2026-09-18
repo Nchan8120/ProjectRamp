@@ -163,7 +163,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_uscyt")
 transform = Transform3D(1, 0, 0, 0, 0.49999997, -0.86602545, 0, 0.86602545, 0.49999997, 0, 0.43151376, -1.5328277)
 script = ExtResource("1_b6fju")
 PointValue = 300
-HoleIndex = 1
+HoleIndex = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Lane/ScoringArea/Holes/Hole_3" unique_id=1169622685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07367015, -0.015839338)
