@@ -219,6 +219,11 @@ public partial class BallBag : Control
 	{
 		if (ballIndex < 0 || ballIndex >= _gameState.OwnedBalls.Count) return;
 		_gameState.OwnedBalls[ballIndex].UpgradeType = upgrade.Name;
+		
+		// Ice Cube Ball starts with its full bonus immediately on equip
+		if (upgrade.Name == "Ice Cube Ball")
+			_gameState.OwnedBalls[ballIndex].BonusPoints = IceCubeBallEffect.InitialBonus;
+
 		_selectedBallIndex = -1;
 		GD.Print($"ApplyUpgradeToBall - ballIndex: {ballIndex}, CurrentBallIndex: {_roundManager?.CurrentBallIndex}, RoundManager null: {_roundManager == null}");
 

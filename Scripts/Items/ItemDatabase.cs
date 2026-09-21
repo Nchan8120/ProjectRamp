@@ -9,6 +9,7 @@ public static class ItemDatabase
 		new ItemData("Glass Ball", "Ball Scores 2x points, then breaks permanently", ItemType.BallUpgrade, 5),
 		new ItemData("Golden Ball", "Scoring this ball gives $3", ItemType.BallUpgrade, 3),
 		new ItemData("Veteran Ball", "Gains +50 points permanently each round it survives", ItemType.BallUpgrade, 6),
+		new ItemData("Ice Cube Ball", "Starts with +300 bonus points, loses 75 each throw until it melts away", ItemType.BallUpgrade, 5),
 	};
 
 	public static List<ItemData> Engineering = new List<ItemData>

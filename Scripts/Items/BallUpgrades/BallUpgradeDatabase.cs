@@ -11,6 +11,7 @@ public static class BallUpgradeDatabase
 			"Golden Ball" => new GoldenBallEffect(),
 			"Rubber Ball" => new RubberBallEffect(),
 			"Veteran Ball" => new VeteranBallEffect(),
+			"Ice Cube Ball" => new IceCubeBallEffect(),
 			_ => null // Standard ball has no effect
 		};
 	}
