@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameState="*uid://b6k66w34uqe8l"
 TotemManager="*uid://davpt731nk7u5"
 SaveManager="*uid://bybbovmufhce5"
+MusicManager="*uid://80p00h74v3i0"
 
 [dotnet]
 
