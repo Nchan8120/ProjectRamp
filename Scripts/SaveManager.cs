@@ -5,6 +5,8 @@ using System.Collections.Generic;
 	public partial class SaveManager : Node
 	{
 		private const string SaveFolder = "user://Saves/";
+		private const string SettingsPath = "user://Saves/settings.cfg";
+		private ConfigFile _settings;
 		private int _activeProfile = 0;
 		public int ActiveProfile => _activeProfile;
 
@@ -23,6 +25,10 @@ using System.Collections.Generic;
 				_profiles[i] = new ConfigFile();
 				_profiles[i].Load(GetProfilePath(i));
 			}
+			
+			// load global settings
+			_settings = new ConfigFile();
+			_settings.Load(SettingsPath);
 		}
 
 		private string GetProfilePath(int profileIndex)
@@ -93,6 +99,18 @@ using System.Collections.Generic;
 			_profiles[profileIndex] = new ConfigFile();
 			DirAccess.RemoveAbsolute(ProjectSettings.GlobalizePath(GetProfilePath(profileIndex)));
 			GD.Print($"Deleted profile {profileIndex + 1}");
+		}
+		
+		// settings (global, not tied to profile)
+		public float GetMusicVolume()
+		{
+			return (float)_settings.GetValue("audio", "music_volume", 100.0);
+		}
+
+		public void SetMusicVolume(float volumePercent)
+		{
+			_settings.SetValue("audio", "music_volume", volumePercent);
+			_settings.Save(SettingsPath);
 		}
 
 		// unlock everything for active profile

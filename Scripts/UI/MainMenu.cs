@@ -32,7 +32,7 @@ public partial class MainMenu : Control
 
 	private void OnSettingsPressed()
 	{
-		GD.Print("Settings - coming soon");
+		GetTree().ChangeSceneToFile("res://scenes/settings_menu.tscn"); 
 	}
 
 	private void OnQuitPressed()

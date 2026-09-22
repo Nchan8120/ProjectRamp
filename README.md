@@ -12,4 +12,5 @@ Skee-ball style Roguelike
 Made in Godot 
 
 Music by @notjustbeats
+
 Copyright 2026 Nathan Chan. All rights reserved. No part of this software may be reproduced, distributed, or modified without express written permission from the author.
