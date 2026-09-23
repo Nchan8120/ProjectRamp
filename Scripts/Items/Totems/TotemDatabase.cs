@@ -11,7 +11,8 @@ public static class TotemDatabase
 		new TotemData("Free Reroll", "First reroll each shop is free", 5, TotemRarity.Common, () => new FreeRerollEffect()),
 		new TotemData("Abstainer", "Each skipped capsule permanently adds +30 points per throw", 6, TotemRarity.Common, () => new AbstainerEffect()),
 		new TotemData("Jackpot", "Randomly selects a scoring hole. Any ball scored in that hole gives $4. Hole changes every throw", 8, TotemRarity.Common, () => new JackpotEffect()),
-
+		new TotemData("Prize Counter", "1 in 4 chance for each scored ball to create a random ball upgrade", 5, TotemRarity.Common, () => new PrizeCounterEffect()),
+		
 		// Rare
 		new TotemData("Bonus Ball", "Gives 1 Bonus Ball", 6, TotemRarity.Rare, () => new BonusBallEffect()),
 		new TotemData("Clutch Gene", "Last ball of round is worth 2x", 6, TotemRarity.Rare, () => new ClutchGeneEffect()),
