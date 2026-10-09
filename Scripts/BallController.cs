@@ -28,6 +28,10 @@ public partial class BallController : RigidBody3D
 	private List<Vector2> _mouseBuffer = new List<Vector2>();
 	private Vector2 _lastMousePos;
 	private GameState _gameState;
+	private CollisionShape3D _collisionShape;
+	private const float BaseCollisionRadius = 0.04f;
+	private const float LeadSizeScale = 1.5f;
+	private const float LeadMass = 3.0f;
 
 	public override void _Ready()
 	{
@@ -37,6 +41,7 @@ public partial class BallController : RigidBody3D
 		// grab the mesh and create a material we can change color on
 		_mesh = GetNode<MeshInstance3D>(MeshPath);
 		_material = new StandardMaterial3D();
+		_collisionShape = GetNode<CollisionShape3D>("CollisionShape3D");
 		_material.AlbedoColor = Colors.White;
 		_mesh.MaterialOverride = _material;
 		_roundManager = GetTree().GetFirstNodeInGroup("RoundManager") as RoundManager;
@@ -187,6 +192,20 @@ public partial class BallController : RigidBody3D
 		};
 
 		PhysicsMaterialOverride = material;
+		ApplyBallSize(upgradeType);
+	}
+
+	private void ApplyBallSize(string upgradeType)
+	{
+		bool isLead = upgradeType == "Lead Ball";
+		float scale = isLead ? LeadSizeScale : 1.0f;
+
+		Mass = isLead ? LeadMass : 1.0f;
+		_mesh.Scale = Vector3.One * scale;
+
+		// assign a fresh shape instead of editing the shared scene resource,
+		// so the size doesn't carry over into the next scene load
+		_collisionShape.Shape = new SphereShape3D { Radius = BaseCollisionRadius * scale };
 	}
 	
 	private void OnBodyEntered(Node body)

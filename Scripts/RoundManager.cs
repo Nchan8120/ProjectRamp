@@ -30,6 +30,7 @@ public partial class RoundManager : Node3D
 	private Label _moneyLabel;
 	private int _currentBallIndex = 0;
 	private BallUpgradeEffect _currentBallEffect;
+	private const float LeadBallMultiplier = 1.5f;
 	
 	public override void _Ready()
 	{
@@ -79,10 +80,24 @@ public partial class RoundManager : Node3D
 		UpdateUI();
 		GD.Print($"Round {_currentRound} | Threshold: {_currentThreshold}");
 	}
+	
+	// each unthrown Lead Ball still in the bag multiplies the score by 1.5x
+	private float GetLeadBallMultiplier()
+	{
+		float multiplier = 1.0f;
+		for (int i = _currentBallIndex + 1; i < _gameState.OwnedBalls.Count; i++)
+		{
+			if (_gameState.OwnedBalls[i].UpgradeType == "Lead Ball")
+				multiplier *= LeadBallMultiplier;
+		}
+		return multiplier;
+	}
 
 	public void OnBallScored(int points, int holeIndex)
 	{
-		 // apply ball upgrade effect
+		// passive bonus from unthrown Lead Balls (checked first so Glass Ball removal doesn't shift the bag)
+		points = Mathf.RoundToInt(points * GetLeadBallMultiplier());
+		// apply ball upgrade effect
 		if (_currentBallEffect != null && _currentBallIndex < _gameState.OwnedBalls.Count)
 		{
 			OwnedBall currentBall = _gameState.OwnedBalls[_currentBallIndex];
