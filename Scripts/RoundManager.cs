@@ -253,6 +253,7 @@ public partial class RoundManager : Node3D
 
 	private void WinRound()
 	{
+		GetNode<TotemManager>("/root/TotemManager").BroadcastRoundEnd(); // Broadcast for Gold Standard payout
 		_currentBallIndex = 0;
 		if (_gameState.CurrentRound > _gameState.HighestRoundReached)
 			_gameState.HighestRoundReached = _gameState.CurrentRound;

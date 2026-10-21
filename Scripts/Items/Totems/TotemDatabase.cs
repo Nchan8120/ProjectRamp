@@ -22,6 +22,7 @@ public static class TotemDatabase
 		new TotemData("Snowball", "Scoring gives +30 points for each ball already thrown this round", 9, TotemRarity.Rare, () => new SnowballEffect()),
 		new TotemData("Deja Vu", "2x multiplier if a ball has already scored in this hole this round", 9, TotemRarity.Rare, () => new DejaVuEffect()),
 		new TotemData("Tinkerer", "All ball upgrades and ball upgrade capsules are free", 10, TotemRarity.Rare, () => new TinkererEffect()),
+		new TotemData("Gold Standard", "Gives $5 for each Golden Ball still in your bag at the end of the round", 8, TotemRarity.Rare, () => new GoldStandardEffect()),
 
 		// Epic
 		new TotemData("Hot Streak", "Consecutive scores increase multiplier by 0.1x, resets on miss", 14, TotemRarity.Epic, () => new HotStreakEffect()),
