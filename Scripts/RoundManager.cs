@@ -16,6 +16,8 @@ public partial class RoundManager : Node3D
 	public int CurrentBallIndex => _currentBallIndex;
 	public BallController GetBallController() => _ball;
 	public int BallsRemaining => _ballsRemaining;
+	public int CurrentScore => _currentScore;
+	public int CurrentThreshold => _currentThreshold;
 
 	private int _ballsRemaining;
 	private int _currentScore;
@@ -293,6 +295,8 @@ public partial class RoundManager : Node3D
 		_currentScore += bonus;
 		GD.Print($"Bounce bonus! +{bonus} points. Total: {_currentScore}");
 		UpdateUI();
+		TotemPanel totemPanel = GetTree().Root.FindChild("TotemPanel", true, false) as TotemPanel;
+		totemPanel?.RefreshUI();
 	}
 	
 	private void IncrementVeteranBalls()
@@ -318,4 +322,12 @@ public partial class RoundManager : Node3D
 		return holes;
 	}
 	
+	
+	public void EjectRound()
+	{
+		if (_currentScore > _gameState.HighestRoundScore)
+			_gameState.HighestRoundScore = _currentScore;
+		WinRound();
+	}
+		
 }

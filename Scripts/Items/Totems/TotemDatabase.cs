@@ -23,6 +23,7 @@ public static class TotemDatabase
 		new TotemData("Deja Vu", "2x multiplier if a ball has already scored in this hole this round", 9, TotemRarity.Rare, () => new DejaVuEffect()),
 		new TotemData("Tinkerer", "All ball upgrades and ball upgrade capsules are free", 10, TotemRarity.Rare, () => new TinkererEffect()),
 		new TotemData("Gold Standard", "Gives $5 for each Golden Ball still in your bag at the end of the round", 8, TotemRarity.Rare, () => new GoldStandardEffect()),
+		new TotemData("Emergency Ejection", "If your score is over half the required score, sell this totem to finish the round and go to the shop", 10, TotemRarity.Rare, () => new EmergencyEjectionEffect()),
 
 		// Epic
 		new TotemData("Hot Streak", "Consecutive scores increase multiplier by 0.1x, resets on miss", 14, TotemRarity.Epic, () => new HotStreakEffect()),
