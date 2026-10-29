@@ -158,20 +158,23 @@ public partial class CapsulePicker : Control
 	
 	private bool CanAddSelectedItems()
 	{
+		int totemsToAdd = 0;
+		int itemsToAdd = 0;
+
 		foreach (int index in _selectedIndices)
 		{
 			ItemData item = _choices[index];
 			if (item.Type == ItemType.Totem)
-			{
-				if (_gameState.OwnedTotems.Count >= _gameState.MaxTotems)
-					return false;
-			}
-			else
-			{
-				if (_gameState.OwnedItems.Count >= _gameState.MaxItems)
-					return false;
-			}
+				totemsToAdd++;
+			else if (item.Type != ItemType.Ball)
+				itemsToAdd++;
 		}
+
+		if (_gameState.OwnedTotems.Count + totemsToAdd > _gameState.MaxTotems)
+			return false;
+		if (_gameState.OwnedItems.Count + itemsToAdd > _gameState.MaxItems)
+			return false;
+
 		return true;
 	}
 	

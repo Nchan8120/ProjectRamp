@@ -158,11 +158,11 @@ public partial class ShopManager : Control
 	private void GenerateShop()
 	{
 		if (_gameState.CurrentRound == 2)
-			_capsule1Data = new CapsuleData(ItemType.Totem, CapsuleSize.Small);
+			_capsule1Data = new CapsuleData(CapsuleType.Totem, CapsuleSize.Small);
 		else
-			_capsule1Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
+			_capsule1Data = new CapsuleData(ItemDatabase.GetRandomCapsuleType(), ItemDatabase.GetRandomSize());
 
-		_capsule2Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
+		_capsule2Data = new CapsuleData(ItemDatabase.GetRandomCapsuleType(), ItemDatabase.GetRandomSize());
 
 		_item1Data = GetRandomItemData(ItemDatabase.GetRandomType());
 		_item2Data = GetRandomItemData(ItemDatabase.GetRandomType());
@@ -192,7 +192,7 @@ public partial class ShopManager : Control
 	
 	private int GetCapsuleCost(CapsuleData capsule)
 	{
-		if (capsule.Type == ItemType.BallUpgrade && _gameState.BallUpgradesFree)
+		if (capsule.Type == CapsuleType.Ball && _gameState.BallUpgradesFree)
 			return 0;
 
 		return capsule.Cost;
@@ -357,11 +357,13 @@ public partial class ShopManager : Control
 		}
 	}
 
-	private List<ItemData> GetUniqueRandomItems(ItemType type, int count)
+	private List<ItemData> GetUniqueRandomItems(CapsuleType type, int count)
 	{
-		if (type == ItemType.Totem)
+		if (type == CapsuleType.Ball)
+			return ItemDatabase.GetRandomBallChoices(count);
+
+		if (type == CapsuleType.Totem)
 		{
-			// pull from TotemDatabase instead
 			var sourceTotems = new List<TotemData>(TotemDatabase.AllTotems);
 			var result = new List<ItemData>();
 
@@ -378,8 +380,8 @@ public partial class ShopManager : Control
 			return result;
 		}
 
-		// existing logic for non totem types
-		var sourceList = new List<ItemData>(ItemDatabase.GetListByType(type));
+		// Item capsule: ball upgrades, engineering, stunts
+		var sourceList = ItemDatabase.GetAllItems();
 		var resultList = new List<ItemData>();
 
 		count = Mathf.Min(count, sourceList.Count);
@@ -451,9 +453,9 @@ public partial class ShopManager : Control
 		// regenerate items and capsules but keep house rule
 		_item1Data = GetRandomItemData(ItemDatabase.GetRandomType());
 		_item2Data = GetRandomItemData(ItemDatabase.GetRandomType());
-		_capsule1Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
-		_capsule2Data = new CapsuleData(ItemDatabase.GetRandomType(), ItemDatabase.GetRandomSize());
-
+		_capsule1Data = new CapsuleData(ItemDatabase.GetRandomCapsuleType(), ItemDatabase.GetRandomSize());
+		_capsule2Data = new CapsuleData(ItemDatabase.GetRandomCapsuleType(), ItemDatabase.GetRandomSize());
+		
 		// re enable buy buttons
 		_item1Buy.Text = "Buy";
 		_item1Buy.Disabled = false;
@@ -513,6 +515,12 @@ public partial class ShopManager : Control
 				{
 					GD.Print("Item slots full! Sell and item first.");
 				}
+				break;
+			case ItemType.Ball:
+				int ballNumber = _gameState.OwnedBalls.Count + 1;
+				_gameState.OwnedBalls.Add(new OwnedBall(ballNumber, item.Name));
+				BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
+				ballBag?.BuildBallList();
 				break;
 		}
 		GD.Print($"Bought: {item.Name}");

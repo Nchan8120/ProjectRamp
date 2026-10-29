@@ -79,4 +79,35 @@ public static class ItemDatabase
 		if (roll <= 80) return CapsuleSize.Medium;
 		return CapsuleSize.Large;
 	}
+	
+	public static CapsuleType GetRandomCapsuleType()
+	{
+		int roll = GD.RandRange(1, 100);
+		if (roll <= 30) return CapsuleType.Totem;
+		if (roll <= 70) return CapsuleType.Item;
+		return CapsuleType.Ball;
+	}
+
+	// ball upgrades + engineering + stunts
+	public static List<ItemData> GetAllItems()
+	{
+		var all = new List<ItemData>();
+		all.AddRange(BallUpgrades);
+		all.AddRange(Engineering);
+		all.AddRange(Stunts);
+		return all;
+	}
+
+	// random upgraded balls (duplicates allowed)
+	public static List<ItemData> GetRandomBallChoices(int count)
+	{
+		var result = new List<ItemData>();
+		for (int i = 0; i < count; i++)
+		{
+			ItemData upgrade = BallUpgrades[(int)GD.RandRange(0, BallUpgrades.Count - 1)];
+			// Name matches the upgrade name so it can be used directly as OwnedBall.UpgradeType
+			result.Add(new ItemData(upgrade.Name, $"Add to your bag: {upgrade.Description}", ItemType.Ball, 0));
+		}
+		return result;
+	}
 }

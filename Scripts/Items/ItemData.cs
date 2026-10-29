@@ -6,7 +6,8 @@ public enum ItemType
 	BallUpgrade,
 	Engineering,
 	Stunt,
-	HouseRule
+	HouseRule,
+	Ball
 }
 
 public enum CapsuleSize
@@ -14,6 +15,13 @@ public enum CapsuleSize
 	Small,  // pick 1 of 2 - $5
 	Medium, // pick 1 of 4 - $8
 	Large   // pick 2 of 6 - $10
+}
+
+public enum CapsuleType
+{
+	Totem,
+	Item,
+	Ball
 }
 
 public class ItemData
@@ -34,11 +42,11 @@ public class ItemData
 
 public class CapsuleData
 {
-	public ItemType Type;
+	public CapsuleType Type;
 	public CapsuleSize Size;
 	public int Cost;
 
-	public CapsuleData(ItemType type, CapsuleSize size)
+	public CapsuleData(CapsuleType type, CapsuleSize size)
 	{
 		Type = type;
 		Size = size;
