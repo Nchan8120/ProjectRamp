@@ -14,6 +14,7 @@ public partial class GameState : Node
 	public List<OwnedItem> OwnedItems = new List<OwnedItem>();
 	public int MaxItems = 3;
 	public List<string> OwnedHouseRules = new List<string>();
+	public ItemData LastUsedItem = null; // copied by Mimic
 
 	// Shop state
 	public int RerollCost = 3;
@@ -102,6 +103,7 @@ public partial class GameState : Node
 		HasFreeReroll = false;
 		CurrentThreshold = 0;
 		BallUpgradesFree = false;
+		LastUsedItem = null;
 		InitializeBalls();
 	}
 

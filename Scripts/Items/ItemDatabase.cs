@@ -31,6 +31,7 @@ public static class ItemDatabase
 		new ItemData("Nudge", "Give ball a small directional push mid air", ItemType.Stunt, 4),
 		new ItemData("Clutch", "Only on last ball, triples its score", ItemType.Stunt, 7),
 		new ItemData("Ghost", "Ball passes through one wall before becomeing solid again", ItemType.Stunt, 7),
+		new ItemData("Mimic", "Use to create a copy of the last item used", ItemType.Stunt, 6),
 	};
 
 	public static List<ItemData> HouseRules = new List<ItemData>

@@ -118,6 +118,7 @@ public partial class ItemPanel : Control
 		}
 
 		_selectedSlot = -1;
+		UpdateUseButtons();
 	}
 
 	public void RefreshUI()
@@ -262,12 +263,20 @@ public partial class ItemPanel : Control
 	
 	private void OnUsePressed(int slotIndex)
 	{
-		if (_selectedBallIndex < 0) return;
 		if (slotIndex >= _gameState.OwnedItems.Count) return;
 		if (_gameState.OwnedItems[slotIndex] == null) return;
 
 		OwnedItem upgrade = _gameState.OwnedItems[slotIndex];
-		
+
+		// Mimic doesn't need a ball selected
+		if (upgrade.Name == "Mimic")
+		{
+			UseMimic(slotIndex);
+			return;
+		}
+
+		if (_selectedBallIndex < 0) return;
+
 		OwnedBall targetBall = _gameState.OwnedBalls[_selectedBallIndex];
 
 		// block upgrades on locked balls
@@ -276,12 +285,15 @@ public partial class ItemPanel : Control
 			GD.Print("This ball cannot be modified!");
 			return;
 		}
-		
+
 		if (upgrade.Type != ItemType.BallUpgrade) return;
 
 		// find ball bag and apply upgrade
 		BallBag ballBag = GetTree().Root.FindChild("BallBag", true, false) as BallBag;
 		ballBag?.ApplyUpgradeToBall(_selectedBallIndex, upgrade);
+
+		// remember this for Mimic
+		_gameState.LastUsedItem = new ItemData(upgrade.Name, upgrade.Description, upgrade.Type, upgrade.PurchasePrice);
 
 		// consume the item
 		_gameState.OwnedItems.RemoveAt(slotIndex);
@@ -309,10 +321,12 @@ public partial class ItemPanel : Control
 		{
 			bool hasItem = i < _gameState.OwnedItems.Count && _gameState.OwnedItems[i] != null;
 			bool isBallUpgrade = hasItem && _gameState.OwnedItems[i].Type == ItemType.BallUpgrade;
+			bool isMimic = hasItem && _gameState.OwnedItems[i].Name == "Mimic";
 			bool ballSelected = _selectedBallIndex >= 0;
 
 			if (_useButtons.Count > i)
-				_useButtons[i].Visible = isBallUpgrade && ballSelected;
+				_useButtons[i].Visible = (isBallUpgrade && ballSelected)
+									  || (isMimic && _gameState.LastUsedItem != null);
 		}
 	}
 	
@@ -322,5 +336,20 @@ public partial class ItemPanel : Control
 					   && _gameState.OwnedItems[slotIndex] != null;
 		if (hasItem)
 			_tooltip?.ShowItem(_gameState.OwnedItems[slotIndex], _slots[slotIndex]);
+	}
+	
+	private void UseMimic(int slotIndex)
+	{
+		ItemData last = _gameState.LastUsedItem;
+		if (last == null)
+		{
+			GD.Print("Mimic: nothing to copy yet");
+			return;
+		}
+
+		// Mimic turns into a copy of the last used item, same slot
+		_gameState.OwnedItems[slotIndex] = new OwnedItem(last);
+		GD.Print($"Mimic copied {last.Name}");
+		RefreshUI();
 	}
 }
